@@ -10,7 +10,7 @@ class Cirular_slider extends StatelessWidget {
      double height=MediaQuery.of(context).size.height;
      double width=MediaQuery.of(context).size.width;
     return Container(
-      color: Colors.orange,
+      
      child: Stack
      (
        children:[
@@ -23,6 +23,7 @@ class Cirular_slider extends StatelessWidget {
              bottomLabelStyle: TextStyle(color:Colors.white54),
            ) ,
            size: 120,
+            
            animationEnabled :true,
            //spinnerMode: true,
            customColors: CustomSliderColors(progressBarColor: Colors.green[600] , trackColor: Colors.grey[300] ),

@@ -10,6 +10,18 @@ class Square_slider extends StatelessWidget {
      double height=MediaQuery.of(context).size.height;
      double width=MediaQuery.of(context).size.width;
     return Container(
+      decoration: BoxDecoration(    
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                       boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            spreadRadius: 5,
+                            blurRadius: 10,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
+                      ),
      color: Colors.white,
      child: Stack
      (
@@ -40,7 +52,7 @@ class Square_slider extends StatelessWidget {
          left: 10,
          child: Container(
           height: 80, 
-           child: Image.asset("assets/images/download-speed.png")))
+           child: Image.asset("assets/images/weather-app.png")))
       ]
      ),
     );

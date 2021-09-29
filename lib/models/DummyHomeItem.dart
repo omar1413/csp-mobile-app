@@ -51,9 +51,9 @@ final  DummyHomeSquareItems =  [
       title: "السرعة الأن",
       subtitle: "",
       type: "ك/س",
-      amount:  120 ,
-      color: Colors.black
-      ,img: "",
+      amount:  120,
+      color: Colors.black,
+      img: "assets/images/download-speed.png",
       ),
 
   HomeItem(
@@ -70,5 +70,5 @@ final  DummyHomeSquareItems =  [
       type: "ج.م",
       amount: 0 , 
       color: Colors.green,
-      img: "")
+      img: "assets/images/weather-app.png")
 ];

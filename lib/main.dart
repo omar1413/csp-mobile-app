@@ -1,6 +1,9 @@
+import 'package:csp_mobile_app/screens/Road_data.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
+import 'package:csp_mobile_app/screens/subscriptions_management.dart';
+import 'package:csp_mobile_app/screens/vehicle_management.dart';
 import 'package:flutter/material.dart';
 import './widets/carouselCircle_slider.dart';
 void main() {
@@ -28,9 +31,13 @@ class MyApp extends StatelessWidget {
               
             ),   
       
-      home:  homeScreen(),
+      home:  login_screen(),
       routes: <String, WidgetBuilder>{
           registrationScreen.routeName: (ctx) => registrationScreen(),
+          Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
+          Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
+          RoudData.routeName: (ctx) => RoudData(),
+
      }          
     );
   }
