@@ -24,24 +24,24 @@ final  DummyHomeCircularItems =  [
       subtitle: "رصيدك الحالى",
       type: "ج.م",
       amount:  163 ,
-      color: Colors.indigo
+      color: Colors.green
       ,img: "",
       ),
 
   HomeItem(
-      title: "رصيد المحفظة",
-      subtitle: "رصيدك الحالى",
-      type: "ج.م",
-      amount: 35,
-      color: Colors.indigo
+      title: "تجديد اشتراك ",
+      subtitle: "تجديد اشتراك ",
+      type: "يوم",
+      amount: 70,
+      color: Colors.orange
       ,img: "",
       ),
   HomeItem(
-      title: "رصيد المحفظة",
-      subtitle: "رصيدك الحالى",
-      type: "ج.م",
-      amount: 7,
-      color: Colors.indigo
+      title: "تجديد رخصة القيادة ",
+      subtitle: "تجديد رخصة القيادة ",
+      type: "يوم",
+      amount: 200,
+      color: Colors.red
       ,img: "",
       ),
 ];

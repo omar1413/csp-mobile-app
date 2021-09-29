@@ -45,7 +45,7 @@ class CarouselCircleState extends State<CarouselCircle> {
                // height: MediaQuery.of(context).size.height*0.6,
                 initialPage: 0,
                 enlargeCenterPage: true,
-                autoPlay: false,
+                autoPlay: true,
                 reverse: false,
                 enableInfiniteScroll: true,
                 autoPlayInterval: Duration(seconds: 3),

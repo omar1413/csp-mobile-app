@@ -113,7 +113,6 @@ class CarouselSquareState extends State<CarouselSquare> {
                     ),
                  
                 Container(
-                 
                   child: Stack(
                     children:[
                       Container(
@@ -122,6 +121,7 @@ class CarouselSquareState extends State<CarouselSquare> {
                         margin: const EdgeInsets.all(10),
                         padding:const  EdgeInsets.all(5),
                         decoration: BoxDecoration(
+                        
                           gradient: LinearGradient(
                             colors: [
                               Theme.of(context).primaryColor.withOpacity(0.75),
