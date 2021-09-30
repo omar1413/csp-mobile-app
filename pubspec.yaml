@@ -37,6 +37,9 @@ dependencies:
   sleek_circular_slider: ^2.0.1
   carousel_slider: ^4.0.0
   curved_navigation_bar: ^1.0.1
+  shared_preferences: ^2.0.5
+ 
+  chat_bubbles: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
