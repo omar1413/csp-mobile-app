@@ -1,71 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/transaction_data.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class TransactionIteam extends StatelessWidget {
-  const TransactionIteam({
-    required transaction,
-    required this.deletefun,
-  }) : transaction = transaction;
-
-  final Transaction transaction;
-  final Function deletefun;
+  Transaction transaction;
+  TransactionIteam({
+    required this.transaction,
+  });
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
+    Intl.defaultLocale = "ar_SU";
+    var format = DateFormat();
+
+    //var dateString = format.format(DateTime.now());
     return Card(
-        elevation: 3,
-        child: Container(
+      elevation: 3,
+      child: Container(
+          padding: EdgeInsets.all(5),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Container(
-                    height: 60,
-                    width: 60,
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    padding: EdgeInsets.all(10),
-                    child: FittedBox(
-                      child: Text(
-                        "",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       transaction.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
                     Text(
-                      "DateFormat().format(transaction.date)",
-                      style: TextStyle(
+                      format.format(transaction.dateTime),
+                      // DateFormat().format(transaction.dateTime),
+                      style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.normal,
                           color: Colors.grey),
                     ),
                   ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 290,
-                ),
-                IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () => deletefun(transaction.id)),
-              ]),
-        ));
+                Container(
+                    child: IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        onPressed:
+                            () {} /*selectedTransaction(transaction.id)*/)),
+              ])),
+    );
   }
 }

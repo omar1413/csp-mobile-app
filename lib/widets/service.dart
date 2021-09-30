@@ -46,8 +46,8 @@ class Service extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.9),
-                  spreadRadius: 5,
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
                   blurRadius: 10,
                   offset: Offset(0, 2), // changes position of shadow
                 ),

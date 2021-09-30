@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import '../widets/custom_text.dart';
+import '../widets/custom_text_line.dart';
 import 'package:flutter/material.dart';
 
 class QrCodeScreen extends StatefulWidget {
@@ -69,7 +69,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                   ],
                 ),
               ),
-              CustomText(text: "زمن تغير ال Qr code"),
+              CustomTextLine(text: "زمن تغير ال Qr code"),
               LinearProgressIndicator(
                 color: Theme.of(context).primaryColor,
                 backgroundColor: Colors.grey[300],
@@ -79,7 +79,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
               ),
               const Text(
                 '25 ثانية',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.green),
               ),
             ],
           ),

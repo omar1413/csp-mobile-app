@@ -1,5 +1,6 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
+import 'package:csp_mobile_app/screens/wallet_screen.dart';
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import '../widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
@@ -81,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
       {'page': QrCodeScreen(), 'title': '2الكود الشخصى'},
       {'page': homeScreen(), 'title': '3الكود الشخصى'},
       {'page': QrCodeScreen(), 'title': '4الكود الشخصى'},
-      {'page': QrCodeScreen(), 'title': '5الكود الشخصى'},
+      {'page': WalletScreen(), 'title': 'محفظتى'},
     ];
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;

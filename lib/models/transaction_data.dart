@@ -6,14 +6,13 @@ class Transaction {
   final String id;
   final String title;
   final String subtitle;
-  //final DateTime dateTime;
+  final DateTime dateTime;
 
-  Transaction({
-    required this.id,
-    required this.subtitle,
-    required this.title,
-    // required this.dateTime
-  });
+  Transaction(
+      {required this.id,
+      required this.subtitle,
+      required this.title,
+      required this.dateTime});
 }
 
 final DummyTransactionData = [
@@ -21,6 +20,54 @@ final DummyTransactionData = [
     id: "1",
     title: "د م ن /423 ",
     subtitle: "طريق مصر السويس",
-    //  dateTime:DateTime();
-  )
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ن /423 ",
+    subtitle: "طريق مصر السويس",
+    dateTime: DateTime.utc(1989, DateTime.november, 9),
+  ),
 ];

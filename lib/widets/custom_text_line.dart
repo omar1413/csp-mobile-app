@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomText extends StatelessWidget {
+class CustomTextLine extends StatelessWidget {
   final String text;
 
-  CustomText({required this.text});
+  CustomTextLine({required this.text});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class CustomText extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Colors.green,
+              color: Color(0xFF43A047),
             ),
           ),
           Container(

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../widets/cirular_slider_item.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../widets/profile.dart';
-import '../widets/custom_text.dart';
+import '../widets/custom_text_line.dart';
 import './qrcode_screen.dart';
 
 class homeScreen extends StatefulWidget {
@@ -125,9 +125,9 @@ class _homeScreenState extends State<homeScreen> {
                       child: CarouselCircle()),
                 ]),
               ),
-              CustomText(text: "المعلومات"),
+              CustomTextLine(text: "المعلومات"),
               CarouselSquare(),
-              CustomText(text: "الخدمات"),
+              CustomTextLine(text: "الخدمات"),
               Container(
                 margin: EdgeInsets.all(10),
                 child: Row(
