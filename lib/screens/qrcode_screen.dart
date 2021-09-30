@@ -1,3 +1,6 @@
+// ignore_for_file: file_names
+
+import '../widets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class QrCodeScreen extends StatefulWidget {
@@ -41,7 +44,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
         ),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Container(
@@ -68,10 +71,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  const Text(
-                    'زمن تغيرالكود',
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  CustomText(text: ""),
                   LinearProgressIndicator(
                     color: Theme.of(context).primaryColor,
                     backgroundColor: Colors.grey[300],

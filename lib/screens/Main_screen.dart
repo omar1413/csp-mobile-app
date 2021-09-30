@@ -1,11 +1,11 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
-import 'package:csp_mobile_app/widets/carouselCircle_slider.dart';
-import 'package:csp_mobile_app/widets/carouselSquare_slider.dart';
+import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
+import '../widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
 import 'package:flutter/material.dart';
-import '../widets/cirular_sliderItem.dart';
+import '../widets/cirular_slider_item.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../widets/profile.dart';
 import '../screens/QrCode_screen.dart';
@@ -13,6 +13,7 @@ import '../screens/QrCode_screen.dart';
 class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
+  static const routeName = '/mainScreen';
 }
 
 class _MainScreenState extends State<MainScreen> {

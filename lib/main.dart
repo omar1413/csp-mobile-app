@@ -1,4 +1,4 @@
-import 'package:csp_mobile_app/screens/Main_screen.dart';
+import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/QrCode_screen.dart';
 import 'package:csp_mobile_app/screens/road_data.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
@@ -7,7 +7,7 @@ import 'package:csp_mobile_app/screens/registration_screen.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
 import 'package:csp_mobile_app/screens/vehicle_management.dart';
 import 'package:flutter/material.dart';
-import './widets/carouselCircle_slider.dart';
+import 'widets/carousel_circle_slider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,12 +31,13 @@ class MyApp extends StatelessWidget {
           // primaryColorLight:const Color(0xFFB7E4C7),
           // primaryColorDark:const Color(0xFF1B4332),
         ),
-        home: MainScreen(),
+        home: LoginScreen(),
         routes: <String, WidgetBuilder>{
-          registrationScreen.routeName: (ctx) => registrationScreen(),
+          RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
           Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
-          RoudData.routeName: (ctx) => RoudData(),
+          RoadData.routeName: (ctx) => RoadData(),
+          MainScreen.routeName: (ctx) => MainScreen(),
         });
   }
 }

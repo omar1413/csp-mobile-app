@@ -1,13 +1,14 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:csp_mobile_app/widets/carouselCircle_slider.dart';
-import 'package:csp_mobile_app/widets/carouselSquare_slider.dart';
+import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
+import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
 import 'package:flutter/material.dart';
-import '../widets/cirular_sliderItem.dart';
+import '../widets/cirular_slider_item.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../widets/profile.dart';
-import '../screens/QrCode_screen.dart';
+import '../widets/custom_text.dart';
+import './qrcode_screen.dart';
 
 class homeScreen extends StatefulWidget {
   @override
@@ -50,18 +51,30 @@ class _homeScreenState extends State<homeScreen> {
   }
 
   Widget _text(String str, BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(3),
-      child: Text(
-        str,
-        textAlign: TextAlign.end,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-          color: Colors.green,
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.all(3),
+          child: Text(
+            str,
+            textAlign: TextAlign.end,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.green,
+            ),
+          ),
         ),
-      ),
+        Container(
+          margin: EdgeInsets.all(3),
+          height: 4,
+          width: 30,
+          decoration: BoxDecoration(
+              color: Colors.green[200],
+              borderRadius: BorderRadius.circular(10)),
+        ),
+      ],
     );
   }
 
@@ -112,25 +125,9 @@ class _homeScreenState extends State<homeScreen> {
                       child: CarouselCircle()),
                 ]),
               ),
-              _text("المعلومات", context),
-              Container(
-                margin: EdgeInsets.all(3),
-                height: 4,
-                width: 30,
-                decoration: BoxDecoration(
-                    color: Colors.green[200],
-                    borderRadius: BorderRadius.circular(10)),
-              ),
+              CustomText(text: "المعلومات"),
               CarouselSquare(),
-              _text("الخدمات", context),
-              Container(
-                margin: EdgeInsets.all(3),
-                height: 4,
-                width: 30,
-                decoration: BoxDecoration(
-                    color: Colors.green[200],
-                    borderRadius: BorderRadius.circular(10)),
-              ),
+              CustomText(text: "الخدمات"),
               Container(
                 margin: EdgeInsets.all(10),
                 child: Row(
