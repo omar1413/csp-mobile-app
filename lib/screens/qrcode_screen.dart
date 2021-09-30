@@ -42,51 +42,47 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
           title: Text("الكود الشخصى", textAlign: TextAlign.center),
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            Container(
-              height: 300,
-              width: 300,
-              margin: EdgeInsets.all(5),
-              alignment: Alignment.center,
-              child: Image.asset('assets/images/user-bar-code.png',
-                  fit: BoxFit.fill),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 5,
-                    blurRadius: 10,
-                    offset: Offset(0, 2), // changes position of shadow
-                  ),
-                ],
+        body: Container(
+          margin: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 50,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  CustomText(text: ""),
-                  LinearProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                    backgroundColor: Colors.grey[300],
-                    value: 0.25,
-                    // valueColor: controller,
-                    semanticsLabel: 'Linear progress indicator',
-                  ),
-                  const Text(
-                    '25 ثانية',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ],
+              Container(
+                height: 300,
+                width: 300,
+                margin: EdgeInsets.all(5),
+                alignment: Alignment.center,
+                child: Image.asset('assets/images/user-bar-code.png',
+                    fit: BoxFit.fill),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 5,
+                      blurRadius: 10,
+                      offset: Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              CustomText(text: "زمن تغير ال Qr code"),
+              LinearProgressIndicator(
+                color: Theme.of(context).primaryColor,
+                backgroundColor: Colors.grey[300],
+                value: 0.25,
+                // valueColor: controller,
+                semanticsLabel: 'Linear progress indicator',
+              ),
+              const Text(
+                '25 ثانية',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
         ),
       ),
     );
