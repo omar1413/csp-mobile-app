@@ -23,10 +23,9 @@ class Cirular_slider extends StatelessWidget {
              bottomLabelStyle: TextStyle(color:Colors.white54),
            ) ,
            size: 120,
-            
            animationEnabled :true,
            //spinnerMode: true,
-           customColors: CustomSliderColors(progressBarColor: Colors.green[600] , trackColor: Colors.grey[300] ),
+           customColors: CustomSliderColors(progressBarColor:item.color, trackColor: Colors.grey[300] ),
            customWidths: CustomSliderWidths(progressBarWidth:5,)),
             min: 0,
             max: 200,
