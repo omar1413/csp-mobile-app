@@ -1,5 +1,4 @@
 import 'package:csp_mobile_app/screens/main_screen.dart';
-import 'package:csp_mobile_app/screens/QrCode_screen.dart';
 import 'package:csp_mobile_app/screens/road_data.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../widets/cirular_slider_item.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../widets/profile.dart';
-import '../screens/QrCode_screen.dart';
+import '../screens/qrcode_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
