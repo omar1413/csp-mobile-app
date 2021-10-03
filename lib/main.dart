@@ -9,6 +9,7 @@ import 'package:csp_mobile_app/screens/onboard/onboard.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
+import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
             // primaryColorLight:const Color(0xFFB7E4C7),
             //primaryColorDark:const Color(0xFF1B4332),
             ),
-        home: LoginScreen(),
+        home: VechileListScreen(),
         routes: <String, WidgetBuilder>{
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
           MainScreen.routeName: (ctx) => MainScreen(),
           RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
           TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
+          VechileListScreen.routeName: (ctx) => VechileListScreen(),
         });
   }
 }
