@@ -6,12 +6,12 @@ import 'package:csp_mobile_app/widets/custom_radio_tile.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:csp_mobile_app/widets/fancy_card.dart';
 import 'package:csp_mobile_app/widets/service.dart';
-import 'package:csp_mobile_app/widets/square_slider_item.dart';
+import 'package:csp_mobile_app/widets/square_item.dart';
 import 'package:flutter/material.dart';
 import '../widets/transaction_list.dart';
 import '../widets/transaction_item.dart';
 import '../models/transaction_data.dart';
-import '../widets/square_slider_item.dart';
+import '../widets/square_item.dart';
 
 Widget CustomText(String str, FontWeight fw, Color color, double size) {
   return Text(

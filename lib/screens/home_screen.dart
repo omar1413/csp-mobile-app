@@ -6,6 +6,7 @@ import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
+import 'package:csp_mobile_app/widets/subscripe_item.dart';
 import 'package:flutter/material.dart';
 
 import '../widets/profile.dart';
@@ -128,6 +129,23 @@ class _homeScreenState extends State<homeScreen> {
               ),
               CustomTextLine(text: "المعلومات"),
               CarouselSquare(),
+              Container(
+                height: 200,
+                width: width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SubscripeItem(
+                      value: width * 0.7,
+                    ),
+                    SubscripeItem(
+                      value: width * 0.3,
+                    ),
+                    SubscripeItem(value: width * 0.9),
+                  ],
+                ),
+              ),
               CustomTextLine(text: "الخدمات"),
               Container(
                 margin: EdgeInsets.all(10),

@@ -15,10 +15,10 @@ class CustomTextLine extends StatelessWidget {
             text,
             textAlign: TextAlign.end,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Color(0xFF43A047),
+              color: Colors.green[900],
             ),
           ),
           Container(

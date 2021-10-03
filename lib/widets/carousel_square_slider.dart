@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'square_slider_item.dart';
+import 'square_item.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import '../models/DummyHomeItem.dart';
@@ -29,6 +29,11 @@ class CarouselSquareState extends State<CarouselSquare> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        /*Square_slider(
+          item: DummyHomeSquareItems[0],
+        ),
+        Square_slider(item: DummyHomeSquareItems[1]),*/
+
         Container(
           alignment: Alignment.center,
           child: Stack(alignment: Alignment.center, children: [
@@ -159,24 +164,25 @@ class CarouselSquareState extends State<CarouselSquare> {
               ),
             ),
             Positioned(
-                top: 40,
-                right: 10,
-                child: Container(
-                  height: height * 0.15,
-                  width: width * 0.45,
-                  padding: const EdgeInsets.all(5),
-                  child: Expanded(
-                    child: Text(
-                      "لقى شخص مصرعه، فيما أصيب 7 أشخاص آخرين في حادث تصادم سيارة ملاكي بجرار زراعي بالطريق الدائري بمركز مغاغة شمال المنيا، وتم نقل المصابين والجثة إلى المستشفي تحت تصرف النيابة",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 11),
-                    ),
+              top: 40,
+              right: 10,
+              child: Container(
+                height: height * 0.15,
+                width: width * 0.45,
+                padding: const EdgeInsets.all(5),
+                child: Expanded(
+                  child: Text(
+                    "لقى شخص مصرعه، فيما أصيب 7 أشخاص آخرين في حادث تصادم سيارة ملاكي بجرار زراعي بالطريق الدائري بمركز مغاغة شمال المنيا، وتم نقل المصابين والجثة إلى المستشفي تحت تصرف النيابة",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 11),
                   ),
-                )),
+                ),
+              ),
+            ),
           ]),
         ),
       ] /*map<Widget>(DummyHomeSquareItems, (index, url) {
