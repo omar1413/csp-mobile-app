@@ -1,3 +1,4 @@
+import 'package:csp_mobile_app/widets/custom_radio_tile.dart';
 import 'package:flutter/material.dart';
 
 class RegisterContinueScreen extends StatefulWidget {
@@ -9,9 +10,10 @@ class RegisterContinueScreen extends StatefulWidget {
 class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
   //final List<String> accountType = ["شركه", "فرد"];
   final Map<int, String> accountType = {
-    1: "فرد",
-    2: "شركه",
+    0: "فرد",
+    1: "شركه",
   };
+  String? accountTypeGroup = "accountType";
   String dropdownValue = "";
   void initState() {
     super.initState();
@@ -113,40 +115,37 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
             SizedBox(
               height: height * 0.06,
             ),
-            DropdownButtonHideUnderline(
-              child: Container(
-                height: 40,
-                width: 300,
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(bottom: 10),
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1.0, style: BorderStyle.solid),
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                  ),
-                ),
-                child: DropdownButton<String>(
-                  value: dropdownValue,
-                  style: const TextStyle(color: Colors.black),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: accountType.entries
-                      .map<DropdownMenuItem<String>>((entry) {
-                    return DropdownMenuItem<String>(
-                      value: entry.value,
-                      child: Text(entry.value),
-                    );
-                  }).toList(),
-                ),
-              ),
+            //
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _accountTypeRadioTile(value: accountType[0]!, text: "فرد"),
+                _accountTypeRadioTile(value: accountType[1]!, text: "شركه"),
+              ],
             ),
-            _textField("اسم المستخدم", context),
-            _textField("الرقم القومى ", context),
-            _textField("كلمة المرور", context),
-            _textField("تأكيد كلمة المرور", context),
+
+            _textField("رقم الحساب", context),
+            _textField("جنسيه الحساب", context),
+            accountTypeGroup == accountType[0]
+                ? Column(
+                    children: [
+                      _textField("الرقم القومى", context),
+                      _textField("الاسم الرباعى ", context),
+                      _textField("رقم الهاتف المحمول", context),
+                    ],
+                  )
+                : Container(),
+
+            accountTypeGroup == accountType[1]
+                ? Column(
+                    children: [
+                      _textField("السجل التجارى", context),
+                      _textField("اسم الشركه", context),
+                      _textField("رقم هاتف الشركه", context),
+                    ],
+                  )
+                : Container(),
+
             SizedBox(
               height: 20,
             ),
@@ -160,12 +159,30 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
                 color: Colors.green[600],
                 height: 40,
                 child: Text(
-                  "انشاء حساب",
+                  "استكمال بيانات الحساب",
                   style: TextStyle(color: Colors.white, fontSize: 14.0),
                 ),
               ),
             ),
           ])),
         ));
+  }
+
+  Widget _accountTypeRadioTile({required String value, required String text}) {
+    return CustomRadioTile(
+        groupValue: accountTypeGroup,
+        text: Text(
+          text,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+        onChanged: (String? v) {
+          setState(() {
+            accountTypeGroup = v;
+          });
+        },
+        value: value);
   }
 }
