@@ -7,11 +7,13 @@ class Service extends StatelessWidget {
   final String id;
   final String title;
   final String image;
+  final Function()? onPress;
 
   Service({
     required this.id,
     required this.title,
     required this.image,
+    this.onPress,
   });
 
   void selectedMeal(BuildContext ctx) {
@@ -33,7 +35,7 @@ class Service extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       child: InkWell(
-        onTap: () => selectedMeal(context),
+        onTap: onPress,
         child: Column(children: [
           Container(
             height: 80,

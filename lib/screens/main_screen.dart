@@ -1,4 +1,6 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:csp_mobile_app/models/chat_model.dart';
+import 'package:csp_mobile_app/screens/chat_page.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/wallet_screen.dart';
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
@@ -79,7 +81,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     List<Map<String, Object>> screensList = [
       {'page': QrCodeScreen(), 'title': 'الكود الشخصى'},
-      {'page': QrCodeScreen(), 'title': '2الكود الشخصى'},
+      {
+        'page': ChatPage(
+          chatModel: ChatModel(),
+        ),
+        'title': '4الكود الشخصى'
+      },
       {'page': homeScreen(), 'title': '3الكود الشخصى'},
       {'page': QrCodeScreen(), 'title': '4الكود الشخصى'},
       {'page': WalletScreen(), 'title': 'محفظتى'},
