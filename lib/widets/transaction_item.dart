@@ -20,35 +20,48 @@ class TransactionIteam extends StatelessWidget {
       elevation: 3,
       child: Container(
           padding: EdgeInsets.all(5),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: <
+              Widget>[
+            Container(
+              height: 20,
+              margin: EdgeInsets.all(10),
+              child: Image.asset("assets/images/car.png"),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      transaction.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Text(
-                      format.format(transaction.dateTime),
-                      // DateFormat().format(transaction.dateTime),
-                      style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey),
-                    ),
-                  ],
+                Text(
+                  transaction.title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[900],
+                  ),
                 ),
-                Container(
-                    child: IconButton(
-                        icon: Icon(Icons.arrow_back),
-                        onPressed:
-                            () {} /*selectedTransaction(transaction.id)*/)),
-              ])),
+                Text(
+                  transaction.subtitle +
+                      "  " +
+                      format.format(transaction.dateTime),
+                  // DateFormat().format(transaction.dateTime),
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.green[900],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 55,
+            ),
+            Container(
+                child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.green[900],
+                    ),
+                    onPressed: () {} /*selectedTransaction(transaction.id)*/)),
+          ])),
     );
   }
 }

@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
             //primaryColor:Color.fromRGBO(0xB7, 0xE4, 0xC7, 1.0)
             //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
             // primaryColorLight:const Color(0xFFB7E4C7),
-            // primaryColorDark:const Color(0xFF1B4332),
+            //primaryColorDark:const Color(0xFF1B4332),
             ),
         home: LoginScreen(),
         routes: <String, WidgetBuilder>{

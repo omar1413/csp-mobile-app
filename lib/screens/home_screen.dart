@@ -1,4 +1,7 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:csp_mobile_app/screens/road_data.dart';
+import 'package:csp_mobile_app/screens/subscriptions_management.dart';
+import 'package:csp_mobile_app/screens/vehicle_management.dart';
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
@@ -134,17 +137,35 @@ class _homeScreenState extends State<homeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Service(
-                        id: "1",
-                        title: "ادارة المركبات",
-                        image: "assets/images/car.png"),
+                      id: "1",
+                      title: "ادارة المركبات",
+                      image: "assets/images/car.png",
+                      function: () {
+                        Navigator.of(context).pushNamed(
+                          Vehiclemanagement.routeName,
+                        );
+                      },
+                    ),
                     Service(
-                        id: "2",
-                        title: "ادارة الأشتراكات",
-                        image: "assets/images/barcode.png"),
+                      id: "2",
+                      title: "ادارة الأشتراكات",
+                      image: "assets/images/barcode.png",
+                      function: () {
+                        Navigator.of(context).pushNamed(
+                          Subscriptionsmanagement.routeName,
+                        );
+                      },
+                    ),
                     Service(
-                        id: "3",
-                        title: "بيانات الطرق",
-                        image: "assets/images/direction.png"),
+                      id: "3",
+                      title: "بيانات الطرق",
+                      image: "assets/images/direction.png",
+                      function: () {
+                        Navigator.of(context).pushNamed(
+                          RoadData.routeName,
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

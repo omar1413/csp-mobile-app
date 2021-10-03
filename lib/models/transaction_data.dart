@@ -24,9 +24,21 @@ final DummyTransactionData = [
   ),
   Transaction(
     id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
+    title: "أ ك م /576 ",
+    subtitle: "طريق صلاح سالم ",
+    dateTime: DateTime.utc(2000, DateTime.february, 3),
+  ),
+  Transaction(
+    id: "1",
+    title: "ط م ن /728 ",
+    subtitle: "طريق مصر الصحراوى",
+    dateTime: DateTime.utc(2012, DateTime.april, 15),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ث /423 ",
+    subtitle: "طريق الزراعى ",
+    dateTime: DateTime.utc(2021, DateTime.january, 16),
   ),
   Transaction(
     id: "1",
@@ -36,9 +48,21 @@ final DummyTransactionData = [
   ),
   Transaction(
     id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
+    title: "أ ك م /576 ",
+    subtitle: "طريق صلاح سالم ",
+    dateTime: DateTime.utc(2000, DateTime.february, 3),
+  ),
+  Transaction(
+    id: "1",
+    title: "ط م ن /728 ",
+    subtitle: "طريق مصر الصحراوى",
+    dateTime: DateTime.utc(2012, DateTime.april, 15),
+  ),
+  Transaction(
+    id: "1",
+    title: "د م ث /423 ",
+    subtitle: "طريق الزراعى ",
+    dateTime: DateTime.utc(2021, DateTime.january, 16),
   ),
   Transaction(
     id: "1",

@@ -80,13 +80,17 @@ class WalletScreen extends StatelessWidget {
             Row(
               children: [
                 Service(
-                    id: "4",
-                    title: "اعادة الشحن",
-                    image: "assets/images/wallet-relaod.png"),
+                  id: "4",
+                  title: "اعادة الشحن",
+                  image: "assets/images/wallet-relaod.png",
+                  function: () {},
+                ),
                 Service(
-                    id: "5",
-                    title: " تحويل رصيد",
-                    image: "assets/images/payment-transfer.png")
+                  id: "5",
+                  title: " تحويل رصيد",
+                  image: "assets/images/payment-transfer.png",
+                  function: () {},
+                )
               ],
             ),
             Container(
@@ -104,27 +108,9 @@ class WalletScreen extends StatelessWidget {
               ),
             ),
             Container(
-                padding: EdgeInsets.all(10),
-                height: height * 0.22,
+                padding: EdgeInsets.all(5),
+                height: height * 0.25,
                 child: TransactionList(DummyTransactionData)),
-            /*Container(
-              color: Colors.red,
-              child: TransactionIteam(
-                transaction: Transaction(
-                  id: "1",
-                  title: "د م ن /423 ",
-                  subtitle: "طريق مصر السويس",
-                  dateTime: DateTime.utc(1989, DateTime.november, 9),
-                ),
-              ),
-            ),
-            child: ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return TransactionIteam(
-                      transaction: DummyTransactionData[index]);
-                },
-                itemCount: DummyTransactionData.length,
-              ),*/
           ],
         ),
       ),
