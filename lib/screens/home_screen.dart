@@ -7,11 +7,9 @@ import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
 import 'package:flutter/material.dart';
-import '../widets/cirular_slider_item.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 import '../widets/profile.dart';
 import '../widets/custom_text_line.dart';
-import './qrcode_screen.dart';
 
 class homeScreen extends StatefulWidget {
   @override
@@ -89,7 +87,7 @@ class _homeScreenState extends State<homeScreen> {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          body: Container(
+          body: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(

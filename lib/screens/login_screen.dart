@@ -45,13 +45,13 @@ Widget _textField(String str, BuildContext context) {
   );
 }
 
-Widget _textBtn(String str) {
+Widget _textBtn(String str, Function onPressed) {
   return Container(
     height: 35,
     alignment: Alignment.topLeft,
     // padding: EdgeInsets.symmetric(horizontal:),
     child: TextButton(
-        onPressed: () {},
+        onPressed: () => onPressed(),
         child: Text(
           str,
           style: TextStyle(
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     _textField("اسم المستخدم", context),
                     _textField("كلمة المرور ", context),
-                    _textBtn("هل نسيت كلمة المرور؟ "),
+                    _textBtn("هل نسيت كلمة المرور؟ ", () {}),
                     Container(
                       margin: EdgeInsets.all(10),
                       height: 40,
@@ -177,8 +177,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _textBtn("هل انت مستخدم جديد؟"),
-                          _textBtn("انشاء حساب جديد  "),
+                          _textBtn("هل انت مستخدم جديد؟", () {
+                            Navigator.pushNamed(
+                                context, RegistrationScreen.routeName);
+                          }),
+                          _textBtn("انشاء حساب جديد  ", () {}),
                           SizedBox(
                             width: 10,
                           ),

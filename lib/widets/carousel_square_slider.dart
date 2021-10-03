@@ -165,12 +165,16 @@ class CarouselSquareState extends State<CarouselSquare> {
                   height: height * 0.15,
                   width: width * 0.45,
                   padding: const EdgeInsets.all(5),
-                  child: Text(
-                    "لقى شخص مصرعه، فيما أصيب 7 أشخاص آخرين في حادث تصادم سيارة ملاكي بجرار زراعي بالطريق الدائري بمركز مغاغة شمال المنيا، وتم نقل المصابين والجثة إلى المستشفي تحت تصرف النيابة",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 11),
+                  child: Expanded(
+                    child: Text(
+                      "لقى شخص مصرعه، فيما أصيب 7 أشخاص آخرين في حادث تصادم سيارة ملاكي بجرار زراعي بالطريق الدائري بمركز مغاغة شمال المنيا، وتم نقل المصابين والجثة إلى المستشفي تحت تصرف النيابة",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 11),
+                    ),
                   ),
                 )),
           ]),

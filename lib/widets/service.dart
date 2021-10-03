@@ -7,19 +7,35 @@ class Service extends StatelessWidget {
   final String id;
   final String title;
   final String image;
-  final Function function;
-  Service(
-      {required this.id,
-      required this.title,
-      required this.image,
-      required this.function});
+  final Function()? onPress;
+
+  Service({
+    required this.id,
+    required this.title,
+    required this.image,
+    this.onPress,
+  });
+
+  void selectedMeal(BuildContext ctx) {
+    if (id == "1") {
+      Navigator.of(ctx).pushNamed(
+        Vehiclemanagement.routeName,
+      );
+    }
+    if (id == "2") {
+      Navigator.of(ctx).pushNamed(Subscriptionsmanagement.routeName);
+    }
+    if (id == "3") {
+      Navigator.of(ctx).pushNamed(RoadData.routeName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(5),
       child: InkWell(
-        onTap: () => function,
+        onTap: onPress,
         child: Column(children: [
           Container(
             height: 70,
