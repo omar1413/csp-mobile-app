@@ -109,26 +109,8 @@ class WalletScreen extends StatelessWidget {
               ),
               Container(
                   padding: EdgeInsets.all(10),
-                  height: height * 0.22,
+                  height: height * 0.25,
                   child: TransactionList(DummyTransactionData)),
-              /*Container(
-                color: Colors.red,
-                child: TransactionIteam(
-                  transaction: Transaction(
-                    id: "1",
-                    title: "د م ن /423 ",
-                    subtitle: "طريق مصر السويس",
-                    dateTime: DateTime.utc(1989, DateTime.november, 9),
-                  ),
-                ),
-              ),
-              child: ListView.builder(
-                  itemBuilder: (ctx, index) {
-                    return TransactionIteam(
-                        transaction: DummyTransactionData[index]);
-                  },
-                  itemCount: DummyTransactionData.length,
-                ),*/
             ],
           ),
         ),

@@ -138,7 +138,7 @@ class _homeScreenState extends State<homeScreen> {
                       id: "1",
                       title: "ادارة المركبات",
                       image: "assets/images/car.png",
-                      function: () {
+                      onPress: () {
                         Navigator.of(context).pushNamed(
                           Vehiclemanagement.routeName,
                         );
@@ -148,7 +148,7 @@ class _homeScreenState extends State<homeScreen> {
                       id: "2",
                       title: "ادارة الأشتراكات",
                       image: "assets/images/barcode.png",
-                      function: () {
+                      onPress: () {
                         Navigator.of(context).pushNamed(
                           Subscriptionsmanagement.routeName,
                         );
@@ -158,7 +158,7 @@ class _homeScreenState extends State<homeScreen> {
                       id: "3",
                       title: "بيانات الطرق",
                       image: "assets/images/direction.png",
-                      function: () {
+                      onPress: () {
                         Navigator.of(context).pushNamed(
                           RoadData.routeName,
                         );

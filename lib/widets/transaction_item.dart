@@ -38,15 +38,19 @@ class TransactionIteam extends StatelessWidget {
                     color: Colors.green[900],
                   ),
                 ),
-                Text(
-                  transaction.subtitle +
-                      "  " +
-                      format.format(transaction.dateTime),
-                  // DateFormat().format(transaction.dateTime),
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.green[900],
+                Container(
+                  width: 160,
+                  height: 20,
+                  child: Text(
+                    transaction.subtitle +
+                        "  " +
+                        format.format(transaction.dateTime),
+                    // DateFormat().format(transaction.dateTime),
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.green[900],
+                    ),
                   ),
                 ),
               ],
