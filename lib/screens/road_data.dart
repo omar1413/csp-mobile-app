@@ -35,13 +35,16 @@ class _RoadDataState extends State<RoadData> {
           children: [
             DropdownButtonHideUnderline(
               child: Container(
-                height: 40,
-                width: 300,
+                height: 45,
+                width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(bottom: 10),
+                margin: EdgeInsets.all(20),
                 decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1.0, style: BorderStyle.solid),
+                    side: BorderSide(
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                        color: Colors.grey),
                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
                   ),
                 ),
@@ -53,8 +56,11 @@ class _RoadDataState extends State<RoadData> {
                       dropdownValue = newValue!;
                     });
                   },
-                  items: ["طريق مصر السويس", " kj"]
-                      .map<DropdownMenuItem<String>>((value) {
+                  items: [
+                    "طريق مصر السويس",
+                    "طريق صلاح سالم ",
+                    "الطريق الزراعى "
+                  ].map<DropdownMenuItem<String>>((value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -75,9 +81,6 @@ class _RoadDataState extends State<RoadData> {
               ),
             ),
             Container(
-              //margin: EdgeInsets.all(10),
-              //height: 150,
-              //color: Colors.pink,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

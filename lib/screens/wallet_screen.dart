@@ -1,6 +1,8 @@
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
+import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
+import 'package:csp_mobile_app/widets/custom_textButton.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:csp_mobile_app/widets/fancy_card.dart';
 import 'package:csp_mobile_app/widets/service.dart';
@@ -99,11 +101,15 @@ class WalletScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomTextLine(text: "تاريخ المعاملات"),
-                    Text(
-                      "عرض الكل",
-                      style: TextStyle(
-                          fontSize: 10, color: Theme.of(context).primaryColor),
-                    )
+                    CustomTextButton(
+                        str: "عرض الكل",
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, TransactionListScreen.routeName);
+                        },
+                        size: 16,
+                        color: Colors.green,
+                        td: TextDecoration.none)
                   ],
                 ),
               ),

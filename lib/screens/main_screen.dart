@@ -101,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
           height: 50,
           index: 2,
           backgroundColor: Colors.white,
-          color: Colors.green,
+          color: Theme.of(context).primaryColor,
           buttonBackgroundColor: Colors.green[900],
           items: const <Widget>[
             Icon(Icons.settings, size: 30),

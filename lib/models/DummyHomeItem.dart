@@ -23,23 +23,23 @@ final DummyHomeCircularItems = [
     title: "رصيد المحفظة",
     subtitle: "رصيدك الحالى",
     type: "ج.م",
-    amount: 163,
+    amount: 10,
     color: Colors.green,
     img: "",
   ),
   HomeItem(
     title: "تجديد اشتراك ",
-    subtitle: "تجديد اشتراك ",
+    subtitle: "متبقى",
     type: "يوم",
-    amount: 70,
+    amount: 7,
     color: Colors.orange,
     img: "",
   ),
   HomeItem(
-    title: "تجديد رخصة القيادة ",
-    subtitle: "تجديد رخصة القيادة ",
-    type: "يوم",
-    amount: 200,
+    title: "عدد المركبات",
+    subtitle: " عدد المركبات",
+    type: "مركبات",
+    amount: 3,
     color: Colors.red,
     img: "",
   ),
@@ -79,7 +79,7 @@ final DummySpeedItems = [
     type: "ك/س",
     amount: 80,
     color: Colors.white,
-    img: "assets/images/download-speed.png",
+    img: "assets/images/speed.png",
   ),
   HomeItem(
     title: "دراجة نارية",
@@ -87,7 +87,7 @@ final DummySpeedItems = [
     type: "ك/س",
     amount: 100,
     color: Colors.white,
-    img: "assets/images/download-speed.png",
+    img: "assets/images/speed.png",
   ),
   HomeItem(
       title: "ملاكى ",
@@ -95,7 +95,7 @@ final DummySpeedItems = [
       type: "ك/س",
       amount: 120,
       color: const Color(0xFFE0E0E0),
-      img: "assets/images/download-speed.png")
+      img: "assets/images/speed.png")
 ];
 
 final DummyRoadItems = [
@@ -121,5 +121,5 @@ final DummyRoadItems = [
       type: "س",
       amount: 28,
       color: const Color(0xFFE0E0E0),
-      img: "assets/images/weather-app.png")
+      img: "assets/images/weather-dark.png")
 ];

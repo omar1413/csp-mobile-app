@@ -1,4 +1,5 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
 import 'package:csp_mobile_app/screens/vehicle_management.dart';
@@ -129,23 +130,6 @@ class _homeScreenState extends State<homeScreen> {
               ),
               CustomTextLine(text: "المعلومات"),
               CarouselSquare(),
-              Container(
-                height: 200,
-                width: width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SubscripeItem(
-                      value: width * 0.7,
-                    ),
-                    SubscripeItem(
-                      value: width * 0.3,
-                    ),
-                    SubscripeItem(value: width * 0.9),
-                  ],
-                ),
-              ),
               CustomTextLine(text: "الخدمات"),
               Container(
                 margin: EdgeInsets.all(10),
@@ -181,6 +165,26 @@ class _homeScreenState extends State<homeScreen> {
                           RoadData.routeName,
                         );
                       },
+                    ),
+                  ],
+                ),
+              ),
+              CustomTextLine(text: "الاشتراكات"),
+              Container(
+                //height: height * 0.17 * 3,
+                width: width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SubscripeItem(
+                      item: DummySubscriptionItems[0],
+                    ),
+                    SubscripeItem(
+                      item: DummySubscriptionItems[1],
+                    ),
+                    SubscripeItem(
+                      item: DummySubscriptionItems[2],
                     ),
                   ],
                 ),

@@ -7,7 +7,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(3),
+      margin: EdgeInsets.all(5),
       child: Text(
         text,
         textAlign: TextAlign.end,
