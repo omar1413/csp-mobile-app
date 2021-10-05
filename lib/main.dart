@@ -17,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/registration_continue.dart';
+import 'screens/subscription_data_screen.dart';
 import 'widets/carousel_circle_slider.dart';
 
 int? isviewed;
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
           RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
           TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
           VechileListScreen.routeName: (ctx) => VechileListScreen(),
+          SubscriptionDataScreen.routeName: (ctx) => SubscriptionDataScreen(),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
         });
   }

@@ -1,12 +1,17 @@
 import 'package:csp_mobile_app/models/subscription.dart';
 
 class Vechile {
+  int id;
   String type;
   String paletChars;
   String paletNumbers;
   String tagId;
-  List<Subscription> subscriptions;
 
-  Vechile(this.type, this.paletChars, this.paletNumbers, this.tagId,
-      this.subscriptions);
+  Vechile(
+    this.id,
+    this.type,
+    this.paletChars,
+    this.paletNumbers,
+    this.tagId,
+  );
 }

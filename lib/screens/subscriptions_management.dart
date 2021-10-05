@@ -1,4 +1,7 @@
+import 'package:csp_mobile_app/api/subscription_api.dart';
+import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/vechile.dart';
+import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_file.dart';
@@ -15,75 +18,107 @@ class Subscriptionsmanagement extends StatefulWidget {
 }
 
 class _SubscriptionsmanagementState extends State<Subscriptionsmanagement> {
+  bool rendered = false;
   @override
   void initState() {
     intl2.initializeDateFormatting();
+    intl.Intl.defaultLocale = "ar";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    intl.Intl.defaultLocale = "ar";
     late final intl.DateFormat formatter = intl.DateFormat('yyyy/MM/dd');
     ;
 
-    final vechile = ModalRoute.of(context)!.settings.arguments as Vechile;
-    final sub = vechile.subscriptions;
+    final vechileId = ModalRoute.of(context)!.settings.arguments as int?;
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: customAppBar(title: "اداراة الاشتراكات ", context: context),
-        body: ListView.builder(
-          itemCount: vechile.subscriptions.length,
-          itemBuilder: (ctx, index) {
-            return Card(
-              child: ListTile(
-                title: Text(sub[index].packageName),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Text("حروف اللوحه : " + vechile.paletChars),
-                        SizedBox(width: 10),
-                        Text("ارقام اللوحه : " + vechile.paletNumbers),
-                      ],
-                    ),
-                    SizedBox(width: 10),
-                    Row(
-                      children: [
-                        Text(
-                          "تاريخ بدايه الاشتراك : ",
-                        ),
-                        Expanded(
-                          child: Text(
-                            formatter.format(sub[index].startDate),
-                            overflow: TextOverflow.ellipsis,
+        body: FutureBuilder(
+          future: SubscriptionApi.findAll(id: vechileId),
+          builder: (context, AsyncSnapshot<List<Subscription>> snap) {
+            if (!snap.hasData && snap.data == null) {
+              return Center(child: CircularProgressIndicator());
+            }
+            final sub = snap.data!;
+
+            rendered = true;
+
+            return Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: ListView.builder(
+                      itemCount: sub.length,
+                      itemBuilder: (ctx, index) {
+                        return Card(
+                          child: ListTile(
+                            title: Text(sub[index].packageName),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("حروف اللوحه : " +
+                                        sub[index].vechile.paletChars),
+                                    SizedBox(width: 10),
+                                    Text("ارقام اللوحه : " +
+                                        sub[index].vechile.paletNumbers),
+                                  ],
+                                ),
+                                SizedBox(width: 10),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "تاريخ بدايه الاشتراك : ",
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        formatter.format(sub[index].startDate),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "تاريخ نهايه الاشتراك : ",
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        formatter.format(sub[index].endDate),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/car.png"),
+                            ),
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          "تاريخ نهايه الاشتراك : ",
-                        ),
-                        Expanded(
-                          child: Text(
-                            formatter.format(sub[index].endDate),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/car.png"),
-                ),
-              ),
+              ],
             );
           },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (rendered) {
+              Navigator.pushNamed(context, SubscriptionDataScreen.routeName);
+            }
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );

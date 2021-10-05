@@ -17,44 +17,40 @@ class _VechileListScreentState extends State<VechileListScreen> {
 
   @override
   void initState() {
-    List<Subscription> subs = [
-      Subscription("شبرا بنها", DateTime.now(), DateTime.now()),
-    ];
-
     vechiles.add(Vechile(
+      1,
       "ملاكى",
       "abc",
       "123",
       "ffsdf3",
-      subs,
     ));
     vechiles.add(Vechile(
+      1,
       "ملاكى",
       "abc",
       "123",
       "ffsdf3",
-      subs,
     ));
     vechiles.add(Vechile(
+      1,
       "ملاكى",
       "abc",
       "123",
       "ffsdf3",
-      subs,
     ));
     vechiles.add(Vechile(
+      1,
       "ملاكى",
       "abc",
       "123",
       "ffsdf3",
-      subs,
     ));
     vechiles.add(Vechile(
+      1,
       "ملاكى",
       "abc",
       "123",
       "ffsdsssssssssssssssssssssssssf3",
-      subs,
     ));
     super.initState();
   }
@@ -74,7 +70,7 @@ class _VechileListScreentState extends State<VechileListScreen> {
                   Navigator.pushNamed(
                     context,
                     Subscriptionsmanagement.routeName,
-                    arguments: vechiles[index],
+                    arguments: vechiles[index].id,
                   );
                 },
                 title: Text(vechiles[index].type),

@@ -29,7 +29,6 @@ class _SubscripeItemState extends State<SubscripeItem> {
     double width = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.all(10),
-      height: height * 0.15,
       width: width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -45,7 +44,6 @@ class _SubscripeItemState extends State<SubscripeItem> {
           ]),
       child: Container(
         width: width,
-        height: height * 0.15,
         margin: EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

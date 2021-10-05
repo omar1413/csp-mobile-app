@@ -2,6 +2,7 @@
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
+import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management.dart';
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
@@ -87,46 +88,62 @@ class _homeScreenState extends State<homeScreen> {
     double width = MediaQuery.of(context).size.width;
 
     return Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Container(
+                width: width,
                 margin: EdgeInsets.only(bottom: 5),
                 alignment: Alignment.center,
-                width: width,
-                child: Stack(children: [
-                  Container(
-                    child: Image.asset('assets/images/login.png',
-                        fit: BoxFit.fill),
-                    height: height * 0.42,
-                    width: width,
-                    decoration: BoxDecoration(
-                      color: Colors.green[700],
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(32.0),
-                        bottomRight: Radius.circular(32.0),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.9),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
+                decoration: BoxDecoration(
+                  color: Colors.green[700],
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(32.0),
+                    bottomRight: Radius.circular(32.0),
                   ),
-                  Positioned(
-                      top: 20,
-                      right: 8,
-                      left: 30,
-                      child: Container(child: ProfileWidget())),
-                  Container(
-                      padding: EdgeInsets.only(top: 90),
-                      child: CarouselCircle()),
-                ]),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/login.png"),
+                      fit: BoxFit.cover),
+                ),
+                child: Column(
+                  children: [
+                    // Container(
+                    //   child: Image.asset('assets/images/login.png',
+                    //       fit: BoxFit.fill),
+                    //   height: height * 0.42,
+                    //   width: width,
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.green[700],
+                    //     borderRadius: BorderRadius.only(
+                    //       bottomLeft: Radius.circular(32.0),
+                    //       bottomRight: Radius.circular(32.0),
+                    //     ),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: Colors.grey.withOpacity(0.9),
+                    //         spreadRadius: 5,
+                    //         blurRadius: 7,
+                    //         offset: Offset(0, 3), // changes position of shadow
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    SizedBox(height: 20),
+                    Container(child: ProfileWidget()),
+                    Container(child: CarouselCircle()),
+                  ],
+                ),
               ),
               CustomTextLine(text: "المعلومات"),
               CarouselSquare(),
@@ -142,7 +159,7 @@ class _homeScreenState extends State<homeScreen> {
                       image: "assets/images/car.png",
                       onPress: () {
                         Navigator.of(context).pushNamed(
-                          Vehiclemanagement.routeName,
+                          VechileListScreen.routeName,
                         );
                       },
                     ),
@@ -189,8 +206,10 @@ class _homeScreenState extends State<homeScreen> {
                   ],
                 ),
               ),
-            ]),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

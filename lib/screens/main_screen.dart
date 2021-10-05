@@ -1,4 +1,5 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/screens/chat_page.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
@@ -98,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
-          height: 50,
+          height: kNavBarHeight,
           index: 2,
           backgroundColor: Colors.white,
           color: Theme.of(context).primaryColor,
@@ -117,7 +118,8 @@ class _MainScreenState extends State<MainScreen> {
             _selectedTap(index);
           },
         ),
-        body: screensList[_indexOfSelectedScreen]['page'] as Widget,
+        body: Container(
+            child: screensList[_indexOfSelectedScreen]['page'] as Widget),
       ),
     );
   }

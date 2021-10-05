@@ -41,7 +41,10 @@ class CarouselCircleState extends State<CarouselCircle> {
               });
             },
             viewportFraction: 0.4,
-            aspectRatio: 16 / 9,
+            aspectRatio: MediaQuery.of(context).size.height /
+                MediaQuery.of(context).size.width *
+                1.2,
+
             // height: MediaQuery.of(context).size.height*0.6,
             initialPage: 0,
             enlargeCenterPage: true,
