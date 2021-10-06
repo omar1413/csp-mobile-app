@@ -1,4 +1,5 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:csp_mobile_app/models/news_dara.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
@@ -6,6 +7,9 @@ import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management.dart';
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
+import 'package:csp_mobile_app/widets/custom_textButton.dart';
+import 'package:csp_mobile_app/widets/new_item.dart';
+import 'package:csp_mobile_app/widets/news_list.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
 import 'package:csp_mobile_app/widets/subscripe_item.dart';
@@ -20,73 +24,10 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
-  Widget _textField(String str) {
-    return Container(
-      height: 40,
-      width: 300,
-      margin: EdgeInsets.only(bottom: 10),
-      child: TextField(
-        textAlign: TextAlign.end,
-        cursorColor: Colors.green[600],
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50.0))),
-          labelText: str,
-        ),
-      ),
-    );
-  }
-
-  Widget _textBtn(String str) {
-    return Container(
-      height: 35,
-      alignment: Alignment.topLeft,
-      // padding: EdgeInsets.symmetric(horizontal:),
-      child: TextButton(
-          onPressed: () {},
-          child: Text(
-            str,
-            style: TextStyle(
-                color: Colors.green[600],
-                decoration: TextDecoration.underline,
-                fontWeight: FontWeight.normal),
-          )),
-    );
-  }
-
-  Widget _text(String str, BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.all(3),
-          child: Text(
-            str,
-            textAlign: TextAlign.end,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.green,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.all(3),
-          height: 4,
-          width: 30,
-          decoration: BoxDecoration(
-              color: Colors.green[200],
-              borderRadius: BorderRadius.circular(10)),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -94,6 +35,7 @@ class _homeScreenState extends State<homeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //info
               Container(
                 width: width,
                 margin: EdgeInsets.only(bottom: 5),
@@ -118,35 +60,19 @@ class _homeScreenState extends State<homeScreen> {
                 ),
                 child: Column(
                   children: [
-                    // Container(
-                    //   child: Image.asset('assets/images/login.png',
-                    //       fit: BoxFit.fill),
-                    //   height: height * 0.42,
-                    //   width: width,
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.green[700],
-                    //     borderRadius: BorderRadius.only(
-                    //       bottomLeft: Radius.circular(32.0),
-                    //       bottomRight: Radius.circular(32.0),
-                    //     ),
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //         color: Colors.grey.withOpacity(0.9),
-                    //         spreadRadius: 5,
-                    //         blurRadius: 7,
-                    //         offset: Offset(0, 3), // changes position of shadow
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(height: 20),
                     Container(child: ProfileWidget()),
                     Container(child: CarouselCircle()),
                   ],
                 ),
               ),
+              //news
+              CustomTextLine(text: "الأخبار"),
+              News(),
+              //info
               CustomTextLine(text: "المعلومات"),
               CarouselSquare(),
+              //servises
               CustomTextLine(text: "الخدمات"),
               Container(
                 margin: EdgeInsets.all(10),
@@ -186,9 +112,26 @@ class _homeScreenState extends State<homeScreen> {
                   ],
                 ),
               ),
-              CustomTextLine(text: "الاشتراكات"),
+              //subscription
               Container(
-                //height: height * 0.17 * 3,
+                margin: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomTextLine(text: "الاشتراكات"),
+                    CustomTextButton(
+                        str: "عرض الكل",
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, Subscriptionsmanagement.routeName);
+                        },
+                        size: 16,
+                        color: Colors.green,
+                        td: TextDecoration.none)
+                  ],
+                ),
+              ),
+              Container(
                 width: width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

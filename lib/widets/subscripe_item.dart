@@ -60,7 +60,7 @@ class _SubscripeItemState extends State<SubscripeItem> {
                 child: FlatButton(
                   onPressed: () {},
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0)),
+                      borderRadius: BorderRadius.circular(10.0)),
                   color: Theme.of(context).primaryColor,
                   height: 20,
                   child: Text(
@@ -71,13 +71,16 @@ class _SubscripeItemState extends State<SubscripeItem> {
               ),
             ]),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  daysLeft.toString(),
-                  style: TextStyle(fontSize: 26, color: Colors.green),
+                  daysLeft.toStringAsFixed(0).toString(),
+                  style: TextStyle(fontSize: 30, color: Colors.green),
                 ),
                 Text(
-                  "  يوم متبقى على انتهاء الاشتراك  ",
+                  "يوم متبقى على انتهاء الاشتراك من " +
+                      days.toStringAsFixed(0).toString() +
+                      " يوم",
                   style: TextStyle(fontSize: 16, color: Colors.green[900]),
                 ),
               ],
