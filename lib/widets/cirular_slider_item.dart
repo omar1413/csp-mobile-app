@@ -3,8 +3,12 @@ import '../models/DummyHomeItem.dart';
 import 'package:flutter/material.dart';
 
 class Cirular_slider extends StatelessWidget {
-  HomeItem item;
-  Cirular_slider({required this.item});
+  final HomeItem item;
+  final double max;
+  Cirular_slider({
+    required this.item,
+    this.max = 1000,
+  });
   //final List<Colors> colors= [Colors.green[600]];
   @override
   Widget build(BuildContext context) {
@@ -29,8 +33,8 @@ class Cirular_slider extends StatelessWidget {
                 progressBarWidth: 5,
               )),
           min: 0,
-          max: 10,
-          initialValue: item.amount.toDouble(),
+          max: max,
+          initialValue: 0,
           innerWidget: (value) {
             return Padding(
               padding: EdgeInsets.all(10),
@@ -50,7 +54,9 @@ class Cirular_slider extends StatelessWidget {
                             style: TextStyle(color: Colors.white54),
                           ),
                           Text(
-                            "${value.toStringAsFixed(0)}" + " " + item.type,
+                            "${item.amount.toStringAsFixed(0)}" +
+                                " " +
+                                item.type,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),

@@ -1,7 +1,10 @@
+import 'package:csp_mobile_app/api/dashboard_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class HomeItem {
+  Future<Response> Function()? future;
   String title;
   String subtitle;
   String type;
@@ -9,13 +12,15 @@ class HomeItem {
   Color color;
   String img;
 
-  HomeItem(
-      {required this.title,
-      required this.subtitle,
-      required this.type,
-      required this.amount,
-      required this.color,
-      required this.img});
+  HomeItem({
+    required this.title,
+    required this.subtitle,
+    required this.type,
+    required this.amount,
+    required this.color,
+    required this.img,
+    this.future,
+  });
 }
 
 final DummyHomeCircularItems = [
@@ -26,14 +31,16 @@ final DummyHomeCircularItems = [
     amount: 10,
     color: Colors.green,
     img: "",
+    future: DashboardApi.getWalletAmount,
   ),
   HomeItem(
-    title: "تجديد اشتراك ",
-    subtitle: "متبقى",
-    type: "يوم",
+    title: " عدد الاشتراكات ",
+    subtitle: " عدد الاشتراكات ",
+    type: "اشتراك ",
     amount: 7,
     color: Colors.orange,
     img: "",
+    future: DashboardApi.getSubscriptionCount,
   ),
   HomeItem(
     title: "عدد المركبات",
@@ -42,6 +49,7 @@ final DummyHomeCircularItems = [
     amount: 3,
     color: Colors.red,
     img: "",
+    future: DashboardApi.getVehicleCount,
   ),
 ];
 

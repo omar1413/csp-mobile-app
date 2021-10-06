@@ -1,0 +1,236 @@
+{
+    "bundle": {
+      "bundleCode": "string",
+      "bundleName": "string",
+      
+     
+     
+      "id": 0
+     
+    
+    
+      
+    },
+    
+   
+   
+  
+   
+   
+   
+    
+    
+   
+   
+    "startDate": "2021-10-06T08:29:14.776Z",
+    "subscriptionPeriod": 0,
+    
+  
+   
+    "vehicle": {
+     
+        "accountYear": 0,
+        "company": {
+          "commercialRegister": "string",
+          "createdBy": {
+            "id": 0,
+            "isCustomer": true,
+            "token": "string",
+            "userCustomer": {
+              "email": "string",
+              "id": 0,
+              "isFirstTime": true,
+              "password": "string"
+            },
+            "userEmployee": {
+              "fullName": "string",
+              "office": {
+                "id": 0,
+                "name": "string"
+              },
+              "title": "string"
+            },
+            "userName": "string"
+          },
+          "createdOn": "2021-10-06T08:29:14.776Z",
+          "id": 0,
+          "name": "string",
+          "phoneNumber": "string",
+          "updatedBy": {
+            "id": 0,
+            "isCustomer": true,
+            "token": "string",
+            "userCustomer": {
+              "email": "string",
+              "id": 0,
+              "isFirstTime": true,
+              "password": "string"
+            },
+            "userEmployee": {
+              "fullName": "string",
+              "office": {
+                "id": 0,
+                "name": "string"
+              },
+              "title": "string"
+            },
+            "userName": "string"
+          },
+          "updatedOn": "2021-10-06T08:29:14.776Z"
+        },
+        "createdBy": {
+          "id": 0,
+          "isCustomer": true,
+          "token": "string",
+          "userCustomer": {
+            "email": "string",
+            "id": 0,
+            "isFirstTime": true,
+            "password": "string"
+          },
+          "userEmployee": {
+            "fullName": "string",
+            "office": {
+              "id": 0,
+              "name": "string"
+            },
+            "title": "string"
+          },
+          "userName": "string"
+        },
+        "createdOn": "2021-10-06T08:29:14.776Z",
+        "id": 0,
+        "isDeleted": true,
+        "isForeigner": true,
+        "person": {
+          "createdBy": {
+            "id": 0,
+            "isCustomer": true,
+            "token": "string",
+            "userCustomer": {
+              "email": "string",
+              "id": 0,
+              "isFirstTime": true,
+              "password": "string"
+            },
+            "userEmployee": {
+              "fullName": "string",
+              "office": {
+                "id": 0,
+                "name": "string"
+              },
+              "title": "string"
+            },
+            "userName": "string"
+          },
+          "createdOn": "2021-10-06T08:29:14.777Z",
+          "id": 0,
+          "mobileNumber": "string",
+          "name": "string",
+          "nationalNumber": "string",
+          "passportNumber": "string",
+          "updatedBy": {
+            "id": 0,
+            "isCustomer": true,
+            "token": "string",
+            "userCustomer": {
+              "email": "string",
+              "id": 0,
+              "isFirstTime": true,
+              "password": "string"
+            },
+            "userEmployee": {
+              "fullName": "string",
+              "office": {
+                "id": 0,
+                "name": "string"
+              },
+              "title": "string"
+            },
+            "userName": "string"
+          },
+          "updatedOn": "2021-10-06T08:29:14.777Z"
+        },
+        "updatedBy": {
+          "id": 0,
+          "isCustomer": true,
+          "token": "string",
+          "userCustomer": {
+            "email": "string",
+            "id": 0,
+            "isFirstTime": true,
+            "password": "string"
+          },
+          "userEmployee": {
+            "fullName": "string",
+            "office": {
+              "id": 0,
+              "name": "string"
+            },
+            "title": "string"
+          },
+          "userName": "string"
+        },
+        "updatedOn": "2021-10-06T08:29:14.777Z"
+      },
+      "createdBy": {
+        "id": 0,
+        "isCustomer": true,
+        "token": "string",
+        "userCustomer": {
+          "email": "string",
+          "id": 0,
+          "isFirstTime": true,
+          "password": "string"
+        },
+        "userEmployee": {
+          "fullName": "string",
+          "office": {
+            "id": 0,
+            "name": "string"
+          },
+          "title": "string"
+        },
+        "userName": "string"
+      },
+      "createdOn": "2021-10-06T08:29:14.777Z",
+      "governorateLkp": {
+        "code": "string",
+        "desc": "string",
+        "id": 0
+      },
+      "id": 0,
+      "isDeleted": true,
+      "isOldPlate": true,
+      "plateCountry": "string",
+      "plateLetters": "string",
+      "plateNumbers": "string",
+      "tagValue": "string",
+      "updatedBy": {
+        "id": 0,
+        "isCustomer": true,
+        "token": "string",
+        "userCustomer": {
+          "email": "string",
+          "id": 0,
+          "isFirstTime": true,
+          "password": "string"
+        },
+        "userEmployee": {
+          "fullName": "string",
+          "office": {
+            "id": 0,
+            "name": "string"
+          },
+          "title": "string"
+        },
+        "userName": "string"
+      },
+      "updatedOn": "2021-10-06T08:29:14.777Z",
+      "vehicleTypeLkp": {
+        "code": "string",
+        "desc": "string",
+        "id": 0
+      }
+    }
+  }
