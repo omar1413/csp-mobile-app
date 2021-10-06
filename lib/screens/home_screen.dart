@@ -90,6 +90,8 @@ class _homeScreenState extends State<homeScreen> {
                     ],
                   ),
                 ),
+                CustomTextLine(text: "الأخبار"),
+                News(),
                 CustomTextLine(text: "المعلومات"),
                 CarouselSquare(),
                 CustomTextLine(text: "الخدمات"),

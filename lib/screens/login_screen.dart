@@ -1,4 +1,4 @@
-import 'package:csp_mobile_app/api/auth-api.dart';
+import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/models/User.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';

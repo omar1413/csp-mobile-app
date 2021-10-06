@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class Road {
   int? id;
-  String name;
-  int feesAmount;
-  int roadLength;
-  int limitSpeed;
-  String weather;
+  String? name;
+  int? feesAmount;
+  int? roadLength;
+  int? limitSpeed;
+  String? weather;
 
   Road({
     required this.limitSpeed,

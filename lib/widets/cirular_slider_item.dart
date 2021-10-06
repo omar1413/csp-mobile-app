@@ -34,7 +34,7 @@ class Cirular_slider extends StatelessWidget {
               )),
           min: 0,
           max: max,
-          initialValue: 0,
+          initialValue: max,
           innerWidget: (value) {
             return Padding(
               padding: EdgeInsets.all(10),

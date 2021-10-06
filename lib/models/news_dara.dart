@@ -2,11 +2,11 @@ import 'package:csp_mobile_app/models/road_data.dart';
 import 'package:flutter/material.dart';
 
 class New {
-  int id;
-  Road road;
-  String newsType;
-  String code;
-  String newsDescription;
+  int? id;
+  Road? road;
+  String? newsType;
+  String? code;
+  String? newsDescription;
 
   New({
     required this.id,
@@ -18,7 +18,7 @@ class New {
 
   New.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        road = json["road"],
+        road = Road.fromJson(json["road"]),
         newsType = json["newsType"],
         code = json["code"],
         newsDescription = json["newsDescription"];

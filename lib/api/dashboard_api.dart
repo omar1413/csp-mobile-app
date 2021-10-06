@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:csp_mobile_app/api/auth-api.dart';
+import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/models/User.dart';
 
 import 'package:http/http.dart' as http;

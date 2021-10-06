@@ -1,4 +1,3 @@
-import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 
 import '../../constant.dart';
@@ -165,7 +164,7 @@ class _OnBoardState extends State<OnBoard> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => homeScreen()));
+                                    builder: (context) => LoginScreen()));
                           }
 
                           _pageController.nextPage(

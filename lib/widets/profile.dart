@@ -1,4 +1,4 @@
-import 'package:csp_mobile_app/api/auth-api.dart';
+import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {

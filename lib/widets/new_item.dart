@@ -10,13 +10,13 @@ class NewItem extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
-      height: 120,
+      //height: 120,
       width: width,
       margin: EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       child: Card(
         child: Column(
-          children: [],
+          children: [Text(newItem.newsType.toString())],
         ),
       ),
     );
