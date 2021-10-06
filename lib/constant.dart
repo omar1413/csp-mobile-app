@@ -14,6 +14,4 @@ const double kNavBarHeight = 50;
 const String kHost = "10.3.1.229:8098";
 const String kPrefixHost = "/csp/portal";
 
-const Map<String, String> kHostHeader = const {
-  "Content-Type": "application/json"
-};
+Map<String, String> kHostHeader = {"Content-Type": "application/json"};

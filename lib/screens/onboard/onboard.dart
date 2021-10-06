@@ -1,4 +1,5 @@
 import 'package:csp_mobile_app/screens/home_screen.dart';
+import 'package:csp_mobile_app/screens/login_screen.dart';
 
 import '../../constant.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _OnBoardState extends State<OnBoard> {
                 onPressed: () {
                   _storeOnboardInfo();
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => homeScreen()));
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 child: Text(
                   "تخطى",

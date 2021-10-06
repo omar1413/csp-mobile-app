@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import '../models/DummyHomeItem.dart';
 import 'cirular_slider_item.dart';
@@ -24,6 +27,11 @@ class CarouselCircleState extends State<CarouselCircle> {
       result.add(handler(i, list[i]));
     }
     return result;
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -59,7 +67,27 @@ class CarouselCircleState extends State<CarouselCircle> {
           items: DummyHomeCircularItems.map((item) {
             return Builder(
               builder: (BuildContext context) {
-                return Cirular_slider(item: item);
+                return FutureBuilder<Response>(
+                    future: item.future!(),
+                    builder: (ctx, sn) {
+                      print(sn);
+                      if (sn.hasError) {
+                        print(sn.error);
+                      }
+                      if (sn.hasData && sn.data != null) {
+                        print(
+                            "status code : " + sn.data!.statusCode.toString());
+                        if (sn.data!.statusCode == 200) {
+                          print("haaaaaaaaaaaaas data");
+                          item.amount = jsonDecode(sn.data!.body)["data"];
+                          return Cirular_slider(
+                            item: item,
+                            max: item.amount.toDouble(),
+                          );
+                        }
+                      }
+                      return Cirular_slider(item: item);
+                    });
               },
             );
           }).toList(),

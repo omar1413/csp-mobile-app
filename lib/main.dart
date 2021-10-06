@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
             // primaryColorLight:const Color(0xFFB7E4C7),
             //primaryColorDark:const Color(0xFF1B4332),
             ),
-        home: MainScreen(),
+        home: OnBoard(),
         routes: <String, WidgetBuilder>{
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),

@@ -156,39 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.white,
                                 width: width * 0.6,
                                 child: FlatButton(
-                                  onPressed: () async {
-                                    showProgressIndicator();
-                                    await AuthApi.login(
-                                      User(
-                                        usernameControll.value.text,
-                                        passcontroll.value.text,
-                                      ),
-                                    ).then(
-                                      (value) {
-                                        print(
-                                            "status code : ${value.statusCode}");
-                                        if (value.statusCode == 200) {
-                                          Navigator.of(context)
-                                              .pushReplacementNamed(
-                                                  MainScreen.routeName);
-                                        } else {
-                                          _showMyDialog(
-                                            "خطأ",
-                                            "حدث خطأ ما اثناء تسجيل الدخول",
-                                          );
-                                        }
-                                        hideProgressIndicator();
-                                      },
-                                    ).onError((error, stackTrace) {
-                                      print(error);
-                                      _showMyDialog(
-                                        "خطأ",
-                                        "حدث خطأ ما اثناء تسجيل الدخول",
-                                      );
-                                      hideProgressIndicator();
-                                    });
-                                    hideProgressIndicator();
-                                  },
+                                  onPressed: _login,
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(50.0)),
@@ -300,6 +268,36 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } else {
       return Container();
+    }
+  }
+
+  _login() async {
+    showProgressIndicator();
+    try {
+      final user = User(
+        usernameControll.value.text,
+        passcontroll.value.text,
+      );
+      final response = await AuthApi.login(user);
+
+      print("status code : ${response.statusCode}");
+      if (response.statusCode == 200) {
+        AuthApi.saveToken(response.body);
+        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+      } else {
+        _showMyDialog(
+          "خطأ",
+          "حدث خطأ ما اثناء تسجيل الدخول",
+        );
+      }
+    } catch (error) {
+      print(error);
+      _showMyDialog(
+        "خطأ",
+        "حدث خطأ ما اثناء تسجيل الدخول",
+      );
+    } finally {
+      hideProgressIndicator();
     }
   }
 }
