@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 class Cirular_slider extends StatelessWidget {
   final HomeItem item;
   final double max;
+  final double initalValue;
   Cirular_slider({
     required this.item,
     this.max = 1000,
+    this.initalValue = 0,
   });
   //final List<Colors> colors= [Colors.green[600]];
   @override
@@ -34,7 +36,7 @@ class Cirular_slider extends StatelessWidget {
               )),
           min: 0,
           max: max,
-          initialValue: max,
+          initialValue: initalValue,
           innerWidget: (value) {
             return Padding(
               padding: EdgeInsets.all(10),

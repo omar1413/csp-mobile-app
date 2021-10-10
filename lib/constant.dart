@@ -10,8 +10,9 @@ const Color kgrey = Color(0xFFC0C0C0);
 const double kMidHeight = 60;
 
 const double kNavBarHeight = 50;
+
 const String kHost = "10.3.1.229:8098";
-//const String kHost = "10.1.2.159:8098";
+// const String kHost = "10.1.2.159:8098";
 const String kPrefixHost = "/csp/portal";
 
 Map<String, String> kHostHeader = {

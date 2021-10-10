@@ -10,13 +10,6 @@ class SubscriptionList extends StatelessWidget {
   SubscriptionList(this.subscriptionList);
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (ctx, index) {
-        return SubscripeItem(
-          item: subscriptionList[index],
-        );
-      },
-      itemCount: subscriptionList.length,
-    );
+    return Container();
   }
 }

@@ -1,10 +1,11 @@
+import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/widets/CustomText.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:flutter/material.dart';
 
 class SubscripeItem extends StatefulWidget {
-  SubscripeData item;
+  Subscription item;
   SubscripeItem({required this.item});
 
   @override
@@ -17,9 +18,11 @@ class _SubscripeItemState extends State<SubscripeItem> {
   double percentage = 0;
   @override
   void initState() {
-    days = widget.item.end.difference(widget.item.start).inDays * 1.0;
-    daysLeft = widget.item.end.difference(DateTime.now()).inDays * 1.0;
-    percentage = daysLeft / days;
+    print("Days :: ");
+    print(widget.item.endDate);
+    days = widget.item.endDate.difference(widget.item.startDate).inDays * 1.0;
+    daysLeft = widget.item.endDate.difference(DateTime.now()).inDays * 1.0;
+    percentage = daysLeft / 10;
     super.initState();
   }
 
@@ -51,7 +54,7 @@ class _SubscripeItemState extends State<SubscripeItem> {
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                widget.item.title,
+                widget.item.bundle.name,
                 style: TextStyle(
                     fontSize: 18, color: Theme.of(context).primaryColorDark),
               ),
@@ -73,15 +76,25 @@ class _SubscripeItemState extends State<SubscripeItem> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  daysLeft.toStringAsFixed(0).toString(),
-                  style: TextStyle(fontSize: 30, color: Colors.green),
+                Expanded(
+                  flex: 1,
+                  child: FittedBox(
+                    child: Text(
+                      daysLeft.toStringAsFixed(0).toString(),
+                      style: TextStyle(fontSize: 30, color: Colors.green),
+                    ),
+                  ),
                 ),
-                Text(
-                  "يوم متبقى على انتهاء الاشتراك من " +
-                      days.toStringAsFixed(0).toString() +
-                      " يوم",
-                  style: TextStyle(fontSize: 16, color: Colors.green[900]),
+                Expanded(
+                  flex: 6,
+                  child: FittedBox(
+                    child: Text(
+                      "يوم متبقى على انتهاء الاشتراك من " +
+                          days.toStringAsFixed(0).toString() +
+                          " يوم",
+                      style: TextStyle(fontSize: 16, color: Colors.green[900]),
+                    ),
+                  ),
                 ),
               ],
             ),

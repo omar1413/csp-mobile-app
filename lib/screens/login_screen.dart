@@ -3,6 +3,7 @@ import 'package:csp_mobile_app/models/User.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
+import 'package:csp_mobile_app/widets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 //import 'package:hospital_application/Widget/Animation.dart';
@@ -225,25 +226,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  _showMyDialog(String title, desc) async {
-    Alert(
-      context: context,
-      type: AlertType.error,
-      title: title,
-      desc: desc,
-      buttons: [
-        // DialogButton(
-        //   child: Text(
-        //     "COOL",
-        //     style: TextStyle(color: Colors.white, fontSize: 20),
-        //   ),
-        //   onPressed: () => Navigator.pop(context),
-        //   width: 120,
-        // ),
-      ],
-    ).show();
-  }
-
   showProgressIndicator() {
     setState(() {
       _showProgressIndicator = true;
@@ -285,16 +267,18 @@ class _LoginScreenState extends State<LoginScreen> {
         AuthApi.saveToken(response.body);
         Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
       } else {
-        _showMyDialog(
-          "خطأ",
-          "حدث خطأ ما اثناء تسجيل الدخول",
+        showMyDialog(
+          context: context,
+          title: "خطأ",
+          desc: "حدث خطأ ما اثناء تسجيل الدخول",
         );
       }
     } catch (error) {
       print(error);
-      _showMyDialog(
-        "خطأ",
-        "حدث خطأ ما اثناء تسجيل الدخول",
+      showMyDialog(
+        context: context,
+        title: "خطأ",
+        desc: "حدث خطأ ما اثناء تسجيل الدخول",
       );
     } finally {
       hideProgressIndicator();

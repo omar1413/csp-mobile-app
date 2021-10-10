@@ -78,15 +78,25 @@ class CarouselCircleState extends State<CarouselCircle> {
                         print(
                             "status code : " + sn.data!.statusCode.toString());
                         if (sn.data!.statusCode == 200) {
-                          print("haaaaaaaaaaaaas data");
                           item.amount = jsonDecode(sn.data!.body)["data"];
+                          print("s${item.amount}s s");
+                          item.amount = jsonDecode(sn.data!.body)["data"];
+                          double max = item.amount.toDouble();
+                          if (item.amount <= 0) {
+                            max = 100;
+                          }
                           return Cirular_slider(
                             item: item,
-                            max: item.amount.toDouble(),
+                            max: max,
+                            initalValue: item.amount.toDouble(),
                           );
                         }
                       }
-                      return Cirular_slider(item: item);
+
+                      return Cirular_slider(
+                        item: item,
+                        initalValue: item.amount.toDouble(),
+                      );
                     });
               },
             );

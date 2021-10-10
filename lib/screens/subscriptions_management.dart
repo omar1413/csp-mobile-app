@@ -1,7 +1,8 @@
 import 'package:csp_mobile_app/api/subscription_api.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
-import 'package:csp_mobile_app/models/vechile.dart';
+import 'package:csp_mobile_app/models/vehicle.dart';
 import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
+import 'package:csp_mobile_app/widets/custom_alert_dialog.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_file.dart';
@@ -38,11 +39,16 @@ class _SubscriptionsmanagementState extends State<Subscriptionsmanagement> {
       child: Scaffold(
         appBar: customAppBar(title: "اداراة الاشتراكات ", context: context),
         body: FutureBuilder(
-          future: SubscriptionApi.findAll(id: vechileId),
-          builder: (context, AsyncSnapshot<List<Subscription>> snap) {
+          future: _subFuture(vechileId),
+          builder: (ctx, AsyncSnapshot<List<Subscription>> snap) {
+            if (snap.hasError) {
+              _showError(context);
+              return Container();
+            }
             if (!snap.hasData && snap.data == null) {
               return Center(child: CircularProgressIndicator());
             }
+
             final sub = snap.data!;
 
             rendered = true;
@@ -56,17 +62,17 @@ class _SubscriptionsmanagementState extends State<Subscriptionsmanagement> {
                       itemBuilder: (ctx, index) {
                         return Card(
                           child: ListTile(
-                            title: Text(sub[index].packageName),
+                            title: Text(sub[index].bundle.name),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Row(
                                   children: [
                                     Text("حروف اللوحه : " +
-                                        sub[index].vechile.paletChars),
+                                        sub[index].vechile.plateLetters),
                                     SizedBox(width: 10),
                                     Text("ارقام اللوحه : " +
-                                        sub[index].vechile.paletNumbers),
+                                        sub[index].vechile.plateNumbers),
                                   ],
                                 ),
                                 SizedBox(width: 10),
@@ -121,6 +127,22 @@ class _SubscriptionsmanagementState extends State<Subscriptionsmanagement> {
           child: Icon(Icons.add),
         ),
       ),
+    );
+  }
+
+  Future<List<Subscription>> _subFuture(int? vehicleId) {
+    if (vehicleId == null) {
+      return Future.value();
+    } else {
+      return SubscriptionApi.getVehicleSubscriptions(vehicleId: vehicleId);
+    }
+  }
+
+  void _showError(context) async {
+    await showMyDialog(
+      context: context,
+      title: "خطأ",
+      desc: "حدث خطأ ما اثناء تسجيل الدخول",
     );
   }
 }

@@ -1,5 +1,7 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:csp_mobile_app/api/dashboard_api.dart';
 import 'package:csp_mobile_app/models/news_dara.dart';
+import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
@@ -24,6 +26,11 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -137,21 +144,33 @@ class _homeScreenState extends State<homeScreen> {
                 Container(
                   //height: height * 0.17 * 3,
                   width: width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SubscripeItem(
-                        item: DummySubscriptionItems[0],
-                      ),
-                      SubscripeItem(
-                        item: DummySubscriptionItems[1],
-                      ),
-                      SubscripeItem(
-                        item: DummySubscriptionItems[2],
-                      ),
-                    ],
-                  ),
+
+                  child: FutureBuilder(
+                      future: DashboardApi.getfirstThreeSupscription(),
+                      builder: (ctx, AsyncSnapshot<List<Subscription>> sn) {
+                        if (!sn.hasData || sn.data == null) {
+                          return Container();
+                        }
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: sn.data!
+                              .map((e) => SubscripeItem(
+                                    item: e,
+                                  ))
+                              .toList(),
+                        );
+                      }),
+
+                  // SubscripeItem(
+                  //   item: DummySubscriptionItems[0],
+                  // ),
+                  // SubscripeItem(
+                  //   item: DummySubscriptionItems[1],
+                  // ),
+                  // SubscripeItem(
+                  //   item: DummySubscriptionItems[2],
+                  // ),
                 ),
               ],
             ),
