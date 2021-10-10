@@ -17,10 +17,10 @@ class CustomText extends StatelessWidget {
         text,
         textAlign: TextAlign.end,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 16,
-          color: Colors.green,
+          fontSize: size,
+          color: color,
         ),
       ),
     );

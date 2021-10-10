@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, curly_braces_in_flow_control_structures
+
 import 'package:csp_mobile_app/models/road_data.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +26,22 @@ class New {
         newsDescription = json["newsDescription"];
 }
 
-enum NewColor {
-  Red,
-  green,
-  yellow,
-  blue,
+Color getColor(String code) {
+  print("code $code");
+
+  if (code == "acc") return Colors.red;
+  if (code == "fix") return Colors.blue;
+
+  if (code == "crow") return Colors.yellow;
+
+  if (code == "gen") return Colors.green;
+
+  return Colors.white;
+}
+
+enum NewsColor {
+  crow,
+  fix,
+  acc,
+  gen,
 }

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
-import 'package:csp_mobile_app/models/news_dara.dart';
+import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

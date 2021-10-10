@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:csp_mobile_app/models/news_dara.dart';
+import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/road_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

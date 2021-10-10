@@ -77,7 +77,7 @@ class _SubscripeItemState extends State<SubscripeItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 3,
                   child: FittedBox(
                     child: Text(
                       daysLeft.toStringAsFixed(0).toString(),
@@ -86,13 +86,17 @@ class _SubscripeItemState extends State<SubscripeItem> {
                   ),
                 ),
                 Expanded(
-                  flex: 6,
-                  child: FittedBox(
-                    child: Text(
-                      "يوم متبقى على انتهاء الاشتراك من " +
-                          days.toStringAsFixed(0).toString() +
-                          " يوم",
-                      style: TextStyle(fontSize: 16, color: Colors.green[900]),
+                  flex: 30,
+                  child: Container(
+                    padding: EdgeInsets.only(right: 50),
+                    child: FittedBox(
+                      child: Text(
+                        "يوم متبقى على انتهاء الاشتراك من " +
+                            days.toStringAsFixed(0).toString() +
+                            " يوم",
+                        style:
+                            TextStyle(fontSize: 16, color: Colors.green[900]),
+                      ),
                     ),
                   ),
                 ),

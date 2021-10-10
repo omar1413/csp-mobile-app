@@ -1,6 +1,6 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:csp_mobile_app/api/dashboard_api.dart';
-import 'package:csp_mobile_app/models/news_dara.dart';
+import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
@@ -103,7 +103,7 @@ class _homeScreenState extends State<homeScreen> {
                 CarouselSquare(),
                 CustomTextLine(text: "الخدمات"),
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -142,9 +142,7 @@ class _homeScreenState extends State<homeScreen> {
                 ),
                 CustomTextLine(text: "الاشتراكات"),
                 Container(
-                  //height: height * 0.17 * 3,
                   width: width,
-
                   child: FutureBuilder(
                       future: DashboardApi.getfirstThreeSupscription(),
                       builder: (ctx, AsyncSnapshot<List<Subscription>> sn) {
@@ -161,16 +159,6 @@ class _homeScreenState extends State<homeScreen> {
                               .toList(),
                         );
                       }),
-
-                  // SubscripeItem(
-                  //   item: DummySubscriptionItems[0],
-                  // ),
-                  // SubscripeItem(
-                  //   item: DummySubscriptionItems[1],
-                  // ),
-                  // SubscripeItem(
-                  //   item: DummySubscriptionItems[2],
-                  // ),
                 ),
               ],
             ),
