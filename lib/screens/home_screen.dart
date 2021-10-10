@@ -1,7 +1,7 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:csp_mobile_app/models/news_dara.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
-import 'package:csp_mobile_app/screens/road_data.dart';
+import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management.dart';
 import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management.dart';

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class Square_slider extends StatelessWidget {
   HomeItem item;
-  Square_slider({required this.item});
+  double amount;
+  Square_slider({required this.item, required this.amount});
   //final List<Colors> colors= [Colors.green[600]];
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class Square_slider extends StatelessWidget {
               TextStyle(fontWeight: FontWeight.bold, color: Colors.green[900]),
         ),
         Text(
-          item.amount.toString(),
+          amount.toStringAsFixed(0).toString(),
           style: TextStyle(
               fontWeight: FontWeight.normal,
               color: Theme.of(context).primaryColor,

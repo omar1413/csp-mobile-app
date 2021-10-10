@@ -2,7 +2,7 @@ import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/screens/chat_page.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
-import 'package:csp_mobile_app/screens/road_data.dart';
+import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:csp_mobile_app/screens/onboard/onboard.dart';
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
             // primaryColorLight:const Color(0xFFB7E4C7),
             //primaryColorDark:const Color(0xFF1B4332),
             ),
-        home: OnBoard(),
+        home: LoginScreen(),
         routes: <String, WidgetBuilder>{
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),

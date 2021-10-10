@@ -17,7 +17,7 @@ class Road {
     required this.id,
   });
 
-  Road.fromJson(Map<String, dynamic> json)
+  Road.fromJson(Map json)
       : id = json["id"],
         name = json["name"],
         limitSpeed = json["limitSpeed"],

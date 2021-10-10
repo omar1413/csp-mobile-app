@@ -23,3 +23,10 @@ class New {
         code = json["code"],
         newsDescription = json["newsDescription"];
 }
+
+enum NewColor {
+  Red,
+  green,
+  yellow,
+  blue,
+}
