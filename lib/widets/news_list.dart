@@ -6,12 +6,10 @@ import 'package:csp_mobile_app/widets/new_item.dart';
 import 'package:flutter/material.dart';
 
 class News extends StatelessWidget {
-  const News({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110,
+      height: 125,
       child: FutureBuilder<List<New>>(
           future: getAllNews(),
           builder: (BuildContext context, AsyncSnapshot<List<New>> snapshot) {
@@ -20,6 +18,7 @@ class News extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+            news = snapshot.data!;
             return ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data!.length,

@@ -1,7 +1,7 @@
 import 'package:csp_mobile_app/api/vehicle_api.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/vehicle.dart';
-import 'package:csp_mobile_app/screens/subscriptions_management.dart';
+import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 

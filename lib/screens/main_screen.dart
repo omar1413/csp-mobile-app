@@ -1,10 +1,14 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+// ignore_for_file: file_names
+
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/chat_model.dart';
-import 'package:csp_mobile_app/screens/chat_page.dart';
+import 'package:csp_mobile_app/screens/chat_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/wallet_screen.dart';
+import 'package:csp_mobile_app/widets/CustomText.dart';
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
+import 'package:csp_mobile_app/widets/custom_icon.dart';
 import '../widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
@@ -21,98 +25,49 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Widget _textField(String str) {
-    return Container(
-      height: 40,
-      width: 300,
-      margin: EdgeInsets.only(bottom: 10),
-      child: TextField(
-        textAlign: TextAlign.end,
-        cursorColor: Colors.green[600],
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50.0))),
-          labelText: str,
-        ),
-      ),
-    );
-  }
-
-  Widget _textBtn(String str) {
-    return Container(
-      height: 35,
-      alignment: Alignment.topLeft,
-      // padding: EdgeInsets.symmetric(horizontal:),
-      child: TextButton(
-          onPressed: () {},
-          child: Text(
-            str,
-            style: TextStyle(
-                color: Colors.green[600],
-                decoration: TextDecoration.underline,
-                fontWeight: FontWeight.normal),
-          )),
-    );
-  }
-
-  Widget _text(String str, BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(3),
-      child: Text(
-        str,
-        textAlign: TextAlign.end,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-          color: Colors.green,
-        ),
-      ),
-    );
-  }
-
-  int _indexOfSelectedScreen = 2;
+  int _indexOfSelectedScreen = 0;
   void _selectedTap(int index) {
     setState(() {
       _indexOfSelectedScreen = index;
     });
   }
 
+  Widget CustomIcon(Icon icon, String str) {
+    return Column(children: [
+      Expanded(child: icon),
+      Expanded(
+          child: Text(
+        str,
+        style: TextStyle(color: Colors.white),
+      ))
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Map<String, Object>> screensList = [
-      {'page': QrCodeScreen(), 'title': 'الكود الشخصى'},
-      {
-        'page': ChatPage(
-          chatModel: ChatModel(),
-        ),
-        'title': '4الكود الشخصى'
-      },
+      {'page': ChatScreen(chatModel: ChatModel()), 'title': '4الكود الشخصى'},
       {'page': homeScreen(), 'title': '3الكود الشخصى'},
-      {'page': QrCodeScreen(), 'title': '4الكود الشخصى'},
       {'page': WalletScreen(), 'title': 'محفظتى'},
     ];
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
           height: kNavBarHeight,
-          index: 2,
+          index: 1,
           backgroundColor: Colors.white,
           color: Theme.of(context).primaryColor,
           buttonBackgroundColor: Colors.green[900],
           items: const <Widget>[
-            Icon(Icons.settings, size: 30),
-            Icon(Icons.help_outline_rounded, size: 30),
-            Icon(Icons.home, size: 35),
-            Icon(Icons.qr_code, size: 30),
             Icon(
-              Icons.account_balance_wallet_outlined,
+              Icons.help_outline_rounded,
               size: 30,
+              color: Colors.white,
             ),
+            Icon(Icons.home, size: 35, color: Colors.white),
+            Icon(Icons.account_balance_wallet_outlined,
+                size: 30, color: Colors.white),
           ],
           onTap: (index) {
             _selectedTap(index);

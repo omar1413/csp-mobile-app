@@ -24,14 +24,17 @@ class _NewItemState extends State<NewItem> {
   @override
   Widget build(BuildContext context) {
     color = getColor(widget.newItem.code!);
-    //print(widget.newItem.code.toString());
+
     double width = MediaQuery.of(context).size.width;
 
     return Container(
       width: width * 0.8,
       padding: EdgeInsets.all(5),
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(offset: Offset(0, 2), blurRadius: 10, color: Colors.grey),
+        ],
         gradient: LinearGradient(colors: [
           color,
           Colors.black,
@@ -47,24 +50,29 @@ class _NewItemState extends State<NewItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
+            flex: 4,
             child: CustomText(
               text: widget.newItem.newsType.toString() +
                   " على طريق " +
                   widget.newItem.road!.name.toString(),
-              size: 18,
+              size: 16,
               color: Colors.white,
             ),
           ),
           Expanded(
-            child: FittedBox(
-              child: Text(
-                widget.newItem.newsDescription.toString(),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 14),
+            flex: 8,
+            child: Container(
+              alignment: Alignment.topRight,
+              child: FittedBox(
+                child: Text(
+                  widget.newItem.newsDescription.toString(),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 12),
+                ),
               ),
             ),
           ),

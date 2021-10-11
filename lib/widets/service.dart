@@ -1,6 +1,6 @@
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
-import 'package:csp_mobile_app/screens/subscriptions_management.dart';
-import 'package:csp_mobile_app/screens/vehicle_management.dart';
+import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
+import 'package:csp_mobile_app/screens/vehicle_management_screen.dart';
 import 'package:flutter/material.dart';
 
 class Service extends StatelessWidget {
