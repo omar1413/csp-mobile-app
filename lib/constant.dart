@@ -21,3 +21,7 @@ Map<String, String> kHostHeader = {
   "Accept-Encoding": "gzip, deflate, br",
   "Connection": "keep-alive",
 };
+
+const String kVehicleIdArgKey = "kVehicleIdArgKey";
+
+const String kSubscriptionArgKey = "kSubscriptionArgKey";

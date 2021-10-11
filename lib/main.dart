@@ -1,5 +1,7 @@
 import 'package:csp_mobile_app/models/chat_model.dart';
-import 'package:csp_mobile_app/screens/chat_screen.dart';
+import 'package:csp_mobile_app/models/subscription.dart';
+import 'package:csp_mobile_app/models/vehicle.dart';
+
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
@@ -42,28 +44,49 @@ class MyApp extends StatelessWidget {
     ColorScheme schema = Theme.of(context).colorScheme;
 
     return MaterialApp(
-        theme: ThemeData(
-            primaryColorLight: Colors.green[400],
-            primaryColor: Colors.green[600],
-            primaryColorDark: Colors.green[900],
-            primarySwatch: Colors.green
-            //primaryColor:Color.fromRGBO(0xB7, 0xE4, 0xC7, 1.0)
-            //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
-            // primaryColorLight:const Color(0xFFB7E4C7),
-            //primaryColorDark:const Color(0xFF1B4332),
-            ),
-        home: LoginScreen(),
-        routes: <String, WidgetBuilder>{
+      theme: ThemeData(
+          primaryColorLight: Colors.green[400],
+          primaryColor: Colors.green[600],
+          primaryColorDark: Colors.green[900],
+          primarySwatch: Colors.green
+          //primaryColor:Color.fromRGBO(0xB7, 0xE4, 0xC7, 1.0)
+          //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
+          // primaryColorLight:const Color(0xFFB7E4C7),
+          //primaryColorDark:const Color(0xFF1B4332),
+          ),
+      home: LoginScreen(),
+      onGenerateRoute: (RouteSettings settings) {
+        Map<String, WidgetBuilder> routes = {
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
-          Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
+          Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(
+                vehicle: settings.arguments as Vehicle?,
+              ),
           RoadData.routeName: (ctx) => RoadData(),
           MainScreen.routeName: (ctx) => MainScreen(),
           RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
           TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
           VechileListScreen.routeName: (ctx) => VechileListScreen(),
-          SubscriptionDataScreen.routeName: (ctx) => SubscriptionDataScreen(),
+          SubscriptionDataScreen.routeName: (ctx) => SubscriptionDataScreen(
+                subscription: settings.arguments as Subscription,
+              ),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
-        });
+        };
+        WidgetBuilder builder = routes[settings.name]!;
+        return MaterialPageRoute(builder: (ctx) => builder(ctx));
+      },
+      // routes: <String, WidgetBuilder>{
+      //   RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
+      //   Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
+      //   Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
+      //   RoadData.routeName: (ctx) => RoadData(),
+      //   MainScreen.routeName: (ctx) => MainScreen(),
+      //   RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
+      //   TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
+      //   VechileListScreen.routeName: (ctx) => VechileListScreen(),
+      //   SubscriptionDataScreen.routeName: (ctx) => SubscriptionDataScreen(),
+      //   TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
+      // },
+    );
   }
 }

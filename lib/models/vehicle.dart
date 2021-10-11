@@ -4,17 +4,17 @@ import 'package:csp_mobile_app/models/subscription.dart';
 
 class Vehicle {
   int id;
-  VehicleType type;
-  String plateLetters;
-  String plateNumbers;
-  String tagValue;
+  VehicleType? type;
+  String? plateLetters;
+  String? plateNumbers;
+  String? tagValue;
 
   Vehicle({
     required this.id,
-    required this.type,
-    required this.plateLetters,
-    required this.plateNumbers,
-    required this.tagValue,
+    this.type,
+    this.plateLetters,
+    this.plateNumbers,
+    this.tagValue,
   });
 
   Vehicle.fromJson(Map jsonMap)
@@ -23,6 +23,16 @@ class Vehicle {
         this.plateNumbers = jsonMap["plateNumbers"],
         this.tagValue = jsonMap["tagValue"],
         this.type = VehicleType.fromJson(jsonMap["vehicleTypeLkp"]);
+
+  Map toJson() {
+    return {
+      "id": id,
+      "plateLetters": plateLetters,
+      "plateNumbers": plateNumbers,
+      "tagValue": tagValue,
+      "vehicleTypeLkp": type?.toJson(),
+    };
+  }
 }
 
 class VehicleType {
@@ -40,4 +50,12 @@ class VehicleType {
       : id = jsonMap["id"],
         code = jsonMap["code"],
         desc = jsonMap["desc"];
+
+  Map toJson() {
+    return {
+      "id": id,
+      "code": code,
+      "desc": desc,
+    };
+  }
 }

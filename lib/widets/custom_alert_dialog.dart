@@ -1,7 +1,7 @@
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 Future<bool?> showMyDialog({
-  context,
+  required context,
   required String title,
   required String desc,
 }) async {
