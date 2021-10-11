@@ -1,5 +1,3 @@
-// ignore_for_file: unrelated_type_equality_checks, curly_braces_in_flow_control_structures
-
 import 'package:csp_mobile_app/models/road_data.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +24,7 @@ class New {
         newsDescription = json["newsDescription"];
 }
 
+List<New> news = [];
 Color getColor(String code) {
   print("code $code");
 

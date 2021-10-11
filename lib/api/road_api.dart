@@ -52,7 +52,7 @@ Future<List<String>> getAllRoadsName() async {
   for (var name in jsonData["data"]["name"]) {
     allroadsname.add(name.fromJson(New));
   }
-  print("vvvvvvvvvvvvvvvvvvvv");
+
   print(allroadsname);
   return allroadsname;
 }

@@ -5,18 +5,18 @@ import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/models/clickable_bubble.dart';
 import 'package:flutter/material.dart';
 
-class ChatPage extends StatefulWidget {
+class ChatScreen extends StatefulWidget {
   final ChatModel chatModel;
-  ChatPage({
+  ChatScreen({
     Key? key,
     required this.chatModel,
   }) : super(key: key);
 
   @override
-  _ChatPageState createState() => _ChatPageState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatScreenState extends State<ChatScreen> {
   // AudioPlayer audioPlayer = new AudioPlayer();
   late Map<String, String> data;
   late List<Widget> dataList;

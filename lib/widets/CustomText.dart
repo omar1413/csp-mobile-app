@@ -15,7 +15,7 @@ class CustomText extends StatelessWidget {
       margin: EdgeInsets.all(5),
       child: Text(
         text,
-        textAlign: TextAlign.end,
+        textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontWeight: FontWeight.bold,

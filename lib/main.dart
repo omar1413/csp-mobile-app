@@ -1,5 +1,5 @@
 import 'package:csp_mobile_app/models/chat_model.dart';
-import 'package:csp_mobile_app/screens/chat_page.dart';
+import 'package:csp_mobile_app/screens/chat_screen.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
@@ -7,16 +7,16 @@ import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:csp_mobile_app/screens/onboard/onboard.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
-import 'package:csp_mobile_app/screens/subscriptions_management.dart';
+import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
 import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
-import 'package:csp_mobile_app/screens/vehicle_management.dart';
+import 'package:csp_mobile_app/screens/vehicle_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'screens/registration_continue.dart';
+import 'screens/registration_continue_screen.dart';
 import 'screens/subscription_data_screen.dart';
 import 'widets/carousel_circle_slider.dart';
 
