@@ -42,7 +42,7 @@ class _NewItemState extends State<NewItem> {
         borderRadius: BorderRadius.circular(5),
         image: DecorationImage(
           alignment: Alignment.bottomLeft,
-          scale: 0.5,
+          scale: 1,
           image: AssetImage("assets/images/promotion.png"),
         ),
       ),

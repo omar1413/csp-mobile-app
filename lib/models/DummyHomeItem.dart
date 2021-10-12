@@ -70,14 +70,6 @@ final DummyHomeSquareItems = [
     color: Colors.orange,
     img: "assets/images/weather-app.png",
   ),
-  HomeItem(
-      title: "حادث على طريق صلاح سالم",
-      subtitle:
-          "لقى شخص مصرعه، فيما أصيب 7 أشخاص آخرين في حادث تصادم سيارة ملاكي بجرار زراعي بالطريق الدائري بمركز مغاغة شمال المنيا، وتم نقل المصابين والجثة إلى المستشفي تحت تصرف النيا",
-      type: "ج.م",
-      amount: 0,
-      color: Colors.green,
-      img: "assets/images/weather-app.png")
 ];
 
 final DummySpeedItems = [
