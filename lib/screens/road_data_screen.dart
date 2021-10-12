@@ -1,6 +1,8 @@
 import 'package:csp_mobile_app/api/road_api.dart';
 import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/road_data.dart';
+import 'package:csp_mobile_app/widets/custom_appbar.dart';
+import 'package:csp_mobile_app/widets/custom_icon.dart';
 
 import 'package:csp_mobile_app/widets/road_info.dart';
 
@@ -24,9 +26,7 @@ class _RoadDataState extends State<RoadData> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("بيانات الطرق "),
-        ),
+        appBar: customAppBar(title: "بيانات الطرق ", context: context),
         body: SingleChildScrollView(
           child: Container(
               child: FutureBuilder<List<Road>>(

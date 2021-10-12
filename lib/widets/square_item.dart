@@ -6,26 +6,27 @@ import 'package:flutter/material.dart';
 class Square_slider extends StatelessWidget {
   HomeItem item;
   double amount;
-  Square_slider({required this.item, required this.amount});
+  double scale;
+  Square_slider(
+      {required this.item, required this.amount, required this.scale});
   //final List<Colors> colors= [Colors.green[600]];
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
-      //alignment: Alignment.topCenter,
       height: 80,
       width: 80,
       margin: const EdgeInsets.all(0),
       decoration: BoxDecoration(
         image: DecorationImage(
           alignment: Alignment.bottomLeft,
-          scale: 0.1,
+          scale: scale,
           image: AssetImage(item.img),
         ),
         color: Colors.white,
         boxShadow: [
-          BoxShadow(offset: Offset(0, 2), color: Colors.black, blurRadius: 5),
+          BoxShadow(offset: Offset(0, 2), color: Colors.grey, blurRadius: 5),
         ],
         borderRadius: BorderRadius.circular(10),
       ),

@@ -108,10 +108,12 @@ class CarouselCircleState extends State<CarouselCircle> {
             return Container(
               width: 10.0,
               height: 10.0,
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
+              margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: _current == index ? Colors.green[600] : Colors.grey[300],
+                color: _current == index
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey[300],
               ),
             );
           }),

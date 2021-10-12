@@ -4,6 +4,7 @@ import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
+import 'package:csp_mobile_app/screens/subscription_taps.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management_screen.dart';
@@ -107,35 +108,29 @@ class _homeScreenState extends State<homeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Service(
-                        id: "1",
-                        title: "ادارة المركبات",
-                        image: "assets/images/car.png",
-                        onPress: () {
-                          Navigator.of(context).pushNamed(
-                            VechileListScreen.routeName,
-                          );
-                        },
+                      Expanded(
+                        child: Service(
+                          id: "2",
+                          title: "ادارة الأشتراكات",
+                          image: "assets/images/barcode.png",
+                          onPress: () {
+                            Navigator.of(context).pushNamed(
+                              SubscriptionTaps.routeName,
+                            );
+                          },
+                        ),
                       ),
-                      Service(
-                        id: "2",
-                        title: "ادارة الأشتراكات",
-                        image: "assets/images/barcode.png",
-                        onPress: () {
-                          Navigator.of(context).pushNamed(
-                            Subscriptionsmanagement.routeName,
-                          );
-                        },
-                      ),
-                      Service(
-                        id: "3",
-                        title: "بيانات الطرق",
-                        image: "assets/images/direction.png",
-                        onPress: () {
-                          Navigator.of(context).pushNamed(
-                            RoadData.routeName,
-                          );
-                        },
+                      Expanded(
+                        child: Service(
+                          id: "3",
+                          title: "بيانات الطرق",
+                          image: "assets/images/direction.png",
+                          onPress: () {
+                            Navigator.of(context).pushNamed(
+                              RoadData.routeName,
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

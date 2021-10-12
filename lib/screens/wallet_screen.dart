@@ -6,6 +6,7 @@ import 'package:csp_mobile_app/widets/custom_textButton.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:csp_mobile_app/widets/fancy_card.dart';
 import 'package:csp_mobile_app/widets/service.dart';
+import 'package:csp_mobile_app/widets/transaction_item.dart';
 import 'package:flutter/material.dart';
 
 import '../widets/transaction_list.dart';
@@ -30,6 +31,7 @@ class WalletScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(
                 height: 25,
@@ -114,9 +116,15 @@ class WalletScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                  padding: EdgeInsets.all(10),
-                  height: height * 0.25,
-                  child: TransactionList(DummyTransactionData)),
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    TransactionIteam(transaction: DummyTransactionData[0]),
+                    TransactionIteam(transaction: DummyTransactionData[1]),
+                    TransactionIteam(transaction: DummyTransactionData[2]),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

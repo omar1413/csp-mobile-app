@@ -7,6 +7,7 @@ import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:csp_mobile_app/screens/onboard/onboard.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
+import 'package:csp_mobile_app/screens/subscription_taps.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
@@ -43,27 +44,24 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
         theme: ThemeData(
-            primaryColorLight: Colors.green[400],
-            primaryColor: Colors.green[600],
-            primaryColorDark: Colors.green[900],
-            primarySwatch: Colors.green
-            //primaryColor:Color.fromRGBO(0xB7, 0xE4, 0xC7, 1.0)
-            //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
-            // primaryColorLight:const Color(0xFFB7E4C7),
-            //primaryColorDark:const Color(0xFF1B4332),
-            ),
+          primaryColor: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
+          primaryColorDark: Color.fromRGBO(0x20, 0x49, 0x36, 1.0),
+          //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
+        ),
         home: LoginScreen(),
         routes: <String, WidgetBuilder>{
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
-          Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
+          Vehiclemanagement.routeName: (ctx) => const Vehiclemanagement(),
           Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
-          RoadData.routeName: (ctx) => RoadData(),
+          RoadData.routeName: (ctx) => const RoadData(),
           MainScreen.routeName: (ctx) => MainScreen(),
           RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
           TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
           VechileListScreen.routeName: (ctx) => VechileListScreen(),
-          SubscriptionDataScreen.routeName: (ctx) => SubscriptionDataScreen(),
+          SubscriptionDataScreen.routeName: (ctx) =>
+              const SubscriptionDataScreen(),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
+          SubscriptionTaps.routeName: (ctx) => SubscriptionTaps(),
         });
   }
 }

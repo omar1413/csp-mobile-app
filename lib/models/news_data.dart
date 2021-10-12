@@ -28,19 +28,12 @@ List<New> news = [];
 Color getColor(String code) {
   print("code $code");
 
-  if (code == "acc") return Colors.red;
-  if (code == "fix") return Colors.blue;
+  if (code == "ACC") return Color.fromRGBO(255, 69, 54, 1);
+  if (code == "FIX") return Color.fromRGBO(70, 156, 255, 1);
 
-  if (code == "crow") return Colors.yellow;
+  if (code == "CROW") return Color.fromRGBO(64, 145, 108, 1);
 
-  if (code == "gen") return Colors.green;
+  if (code == "GEN") return Color.fromRGBO(255, 155, 70, 1);
 
   return Colors.white;
-}
-
-enum NewsColor {
-  crow,
-  fix,
-  acc,
-  gen,
 }

@@ -36,8 +36,8 @@ class _NewItemState extends State<NewItem> {
           BoxShadow(offset: Offset(0, 2), blurRadius: 10, color: Colors.grey),
         ],
         gradient: LinearGradient(colors: [
-          color,
           Colors.black,
+          color,
         ], tileMode: TileMode.clamp),
         borderRadius: BorderRadius.circular(5),
         image: DecorationImage(

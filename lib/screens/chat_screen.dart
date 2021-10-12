@@ -3,6 +3,7 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/models/clickable_bubble.dart';
+import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -53,9 +54,8 @@ class _ChatScreenState extends State<ChatScreen> {
       _needsScroll = false;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("أقدر أساعدك")),
-      ),
+      appBar: customAppBar(title: "أقدر أساعدك", context: context),
+
       body: Container(
         color: kwhite,
         child: ListView.builder(
@@ -139,11 +139,11 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           margin: BubbleEdges.only(top: 10),
           nip: BubbleNip.leftBottom,
-          color: Colors.green[200],
+          color: Theme.of(context).primaryColor,
           child: Text(
             text,
             textAlign: TextAlign.right,
-            style: TextStyle(color: kblack),
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ),

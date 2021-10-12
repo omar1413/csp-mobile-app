@@ -29,7 +29,7 @@ final DummyHomeCircularItems = [
     subtitle: "رصيدك الحالى",
     type: "ج.م",
     amount: 0,
-    color: Colors.green,
+    color: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
     img: "",
     future: DashboardApi.getWalletAmount,
   ),

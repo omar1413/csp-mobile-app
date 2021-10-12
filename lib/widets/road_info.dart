@@ -24,32 +24,49 @@ class RoadInfo extends StatelessWidget {
         Container(
           margin: EdgeInsets.all(10),
           child: CustomText(
-              text: "السرعة المقررة", size: 18, color: Colors.green[600]!),
+              text: "السرعة المقررة",
+              size: 18,
+              color: Theme.of(context).primaryColor),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Square_slider(
-                item: DummySpeedItems[0],
-                amount: (road.limitSpeed! - 50).toDouble()),
+              item: DummySpeedItems[0],
+              amount: (road.limitSpeed! - 50).toDouble(),
+              scale: 3,
+            ),
             Square_slider(
-                item: DummySpeedItems[1],
-                amount: (road.limitSpeed! + 50).toDouble()),
+              item: DummySpeedItems[1],
+              amount: (road.limitSpeed! + 50).toDouble(),
+              scale: 3,
+            ),
             Square_slider(
-                item: DummySpeedItems[2], amount: road.limitSpeed!.toDouble()),
+              item: DummySpeedItems[2],
+              amount: road.limitSpeed!.toDouble(),
+              scale: 3,
+            ),
           ],
         ),
         Container(
             margin: EdgeInsets.all(10),
             child: CustomText(
-                text: "معلومات الطريق ", size: 18, color: Colors.green[600]!)),
+                text: "معلومات الطريق ",
+                size: 18,
+                color: Theme.of(context).primaryColor)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Square_slider(
-                item: DummyRoadItems[0], amount: road.roadLength!.toDouble()),
+              item: DummyRoadItems[0],
+              amount: road.roadLength!.toDouble(),
+              scale: 2,
+            ),
             Square_slider(
-                item: DummyRoadItems[1], amount: road.feesAmount!.toDouble()),
+              item: DummyRoadItems[1],
+              amount: road.feesAmount!.toDouble(),
+              scale: 0.6,
+            ),
           ],
         ),
         SizedBox(
