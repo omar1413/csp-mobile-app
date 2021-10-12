@@ -4,7 +4,7 @@ import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
-import 'package:csp_mobile_app/screens/subscription_taps.dart';
+import 'package:csp_mobile_app/screens/subscription_tabs.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management_screen.dart';
@@ -115,7 +115,7 @@ class _homeScreenState extends State<homeScreen> {
                           image: "assets/images/barcode.png",
                           onPress: () {
                             Navigator.of(context).pushNamed(
-                              SubscriptionTaps.routeName,
+                              SubscriptionTabs.routeName,
                             );
                           },
                         ),

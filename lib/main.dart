@@ -1,5 +1,7 @@
 import 'package:csp_mobile_app/models/chat_model.dart';
-import 'package:csp_mobile_app/screens/chat_screen.dart';
+import 'package:csp_mobile_app/models/subscription.dart';
+import 'package:csp_mobile_app/models/vehicle.dart';
+
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
@@ -7,7 +9,7 @@ import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:csp_mobile_app/screens/onboard/onboard.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
-import 'package:csp_mobile_app/screens/subscription_taps.dart';
+import 'package:csp_mobile_app/screens/subscription_tabs.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
@@ -58,10 +60,10 @@ class MyApp extends StatelessWidget {
           RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
           TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
           VechileListScreen.routeName: (ctx) => VechileListScreen(),
-          SubscriptionDataScreen.routeName: (ctx) =>
-              const SubscriptionDataScreen(),
+          //SubscriptionDataScreen.routeName: (ctx) =>
+          //  const SubscriptionDataScreen(),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
-          SubscriptionTaps.routeName: (ctx) => SubscriptionTaps(),
+          SubscriptionTabs.routeName: (ctx) => SubscriptionTabs(),
         });
   }
 }

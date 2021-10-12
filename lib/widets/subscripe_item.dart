@@ -20,8 +20,8 @@ class _SubscripeItemState extends State<SubscripeItem> {
   void initState() {
     print("Days :: ");
     print(widget.item.endDate);
-    days = widget.item.endDate.difference(widget.item.startDate).inDays * 1.0;
-    daysLeft = widget.item.endDate.difference(DateTime.now()).inDays * 1.0;
+    days = widget.item.endDate!.difference(widget.item.startDate!).inDays * 1.0;
+    daysLeft = widget.item.endDate!.difference(DateTime.now()).inDays * 1.0;
     percentage = daysLeft / 10;
     super.initState();
   }
@@ -54,7 +54,7 @@ class _SubscripeItemState extends State<SubscripeItem> {
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                widget.item.bundle.name,
+                widget.item.bundle!.name,
                 style: TextStyle(
                     fontSize: 18, color: Theme.of(context).primaryColorDark),
               ),

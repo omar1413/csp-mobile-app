@@ -8,7 +8,7 @@ class Vehiclemanagement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "ادارة المركبات", context: context),
-    );
+        //appBar: customAppBar(title: "ادارة المركبات", context: context),
+        );
   }
 }
