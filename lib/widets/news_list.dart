@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:csp_mobile_app/api/news_api.dart';
@@ -11,22 +12,18 @@ class News extends StatelessWidget {
     return Container(
       height: 125,
       child: FutureBuilder<List<New>>(
-          future: getAllNews(),
-          builder: (BuildContext context, AsyncSnapshot<List<New>> snapshot) {
-            if (!snapshot.hasData || snapshot.data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            news = snapshot.data!;
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (BuildContext context, int index) {
-                return NewItem(newItem: snapshot.data![index]);
-              },
+        future: getAllNews(),
+        builder: (BuildContext context, AsyncSnapshot<List<New>> snapshot) {
+          if (!snapshot.hasData || snapshot.data == null) {
+            return Center(
+              child: CircularProgressIndicator(),
             );
-          }),
+          }
+          news = snapshot.data!;
+
+          return NewItem(news: snapshot.data!);
+        },
+      ),
     );
   }
 }

@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class MainScreen extends StatefulWidget {
+  static int WalletPage = 2;
+
   @override
   State<MainScreen> createState() => _MainScreenState();
   static const routeName = '/mainScreen';
@@ -20,6 +22,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _indexOfSelectedScreen = 1;
+
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   void _selectedTap(int index) {
     setState(() {
       _indexOfSelectedScreen = index;
@@ -30,13 +34,25 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     List<Map<String, Object>> screensList = [
       {'page': ChatScreen(chatModel: ChatModel()), 'title': 'مساعدة'},
-      {'page': homeScreen(), 'title': 'هوم'},
+      {
+        'page': HomeScreen(
+          selectedPage: (int val) => setState(
+            () {
+              print("vaaal $val");
+              _indexOfSelectedScreen = val;
+              _bottomNavigationKey.currentState?.setPage(val);
+            },
+          ),
+        ),
+        'title': 'هوم'
+      },
       {'page': WalletScreen(), 'title': 'محفظتى'},
     ];
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
+          key: _bottomNavigationKey,
           height: kNavBarHeight,
           index: 1,
           backgroundColor: Colors.white,

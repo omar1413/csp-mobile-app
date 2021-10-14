@@ -93,9 +93,9 @@ class CarouselSquareState extends State<CarouselSquare> {
     double width = MediaQuery.of(context).size.width;
     return Row(
       children: [
-        Expanded(
-          child: CustomSquarWidget(DummyHomeSquareItems[0]),
-        ),
+        // Expanded(
+        //   child: CustomSquarWidget(DummyHomeSquareItems[0]),
+        // ),
         Expanded(
           child: CustomSquarWidget(DummyHomeSquareItems[1]),
         )

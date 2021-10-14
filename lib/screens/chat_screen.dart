@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
   final ChatModel chatModel;
+
   ChatScreen({
     Key? key,
     required this.chatModel,

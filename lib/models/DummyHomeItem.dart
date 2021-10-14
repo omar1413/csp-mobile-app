@@ -4,54 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class HomeItem {
-  Future<Response> Function()? future;
+  int? id;
+  Future<int> Function()? future;
   String title;
   String subtitle;
   String type;
   int amount;
+  double? max;
   Color color;
   String img;
 
   HomeItem({
     required this.title,
+    this.id,
     required this.subtitle,
     required this.type,
     required this.amount,
     required this.color,
     required this.img,
     this.future,
+    this.max,
   });
 }
-
-final DummyHomeCircularItems = [
-  HomeItem(
-    title: "رصيد المحفظة",
-    subtitle: "رصيدك الحالى",
-    type: "ج.م",
-    amount: 0,
-    color: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
-    img: "",
-    future: DashboardApi.getWalletAmount,
-  ),
-  HomeItem(
-    title: " عدد الاشتراكات ",
-    subtitle: " عدد الاشتراكات ",
-    type: "اشتراك ",
-    amount: 2,
-    color: Colors.orange,
-    img: "",
-    future: DashboardApi.getSubscriptionCount,
-  ),
-  HomeItem(
-    title: "عدد المركبات",
-    subtitle: " عدد المركبات",
-    type: "مركبات",
-    amount: 2,
-    color: Colors.red,
-    img: "",
-    future: DashboardApi.getVehicleCount,
-  ),
-];
 
 final DummyHomeSquareItems = [
   HomeItem(
@@ -63,9 +37,9 @@ final DummyHomeSquareItems = [
     img: "assets/images/download-speed.png",
   ),
   HomeItem(
-    title: "مشمس",
+    title: "شيراتون",
     subtitle: "رصيدك الحالى",
-    type: "س",
+    type: "مشمس",
     amount: 28,
     color: Colors.orange,
     img: "assets/images/weather-app.png",

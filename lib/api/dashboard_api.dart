@@ -11,31 +11,61 @@ import '../constant.dart';
 import 'base_api.dart';
 
 class DashboardApi {
-  static Future<Response> getSubscriptionCount() {
+  static Future<int> getSubscriptionCount() async {
     Uri url = BaseApi.getApiUrl("/dashboard/subscriptionCount");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
-    return http.get(
-      url,
-      headers: kHostHeader,
-    );
+    try {
+      final response = await http.get(
+        url,
+        headers: kHostHeader,
+      );
+      Map body = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return body["data"];
+      }
+      String msg = body["message"];
+      throw Exception("status code ${response.statusCode} with msg ${msg}");
+    } catch (e) {
+      rethrow;
+    }
   }
 
-  static Future<Response> getVehicleCount() {
+  static Future<int> getVehicleCount() async {
     Uri url = BaseApi.getApiUrl("/dashboard/vehicleCount");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
-    return http.get(
-      url,
-      headers: kHostHeader,
-    );
+    try {
+      final response = await http.get(
+        url,
+        headers: kHostHeader,
+      );
+      Map body = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return body["data"];
+      }
+      String msg = body["message"];
+      throw Exception("status code ${response.statusCode} with msg ${msg}");
+    } catch (e) {
+      rethrow;
+    }
   }
 
-  static Future<Response> getWalletAmount() {
+  static Future<int> getWalletAmount() async {
     Uri url = BaseApi.getApiUrl("/dashboard/walletAmount");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
-    return http.get(
-      url,
-      headers: kHostHeader,
-    );
+    try {
+      final response = await http.get(
+        url,
+        headers: kHostHeader,
+      );
+      Map body = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return body["data"];
+      }
+      String msg = body["message"];
+      throw Exception("status code ${response.statusCode} with msg ${msg}");
+    } catch (e) {
+      rethrow;
+    }
   }
 
   static Future<List<Subscription>> getfirstThreeSupscription() async {

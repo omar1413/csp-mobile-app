@@ -54,7 +54,7 @@ class _VechileListScreentState extends State<VechileListScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: customAppBar(title: "المركبات", context: context),
+        //appBar: customAppBar(title: "المركبات", context: context),
         body: PagedListView<int, Vehicle>(
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<Vehicle>(

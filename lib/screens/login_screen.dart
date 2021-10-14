@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         _textField("اسم المستخدم", context, usernameControll),
                         _textField("كلمة المرور ", context, passcontroll),
-                        _textBtn("هل نسيت كلمة المرور؟ ", () {}),
+                        // _textBtn("هل نسيت كلمة المرور؟ ", () {}),
                         Container(
                           margin: EdgeInsets.all(10),
                           height: 40,
@@ -170,14 +170,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.fingerprint,
-                                  color: Colors.green,
-                                ),
-                                //color:Colors.,
-                                onPressed: () {},
-                              ),
+                              // IconButton(
+                              //   icon: const Icon(
+                              //     Icons.fingerprint,
+                              //     color: Colors.green,
+                              //   ),
+                              //   //color:Colors.,
+                              //   onPressed: () {},
+                              // ),
                             ],
                           ),
                         ),
@@ -198,21 +198,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),
-                        Container(
-                          color: Colors.white,
-                          width: width * 0.65,
-                          child: RaisedButton(
-                            onPressed: () {},
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0)),
-                            color: Colors.white,
-                            child: Text(
-                              "الدخول كزائر",
-                              style: TextStyle(
-                                  color: Colors.green[600], fontSize: 14.0),
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   color: Colors.white,
+                        //   width: width * 0.65,
+                        //   child: RaisedButton(
+                        //     onPressed: () {},
+                        //     shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(50.0)),
+                        //     color: Colors.white,
+                        //     child: Text(
+                        //       "الدخول كزائر",
+                        //       style: TextStyle(
+                        //           color: Colors.green[600], fontSize: 14.0),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   )

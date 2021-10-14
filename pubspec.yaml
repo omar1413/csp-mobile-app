@@ -49,6 +49,7 @@ dependencies:
   infinite_scroll_pagination: ^3.1.0
   top_snackbar_flutter: ^1.0.1
   jiffy: ^4.1.0
+  badges: ^2.0.1
  
 dev_dependencies:
   flutter_test:

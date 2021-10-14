@@ -33,7 +33,7 @@ class _SubscriptionTabsState extends State<SubscriptionTabs> {
   Widget build(BuildContext context) {
     List<Map<String, Object>> screensList = [
       {'page': Subscriptionsmanagement(), 'title': 'ادارة الاشتراكات'},
-      {'page': Vehiclemanagement(), 'title': '3الكود الشخصى'},
+      {'page': VechileListScreen(), 'title': '3الكود الشخصى'},
     ];
     return Directionality(
       textDirection: TextDirection.rtl,

@@ -37,7 +37,7 @@ class WalletScreen extends StatelessWidget {
                 height: 25,
               ),
               Container(
-                margin: EdgeInsets.only(right: 20),
+                margin: EdgeInsets.all(15),
                 child: FancyCard(
                   imagePath: "assets/images/card.png",
                   // color: Colors.white,

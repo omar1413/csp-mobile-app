@@ -11,6 +11,8 @@ import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:intl/date_symbol_data_local.dart' as intl2;
 
+import 'package:badges/badges.dart';
+
 class Subscriptionsmanagement extends StatefulWidget {
   static const routeName = '/subscriptionsmanagementScreen';
   final Vehicle? vehicle;
@@ -76,7 +78,9 @@ class _SubscriptionsmanagementState extends State<Subscriptionsmanagement> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        //appBar: customAppBar(title: "اداراة الاشتراكات ", context: context),
+        appBar: widget.vehicle != null
+            ? customAppBar(title: "اداراة الاشتراكات ", context: context)
+            : null,
         body: PagedListView<int, Subscription>(
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<Subscription>(
@@ -134,59 +138,108 @@ class SubscriptionListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color color = Colors.white;
+    String text = "فعال";
+    Color textColor = kblack;
+    bool isInActive =
+        subscription.endDate!.difference(DateTime.now()).isNegative;
+    bool tooSoon =
+        subscription.endDate!.difference(DateTime.now()).inDays <= 10;
+
+    bool isActive = true;
+    if (isInActive) {
+      color = Colors.red;
+      textColor = kwhite;
+      text = "منتهى";
+    } else if (tooSoon) {
+      color = Colors.yellow;
+      text = "قارب على الانتهاء";
+    } else {
+      color = Colors.green;
+      textColor = kwhite;
+    }
+
     intl.DateFormat formatter = intl.DateFormat('yyyy/MM/dd');
-    return Card(
-      child: ListTile(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            SubscriptionDataScreen.routeName,
-            arguments: subscription,
-          );
-        },
-        title: Text(subscription.bundle!.name),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                Text("حروف اللوحه : " + subscription.vechile!.plateLetters!),
-                SizedBox(width: 10),
-                Text("ارقام اللوحه : " + subscription.vechile!.plateNumbers!),
-              ],
-            ),
-            SizedBox(width: 10),
-            Row(
-              children: [
-                Text(
-                  "تاريخ بدايه الاشتراك : ",
-                ),
-                Expanded(
-                  child: Text(
-                    formatter.format(subscription.startDate!),
-                    overflow: TextOverflow.ellipsis,
+    TextTheme textTheme = Theme.of(context).textTheme.apply(
+          bodyColor: textColor,
+          displayColor: textColor,
+        );
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      child: Stack(
+        children: [
+          Card(
+            child: ListTile(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  SubscriptionDataScreen.routeName,
+                  arguments: subscription,
+                );
+              },
+              title: Text(subscription.bundle!.name),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Text("حروف اللوحه : " +
+                          subscription.vechile!.plateLetters!),
+                      SizedBox(width: 10),
+                      Text("ارقام اللوحه : " +
+                          subscription.vechile!.plateNumbers!),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  "تاريخ نهايه الاشتراك : ",
-                ),
-                Expanded(
-                  child: Text(
-                    formatter.format(subscription.endDate!),
-                    overflow: TextOverflow.ellipsis,
+                  SizedBox(width: 10),
+                  Row(
+                    children: [
+                      Text(
+                        "تاريخ بدايه الاشتراك : ",
+                      ),
+                      Expanded(
+                        child: Text(
+                          formatter.format(subscription.startDate!),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  Row(
+                    children: [
+                      Text(
+                        "تاريخ نهايه الاشتراك : ",
+                      ),
+                      Expanded(
+                        child: Text(
+                          formatter.format(subscription.endDate!),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              leading: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/car.png"),
+              ),
             ),
-          ],
-        ),
-        leading: CircleAvatar(
-          backgroundImage: AssetImage("assets/images/car.png"),
-        ),
+          ),
+          Positioned(
+            left: 0,
+            top: 0,
+            child: RotationTransition(
+              turns: AlwaysStoppedAnimation(0 / 360),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(text),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

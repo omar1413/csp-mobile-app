@@ -12,8 +12,6 @@ class FancyCard extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
-        height: height * 0.22,
-        width: width * 0.88,
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),

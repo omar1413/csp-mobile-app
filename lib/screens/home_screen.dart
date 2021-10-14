@@ -1,9 +1,14 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'dart:async';
+
 import 'package:csp_mobile_app/api/dashboard_api.dart';
+import 'package:csp_mobile_app/api/subscription_api.dart';
+import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
+import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_tabs.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
@@ -21,14 +26,21 @@ import 'package:flutter/material.dart';
 import '../widets/profile.dart';
 import '../widets/custom_text_line.dart';
 
-class homeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
+  final Function(int)? selectedPage;
+
+  HomeScreen({this.selectedPage});
   @override
-  State<homeScreen> createState() => _homeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _homeScreenState extends State<homeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
+  StreamController<List<Subscription>?> subStream = StreamController();
+
   @override
   void initState() {
+    loadFirstThreeSubscription();
+
     super.initState();
   }
 
@@ -94,14 +106,18 @@ class _homeScreenState extends State<homeScreen> {
                       // ),
                       SizedBox(height: 20),
                       Container(child: ProfileWidget()),
-                      Container(child: CarouselCircle()),
+                      Container(
+                          child: CarouselCircle(
+                        selectedPage: widget.selectedPage,
+                      )),
                     ],
                   ),
                 ),
                 CustomTextLine(text: "الأخبار"),
                 News(),
-                CustomTextLine(text: "المعلومات"),
                 CarouselSquare(),
+                // CustomTextLine(text: "المعلومات"),
+                // CarouselSquare(),
                 CustomTextLine(text: "الخدمات"),
                 Container(
                   margin: const EdgeInsets.all(10),
@@ -135,31 +151,82 @@ class _homeScreenState extends State<homeScreen> {
                     ],
                   ),
                 ),
-                CustomTextLine(text: "الاشتراكات"),
-                Container(
-                  width: width,
-                  child: FutureBuilder(
-                      future: DashboardApi.getfirstThreeSupscription(),
-                      builder: (ctx, AsyncSnapshot<List<Subscription>> sn) {
-                        if (!sn.hasData || sn.data == null) {
-                          return Container();
-                        }
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: sn.data!
-                              .map((e) => SubscripeItem(
-                                    item: e,
-                                  ))
-                              .toList(),
-                        );
-                      }),
-                ),
+                StreamBuilder(
+
+                    // future: DashboardApi.getfirstThreeSupscription(),
+                    stream: subStream.stream,
+                    builder: (ctx, AsyncSnapshot<List<Subscription>?> sn) {
+                      if (!sn.hasData || sn.data == null) {
+                        return Container();
+                      }
+                      if (sn.data!.length == 0) {
+                        return Container();
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomTextLine(text: "الاشتراكات"),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 8),
+                            child: Card(
+                              color: Colors.white60,
+                              elevation: 1.5,
+                              shape: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              borderOnForeground: true,
+                              shadowColor: Colors.black,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: sn.data!
+                                    .map((e) => SubscripeItem(
+                                          item: e,
+                                          onTap: (e) async {
+                                            await Navigator.pushNamed(
+                                              context,
+                                              SubscriptionDataScreen.routeName,
+                                              arguments: e,
+                                            );
+
+                                            // loadFirstThreeSubscription();
+                                          },
+                                        ))
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  loadFirstThreeSubscription() async {
+    subStream.add(null);
+    List<Subscription> subs = await DashboardApi.getfirstThreeSupscription();
+
+    subStream.add(subs);
+  }
+
+  @override
+  void dispose() {
+    subStream.close();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    loadFirstThreeSubscription();
+    super.didChangeDependencies();
   }
 }

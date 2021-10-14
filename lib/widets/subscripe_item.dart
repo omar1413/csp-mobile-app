@@ -1,12 +1,14 @@
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
+import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
 import 'package:csp_mobile_app/widets/CustomText.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:flutter/material.dart';
 
 class SubscripeItem extends StatefulWidget {
   Subscription item;
-  SubscripeItem({required this.item});
+  final Function(Subscription) onTap;
+  SubscripeItem({required this.item, required this.onTap});
 
   @override
   State<SubscripeItem> createState() => _SubscripeItemState();
@@ -20,9 +22,14 @@ class _SubscripeItemState extends State<SubscripeItem> {
   void initState() {
     print("Days :: ");
     print(widget.item.endDate);
+    print("end Date " + widget.item.endDate.toString());
+    print("start Date " + widget.item.startDate.toString());
+    print("now " + DateTime.now().toString());
+    print(widget.item.endDate!.difference(DateTime.now()).inDays * 1.0);
     days = widget.item.endDate!.difference(widget.item.startDate!).inDays * 1.0;
     daysLeft = widget.item.endDate!.difference(DateTime.now()).inDays * 1.0;
-    percentage = daysLeft / 10;
+    //percentage = daysLeft / 10;
+    percentage = daysLeft / days;
     super.initState();
   }
 
@@ -61,7 +68,10 @@ class _SubscripeItemState extends State<SubscripeItem> {
               Container(
                 width: width * 0.31,
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(widget.onTap);
+                    widget.onTap(widget.item);
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),
                   color: Theme.of(context).primaryColor,

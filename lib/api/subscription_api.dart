@@ -81,7 +81,7 @@ class SubscriptionApi {
 
         Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
-        for (Map m in decodedJson["data"]) {
+        for (Map m in decodedJson["data"]["result"]) {
           subscription.add(Subscription.fromJson(m));
         }
 
@@ -112,7 +112,7 @@ class SubscriptionApi {
 
         Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
-        for (Map m in decodedJson["data"]) {
+        for (Map m in decodedJson["data"]["result"]) {
           subscription.add(Subscription.fromJson(m));
         }
 

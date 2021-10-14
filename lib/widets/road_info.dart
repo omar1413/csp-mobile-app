@@ -74,14 +74,8 @@ class RoadInfo extends StatelessWidget {
         ),
         Container(
           height: 120,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: newsOfRoad.length,
-            itemBuilder: (BuildContext context, int index) {
-              return NewItem(newItem: newsOfRoad[index]);
-            },
-          ),
-        )
+          child: NewItem(news: newsOfRoad),
+        ),
       ]),
     );
   }

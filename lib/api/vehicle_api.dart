@@ -26,7 +26,7 @@ class VehicleApi {
 
         Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
-        for (Map m in decodedJson["data"]) {
+        for (Map m in decodedJson["data"]["result"]) {
           vehicles.add(Vehicle.fromJson(m));
         }
 

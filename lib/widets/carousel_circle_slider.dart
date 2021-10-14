@@ -1,14 +1,17 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:csp_mobile_app/api/dashboard_api.dart';
+import 'package:csp_mobile_app/models/subscription.dart';
+import 'package:csp_mobile_app/screens/subscription_tabs.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+
 import '../models/DummyHomeItem.dart';
 import 'cirular_slider_item.dart';
 
 class CarouselCircle extends StatefulWidget {
-  CarouselCircle() : super();
+  CarouselCircle({this.selectedPage}) : super();
+  final Function(int)? selectedPage;
 
   final String title = "Home";
 
@@ -18,6 +21,39 @@ class CarouselCircle extends StatefulWidget {
 
 class CarouselCircleState extends State<CarouselCircle> {
   static String routName = 'HomeScreen';
+
+  List<HomeItem> homeCircularItems = [
+    HomeItem(
+      id: 1,
+      title: "رصيد المحفظة",
+      subtitle: "رصيدك الحالى",
+      type: "ج.م",
+      amount: 0,
+      color: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
+      img: "",
+      future: DashboardApi.getWalletAmount,
+    ),
+    HomeItem(
+      id: 2,
+      title: " عدد الاشتراكات ",
+      subtitle: " عدد الاشتراكات ",
+      type: "اشتراك ",
+      amount: 2,
+      color: Colors.orange,
+      img: "",
+      future: DashboardApi.getSubscriptionCount,
+    ),
+    HomeItem(
+      id: 3,
+      title: "عدد المركبات",
+      subtitle: " عدد المركبات",
+      type: "مركبات",
+      amount: 2,
+      color: Colors.red,
+      img: "",
+      future: DashboardApi.getVehicleCount,
+    ),
+  ];
 
   int _current = 0;
 
@@ -29,9 +65,48 @@ class CarouselCircleState extends State<CarouselCircle> {
     return result;
   }
 
+  void initHome() async {
+    List<Subscription> subs = await DashboardApi.getfirstThreeSupscription();
+
+    if (subs.length > 0) {
+      setState(() {
+        homeCircularItems.add(
+          HomeItem(
+            id: 4,
+            title: "",
+            subtitle: "اشتراك قارب على الانتهاء",
+            type: "ايام ",
+            amount: 1,
+            max: 10,
+            color: Colors.red,
+            img: "img",
+            future: () => Future(() {
+              return subs[0].endDate!.difference(DateTime.now()).inDays;
+            }),
+          ),
+        );
+      });
+    }
+  }
+
   @override
   void initState() {
+    initHome();
     super.initState();
+  }
+
+  void _goToPage(BuildContext context, HomeItem ob) {
+    if (ob.id == 1) {
+      if (widget.selectedPage != null) {
+        widget.selectedPage!(2);
+      }
+    } else if (ob.id == 2) {
+      Navigator.pushNamed(context, SubscriptionTabs.routeName);
+    } else if (ob.id == 3) {
+      Navigator.pushNamed(context, SubscriptionTabs.routeName);
+    } else if (ob.id == 4) {
+      Navigator.pushNamed(context, SubscriptionTabs.routeName);
+    }
   }
 
   @override
@@ -64,37 +139,39 @@ class CarouselCircleState extends State<CarouselCircle> {
             pauseAutoPlayOnTouch: true,
             scrollDirection: Axis.horizontal,
           ),
-          items: DummyHomeCircularItems.map((item) {
+          items: homeCircularItems.map((item) {
             return Builder(
               builder: (BuildContext context) {
-                return FutureBuilder<Response>(
+                return FutureBuilder<int>(
                     future: item.future!(),
                     builder: (ctx, sn) {
-                      print(sn);
                       if (sn.hasError) {
                         print(sn.error);
                       }
                       if (sn.hasData && sn.data != null) {
-                        print(
-                            "status code : " + sn.data!.statusCode.toString());
-                        if (sn.data!.statusCode == 200) {
-                          item.amount = jsonDecode(sn.data!.body)["data"];
-                          print("s${item.amount}s s");
-                          item.amount = jsonDecode(sn.data!.body)["data"];
-                          double max = item.amount.toDouble();
-                          if (item.amount <= 0) {
-                            max = 100;
-                          }
-                          return Cirular_slider(
-                            item: item,
-                            max: max,
-                            initalValue: item.amount.toDouble(),
-                          );
+                        item.amount = sn.data!;
+                        double max = item.amount.toDouble();
+                        if (item.max != null) {
+                          max = item.max!;
                         }
+                        if (item.amount <= 0) {
+                          max = 100;
+                        }
+                        return Cirular_slider(
+                          item: item,
+                          max: max,
+                          onTap: (e) {
+                            _goToPage(context, e);
+                          },
+                          initalValue: item.amount.toDouble(),
+                        );
                       }
 
                       return Cirular_slider(
                         item: item,
+                        onTap: (e) {
+                          _goToPage(context, e);
+                        },
                         initalValue: item.amount.toDouble(),
                       );
                     });
@@ -104,7 +181,7 @@ class CarouselCircleState extends State<CarouselCircle> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: map<Widget>(DummyHomeCircularItems, (index, url) {
+          children: map<Widget>(homeCircularItems, (index, url) {
             return Container(
               width: 10.0,
               height: 10.0,

@@ -39,135 +39,144 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: customAppBar(title: "إعادة الشحن", context: context),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 25,
-              ),
-              CustomTextLine(text: "أدخل المبلغ"),
-              Container(
-                margin: EdgeInsets.only(right: 20),
-                child: FancyCard(
-                  imagePath: "assets/images/card.png",
-                  // color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          CustomText("اسم المستخدم", FontWeight.normal,
-                              Colors.white70, 16),
-                          SizedBox(height: 5),
-                          CustomText("RFIO 10002248900", FontWeight.normal,
-                              Colors.white70, 14),
-                        ],
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    CustomTextLine(text: "أدخل المبلغ"),
+                    Container(
+                      margin: EdgeInsets.all(15),
+                      child: FancyCard(
+                        imagePath: "assets/images/card.png",
+                        // color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                CustomText("اسم المستخدم", FontWeight.normal,
+                                    Colors.white70, 16),
+                                SizedBox(height: 5),
+                                CustomText("RFIO 10002248900",
+                                    FontWeight.normal, Colors.white70, 14),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomIcon(
+                                  icon: Icons.remove,
+                                  color: kwhite,
+                                  onPress: () {
+                                    setState(() {
+                                      if (priceValue > 0) {
+                                        priceValue--;
+                                      }
+                                    });
+                                  },
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomText(
+                                        priceValue.toStringAsFixed(2) + " ",
+                                        FontWeight.normal,
+                                        Colors.white,
+                                        26),
+                                    CustomText("ج/م", FontWeight.normal,
+                                        Colors.white, 18),
+                                  ],
+                                ),
+                                CustomIcon(
+                                  icon: Icons.add,
+                                  color: kwhite,
+                                  onPress: () {
+                                    setState(() {
+                                      priceValue++;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CustomIcon(
-                            icon: Icons.remove,
-                            color: kwhite,
-                            onPress: () {
+                    ),
+                    CustomTextLine(text: "طريقه الدفع"),
+                    Column(
+                      children: [
+                        _radioTile<String>(
+                            text: "بطاقه ائتمانيه",
+                            value: "a",
+                            groupValue: _character,
+                            iconPath: "assets/images/credit-card.png",
+                            onChanged: (String? v) {
                               setState(() {
-                                if (priceValue > 0) {
-                                  priceValue--;
-                                }
+                                _character = v;
                               });
-                            },
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomText(priceValue.toStringAsFixed(2) + " ",
-                                  FontWeight.normal, Colors.white, 26),
-                              CustomText(
-                                  "ج/م", FontWeight.normal, Colors.white, 18),
-                            ],
-                          ),
-                          CustomIcon(
-                            icon: Icons.add,
-                            color: kwhite,
-                            onPress: () {
+                            }),
+                        _radioTile<String>(
+                            text: "كارت ميزة",
+                            value: "b",
+                            groupValue: _character,
+                            iconPath: "assets/images/miza.png",
+                            onChanged: (String? v) {
                               setState(() {
-                                priceValue++;
+                                _character = v;
                               });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                            }),
+                        _radioTile<String>(
+                            text: "فورى",
+                            value: "c",
+                            groupValue: _character,
+                            iconPath: "assets/images/fawry.png",
+                            onChanged: (String? v) {
+                              setState(() {
+                                _character = v;
+                              });
+                            }),
+                      ],
+                    ),
+                    _textField("رقم كارت الائتمان", context),
+                    _textField("اسم كارت الائتمان", context),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _textField("تاريخ الانتهاء", context),
+                        ),
+                        Expanded(
+                          child: _textField("الرقم المتغير", context),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              CustomTextLine(text: "طريقه الدفع"),
-              Column(
-                children: [
-                  _radioTile<String>(
-                      text: "بطاقه ائتمانيه",
-                      value: "a",
-                      groupValue: _character,
-                      iconPath: "assets/images/credit-card.png",
-                      onChanged: (String? v) {
-                        setState(() {
-                          _character = v;
-                        });
-                      }),
-                  _radioTile<String>(
-                      text: "كارت ميزة",
-                      value: "b",
-                      groupValue: _character,
-                      iconPath: "assets/images/miza.png",
-                      onChanged: (String? v) {
-                        setState(() {
-                          _character = v;
-                        });
-                      }),
-                  _radioTile<String>(
-                      text: "فورى",
-                      value: "c",
-                      groupValue: _character,
-                      iconPath: "assets/images/fawry.png",
-                      onChanged: (String? v) {
-                        setState(() {
-                          _character = v;
-                        });
-                      }),
-                ],
-              ),
-              _textField("رقم كارت الائتمان", context),
-              _textField("اسم كارت الائتمان", context),
-              Row(
-                children: [
-                  Expanded(
-                    child: _textField("تاريخ الانتهاء", context),
-                  ),
-                  Expanded(
-                    child: _textField("الرقم المتغير", context),
-                  ),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                width: double.infinity,
-                child: FlatButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  color: Theme.of(context).primaryColor,
-                  height: 40,
-                  child: Text(
-                    "تأكيد الدفع",
-                    style: TextStyle(color: Colors.white, fontSize: 14.0),
-                  ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              width: double.infinity,
+              child: FlatButton(
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: Theme.of(context).primaryColor,
+                height: 40,
+                child: Text(
+                  "تأكيد الدفع",
+                  style: TextStyle(color: Colors.white, fontSize: 14.0),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

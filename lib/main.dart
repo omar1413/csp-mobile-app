@@ -45,25 +45,47 @@ class MyApp extends StatelessWidget {
     ColorScheme schema = Theme.of(context).colorScheme;
 
     return MaterialApp(
-        theme: ThemeData(
-          primaryColor: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
-          primaryColorDark: Color.fromRGBO(0x20, 0x49, 0x36, 1.0),
-          //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
-        ),
-        home: LoginScreen(),
-        routes: <String, WidgetBuilder>{
+      theme: ThemeData(
+        primaryColor: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
+        primaryColorDark: Color.fromRGBO(0x20, 0x49, 0x36, 1.0),
+        //colorScheme:schema.copyWith(secondary:const Color(0xFFB7E4C7)),
+      ),
+      home: OnBoard(),
+      onGenerateRoute: (RouteSettings settings) {
+        Map<String, WidgetBuilder> routes = {
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
-          Vehiclemanagement.routeName: (ctx) => const Vehiclemanagement(),
-          Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
-          RoadData.routeName: (ctx) => const RoadData(),
+          Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
+          Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(
+                vehicle: settings.arguments as Vehicle?,
+              ),
+          RoadData.routeName: (ctx) => RoadData(),
           MainScreen.routeName: (ctx) => MainScreen(),
           RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
           TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
           VechileListScreen.routeName: (ctx) => VechileListScreen(),
-          //SubscriptionDataScreen.routeName: (ctx) =>
-          //  const SubscriptionDataScreen(),
+          SubscriptionDataScreen.routeName: (ctx) => SubscriptionDataScreen(
+                subscription: settings.arguments as Subscription,
+              ),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
           SubscriptionTabs.routeName: (ctx) => SubscriptionTabs(),
-        });
+        };
+        WidgetBuilder builder = routes[settings.name]!;
+        return MaterialPageRoute(builder: (ctx) => builder(ctx));
+      },
+      // routes: <String, WidgetBuilder>{
+      //   RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
+      //   Vehiclemanagement.routeName: (ctx) => const Vehiclemanagement(),
+      //   Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(),
+      //   RoadData.routeName: (ctx) => const RoadData(),
+      //   MainScreen.routeName: (ctx) => MainScreen(),
+      //   RechargeWalletScreen.routeName: (ctx) => RechargeWalletScreen(),
+      //   TransferMoenyScreen.routeName: (ctx) => TransferMoenyScreen(),
+      //   VechileListScreen.routeName: (ctx) => VechileListScreen(),
+      //   //SubscriptionDataScreen.routeName: (ctx) =>
+      //   //  const SubscriptionDataScreen(),
+      //   TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
+      //   SubscriptionTabs.routeName: (ctx) => SubscriptionTabs(),
+      // },
+    );
   }
 }
