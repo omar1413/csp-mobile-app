@@ -1,5 +1,7 @@
+import 'package:csp_mobile_app/api/subscription_api.dart';
 import 'package:csp_mobile_app/api/vehicle_api.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
+import 'package:csp_mobile_app/models/subscriptions_management_data_arg.dart';
 import 'package:csp_mobile_app/models/vehicle.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
@@ -80,7 +82,10 @@ class VehicleListItem extends StatelessWidget {
           Navigator.pushNamed(
             context,
             Subscriptionsmanagement.routeName,
-            arguments: vehicle,
+            arguments: SubscriptionsmanagementArg(
+              vehicle: vehicle,
+              getVehicleSubscriptions: SubscriptionApi.getVehicleSubscriptions,
+            ),
           );
         },
         title: Text(vehicle.type!.desc),

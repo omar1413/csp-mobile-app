@@ -1,8 +1,10 @@
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 // ignore_for_file: file_names, prefer_const_constructors
 
+import 'package:csp_mobile_app/api/subscription_api.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/chat_model.dart';
+import 'package:csp_mobile_app/models/subscriptions_management_data_arg.dart';
 import 'package:csp_mobile_app/screens/chat_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
@@ -32,7 +34,14 @@ class _SubscriptionTabsState extends State<SubscriptionTabs> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, Object>> screensList = [
-      {'page': Subscriptionsmanagement(), 'title': 'ادارة الاشتراكات'},
+      {
+        'page': Subscriptionsmanagement(
+          args: SubscriptionsmanagementArg(
+            getAllSubscriptions: SubscriptionApi.getAllSubscriptions,
+          ),
+        ),
+        'title': 'ادارة الاشتراكات'
+      },
       {'page': VechileListScreen(), 'title': '3الكود الشخصى'},
     ];
     return Directionality(

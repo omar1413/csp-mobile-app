@@ -114,6 +114,7 @@ class SubscriptionApi {
 
         for (Map m in decodedJson["data"]["result"]) {
           subscription.add(Subscription.fromJson(m));
+          print(m);
         }
 
         return subscription;

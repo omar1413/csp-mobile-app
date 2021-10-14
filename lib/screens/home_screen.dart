@@ -166,7 +166,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomTextLine(text: "الاشتراكات"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomTextLine(text: "الاشتراكات"),
+                              CustomTextButton(
+                                  str: "عرض الكل",
+                                  onPressed: () {},
+                                  size: 16,
+                                  color: Colors.green,
+                                  td: TextDecoration.none)
+                            ],
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 8),

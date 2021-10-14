@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:csp_mobile_app/models/governorate_lkp.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 
 class Vehicle {
@@ -8,6 +9,7 @@ class Vehicle {
   String? plateLetters;
   String? plateNumbers;
   String? tagValue;
+  GovernorateLkp? governorateLkp;
 
   Vehicle({
     required this.id,
@@ -22,7 +24,17 @@ class Vehicle {
         this.plateLetters = jsonMap["plateLetters"],
         this.plateNumbers = jsonMap["plateNumbers"],
         this.tagValue = jsonMap["tagValue"],
-        this.type = VehicleType.fromJson(jsonMap["vehicleTypeLkp"]);
+        this.type = VehicleType.fromJson(jsonMap["vehicleTypeLkp"]),
+        this.governorateLkp =
+            GovernorateLkp.fromJson(jsonMap["governorateLkp"]) {
+    if (plateLetters == null) {
+      if (governorateLkp?.desc == null) {
+        plateLetters = "";
+      } else {
+        plateLetters = governorateLkp?.desc;
+      }
+    }
+  }
 
   Map toJson() {
     return {
@@ -31,6 +43,7 @@ class Vehicle {
       "plateNumbers": plateNumbers,
       "tagValue": tagValue,
       "vehicleTypeLkp": type?.toJson(),
+      "governorateLkp": governorateLkp?.toJson(),
     };
   }
 }

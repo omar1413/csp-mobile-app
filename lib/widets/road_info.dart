@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'custom_text_line.dart';
 
 class RoadInfo extends StatelessWidget {
-  Road road;
-  List<New> newsOfRoad;
+  final Road road;
+  final List<New> newsOfRoad;
   RoadInfo({required this.road, required this.newsOfRoad});
 
   @override

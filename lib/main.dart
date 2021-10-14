@@ -1,5 +1,6 @@
 import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
+import 'package:csp_mobile_app/models/subscriptions_management_data_arg.dart';
 import 'package:csp_mobile_app/models/vehicle.dart';
 
 import 'package:csp_mobile_app/screens/main_screen.dart';
@@ -33,6 +34,8 @@ void main() async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isviewed = prefs.getInt('onBoard');
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
   runApp(MyApp());
 }
 
@@ -56,7 +59,7 @@ class MyApp extends StatelessWidget {
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),
           Subscriptionsmanagement.routeName: (ctx) => Subscriptionsmanagement(
-                vehicle: settings.arguments as Vehicle?,
+                args: settings.arguments as SubscriptionsmanagementArg,
               ),
           RoadData.routeName: (ctx) => RoadData(),
           MainScreen.routeName: (ctx) => MainScreen(),

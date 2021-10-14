@@ -4,6 +4,7 @@ import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
 import 'package:csp_mobile_app/widets/custom_alert_dialog.dart';
+import 'package:csp_mobile_app/widets/messages.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 //import 'package:hospital_application/Widget/Animation.dart';
@@ -267,19 +268,11 @@ class _LoginScreenState extends State<LoginScreen> {
         AuthApi.saveToken(response.body);
         Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
       } else {
-        showMyDialog(
-          context: context,
-          title: "خطأ",
-          desc: "حدث خطأ ما اثناء تسجيل الدخول",
-        );
+        errorMessage(context, "حدث خطأ ما اثناء تسجيل الدخول");
       }
     } catch (error) {
       print(error);
-      showMyDialog(
-        context: context,
-        title: "خطأ",
-        desc: "حدث خطأ ما اثناء تسجيل الدخول",
-      );
+      errorMessage(context, "حدث خطأ ما اثناء تسجيل الدخول");
     } finally {
       hideProgressIndicator();
     }

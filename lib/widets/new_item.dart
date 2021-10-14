@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewItem extends StatefulWidget {
-  List<New> news;
+  final List<New> news;
   NewItem({required this.news});
 
   @override
@@ -23,10 +23,11 @@ class _NewItemState extends State<NewItem> {
   late Timer t;
   @override
   void initState() {
+    print("init");
     t = Timer.periodic(Duration(seconds: 5), (_) {
       setState(() {
         x++;
-        if (x == widget.news.length) {
+        if (x >= widget.news.length) {
           x = 0;
         }
       });
@@ -36,13 +37,18 @@ class _NewItemState extends State<NewItem> {
 
   @override
   void dispose() {
+    print("dispose");
     t.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    color = getColor(widget.news[x].code!);
+    if (widget.news.length > 0) {
+      color = getColor(widget.news[x].code!);
+    } else {
+      return Container();
+    }
 
     double width = MediaQuery.of(context).size.width;
 

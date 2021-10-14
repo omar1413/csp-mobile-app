@@ -19,7 +19,9 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 class SubscriptionDataScreen extends StatefulWidget {
   static const routeName = 'SubscriptionDataScreen';
   final Subscription subscription;
-  const SubscriptionDataScreen({Key? key, required this.subscription})
+  final bool readOnly;
+  const SubscriptionDataScreen(
+      {Key? key, required this.subscription, this.readOnly = true})
       : super(key: key);
 
   @override
@@ -58,6 +60,8 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
 
   Map? dataArgs;
 
+  bool readOnly = true;
+
   void initBundleLkp() async {
     try {
       _showProgress();
@@ -82,10 +86,16 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
       selectedValue = sub.bundle!;
       users.clear();
       users.add(selectedValue);
-      dateinput.text = intl.DateFormat('yyyy-MM-dd').format(sub.startDate!);
-      periodInput.text = sub.subscriptionPeriod.toString();
-      paidAmountInput.text = sub.paidAmount.toString();
+      String dateFormat = "yyyy/MM/dd";
+      dateinput.text = intl.DateFormat(dateFormat).format(sub.startDate!);
       pickedDate = sub.startDate;
+      if (readOnly) {
+        periodInput.text = sub.subscriptionPeriod.toString();
+        paidAmountInput.text = sub.paidAmount.toString();
+      } else {
+        dateinput.text = intl.DateFormat(dateFormat).format(sub.endDate!);
+        pickedDate = sub.endDate;
+      }
     }
     items = users.map((Bundle user) {
       return DropdownMenuItem<Bundle>(
@@ -100,6 +110,10 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
 
   @override
   void initState() {
+    readOnly = widget.readOnly;
+    if (widget.subscription.id == null) {
+      readOnly = false;
+    }
     initBundleLkp();
     initItems();
 
@@ -157,6 +171,9 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                                     height: kMidHeight,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton(
+                                        icon: widget.subscription.id != null
+                                            ? Icon(null)
+                                            : null,
                                         value: selectedValue,
                                         items: items,
                                         onChanged:
@@ -181,17 +198,18 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                               controller: dateinput,
                               error: dateInputError,
                               readOnly: true,
-                              onTap: showPicker,
+                              onTap: readOnly ? null : showPicker,
                               textAlign: TextAlign.center,
                             ),
                             CustomTextField(
+                              readOnly: readOnly,
                               onChanged: (_) {
                                 _calculatePaidAmount();
                               },
                               controller: periodInput,
                               error: periodInputError,
                               keyboardType: TextInputType.number,
-                              str: "صلاحيه الاشتراك بالشهور",
+                              str: "مدة الاشتراك بالشهور",
                               textAlign: TextAlign.center,
                             ),
                             CustomTextField(
@@ -212,7 +230,9 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                       child: CustomButton(
                         text: widget.subscription.id == null
                             ? "اشتراك"
-                            : "تجديد الاشتراك",
+                            : readOnly
+                                ? "اضغط للتجديد"
+                                : "تجديد الاشتراك",
                         onPress: () {
                           _saveSub(context);
                         },
@@ -321,6 +341,18 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
   _saveSub(BuildContext context) async {
     _showProgress();
     try {
+      if (readOnly) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => SubscriptionDataScreen(
+              subscription: widget.subscription,
+              readOnly: false,
+            ),
+          ),
+        );
+        return;
+      }
       if (!_validate(context)) {
         _hideProgress();
         return;
