@@ -1,97 +1,40 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:intl/intl.dart';
+import 'package:csp_mobile_app/models/account.dart';
+import 'package:csp_mobile_app/models/founder.dart';
+import 'package:csp_mobile_app/models/transaction_type.dart';
 
 class Transaction {
-  final String id;
-  final String title;
-  final String subtitle;
-  final DateTime dateTime;
+  int? id;
+  int? amount;
+  TransactionType? transactionType;
+  Founder? founder;
+  Account? toAccount;
+  DateTime? dateTime;
 
   Transaction(
-      {required this.id,
-      required this.subtitle,
-      required this.title,
-      required this.dateTime});
+      {this.id,
+      this.transactionType,
+      this.dateTime,
+      this.amount,
+      this.founder,
+      this.toAccount});
+
+  Transaction.fromJson(Map json)
+      : id = json["id"],
+        amount = json["amount"],
+        transactionType = TransactionType.fromJson(json["transactionType"]),
+        founder = Founder.fromJson(json["founderType"]),
+        toAccount = Account.fromJson(json["toAccount"]),
+        dateTime = DateTime.fromMillisecondsSinceEpoch(json["date"]);
+  Map toJson() {
+    return {
+      "id": id,
+      "amount": amount,
+      "transactionType": transactionType?.toJson(),
+      "founderType": founder?.toJson(),
+      "toAccount": toAccount?.toJson(),
+      "date": dateTime,
+    };
+  }
 }
 
-final DummyTransactionData = [
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-  Transaction(
-    id: "1",
-    title: "أ ك م /576 ",
-    subtitle: "طريق صلاح سالم ",
-    dateTime: DateTime.utc(2000, DateTime.february, 3),
-  ),
-  Transaction(
-    id: "1",
-    title: "ط م ن /728 ",
-    subtitle: "طريق مصر الصحراوى",
-    dateTime: DateTime.utc(2012, DateTime.april, 15),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ث /423 ",
-    subtitle: "طريق الزراعى ",
-    dateTime: DateTime.utc(2021, DateTime.january, 16),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-  Transaction(
-    id: "1",
-    title: "أ ك م /576 ",
-    subtitle: "طريق صلاح سالم ",
-    dateTime: DateTime.utc(2000, DateTime.february, 3),
-  ),
-  Transaction(
-    id: "1",
-    title: "ط م ن /728 ",
-    subtitle: "طريق مصر الصحراوى",
-    dateTime: DateTime.utc(2012, DateTime.april, 15),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ث /423 ",
-    subtitle: "طريق الزراعى ",
-    dateTime: DateTime.utc(2021, DateTime.january, 16),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-  Transaction(
-    id: "1",
-    title: "د م ن /423 ",
-    subtitle: "طريق مصر السويس",
-    dateTime: DateTime.utc(1989, DateTime.november, 9),
-  ),
-];
+List<Transaction> transactions = [];

@@ -7,12 +7,15 @@ class TransactionListScreen extends StatelessWidget {
   static const routeName = '/TransactionListScreen';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(title: "تاريخ المعاملات", context: context),
-      body: Container(
-          padding: EdgeInsets.all(10),
-          height: MediaQuery.of(context).size.height,
-          child: TransactionList(DummyTransactionData)),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: customAppBar(title: "تاريخ المعاملات", context: context),
+        body: Container(
+            padding: EdgeInsets.all(10),
+            height: MediaQuery.of(context).size.height,
+            child: TransactionList()),
+      ),
     );
   }
 }

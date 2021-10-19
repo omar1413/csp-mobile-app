@@ -55,7 +55,6 @@ Widget _textBtn(String str, Function onPressed) {
   return Container(
     height: 35,
     alignment: Alignment.topLeft,
-    // padding: EdgeInsets.symmetric(horizontal:),
     child: TextButton(
         onPressed: () => onPressed(),
         child: Text(

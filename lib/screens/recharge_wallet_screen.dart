@@ -1,17 +1,16 @@
+import 'package:csp_mobile_app/api/transaction_api.dart';
 import 'package:csp_mobile_app/constant.dart';
-import 'package:csp_mobile_app/screens/home_screen.dart';
+import 'package:csp_mobile_app/models/founder.dart';
+
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:csp_mobile_app/widets/custom_icon.dart';
 import 'package:csp_mobile_app/widets/custom_radio_tile.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:csp_mobile_app/widets/fancy_card.dart';
-import 'package:csp_mobile_app/widets/service.dart';
-import 'package:csp_mobile_app/widets/square_item.dart';
+import '../api/rechargr_api.dart';
 import 'package:flutter/material.dart';
-import '../widets/transaction_list.dart';
-import '../widets/transaction_item.dart';
+
 import '../models/transaction_data.dart';
-import '../widets/square_item.dart';
 
 Widget CustomText(String str, FontWeight fw, Color color, double size) {
   return Text(
@@ -28,8 +27,21 @@ class RechargeWalletScreen extends StatefulWidget {
 }
 
 class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
-  double priceValue = 0;
-  String? _character;
+  int amount = 0;
+  int? founderId;
+  Founder founder = new Founder(id: 0);
+
+  _recharge() async {
+    print("founderId:  " +
+        founderId.toString() +
+        " amount: " +
+        amount.toString());
+    founder.id = founderId;
+    print(founder.id.toString());
+    final transaction = Transaction(amount: amount, founder: founder);
+
+    final response = await RechargeAPI.saveRechargeTransaction(transaction);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +66,6 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                       margin: EdgeInsets.all(15),
                       child: FancyCard(
                         imagePath: "assets/images/card.png",
-                        // color: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,8 +88,8 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                                   color: kwhite,
                                   onPress: () {
                                     setState(() {
-                                      if (priceValue > 0) {
-                                        priceValue--;
+                                      if (amount > 10) {
+                                        amount -= 10;
                                       }
                                     });
                                   },
@@ -86,11 +97,8 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    CustomText(
-                                        priceValue.toStringAsFixed(2) + " ",
-                                        FontWeight.normal,
-                                        Colors.white,
-                                        26),
+                                    CustomText(amount.toStringAsFixed(2) + " ",
+                                        FontWeight.normal, Colors.white, 26),
                                     CustomText("ج/م", FontWeight.normal,
                                         Colors.white, 18),
                                   ],
@@ -100,7 +108,7 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                                   color: kwhite,
                                   onPress: () {
                                     setState(() {
-                                      priceValue++;
+                                      amount += 10;
                                     });
                                   },
                                 ),
@@ -113,39 +121,39 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                     CustomTextLine(text: "طريقه الدفع"),
                     Column(
                       children: [
-                        _radioTile<String>(
-                            text: "بطاقه ائتمانيه",
-                            value: "a",
-                            groupValue: _character,
-                            iconPath: "assets/images/credit-card.png",
-                            onChanged: (String? v) {
+                        _radioTile<int>(
+                            text: " فودافون كاش",
+                            value: 2,
+                            groupValue: founderId,
+                            iconPath: "assets/images/vodafone.png",
+                            onChanged: (int? selected) {
                               setState(() {
-                                _character = v;
+                                founderId = selected;
                               });
                             }),
-                        _radioTile<String>(
-                            text: "كارت ميزة",
-                            value: "b",
-                            groupValue: _character,
+                        _radioTile<int>(
+                            text: " فيزا",
+                            value: 3,
+                            groupValue: founderId,
                             iconPath: "assets/images/miza.png",
-                            onChanged: (String? v) {
+                            onChanged: (int? selected) {
                               setState(() {
-                                _character = v;
+                                founderId = selected;
                               });
                             }),
-                        _radioTile<String>(
-                            text: "فورى",
-                            value: "c",
-                            groupValue: _character,
+                        _radioTile<int>(
+                            text: " فورى",
+                            value: 1,
+                            groupValue: founderId,
                             iconPath: "assets/images/fawry.png",
-                            onChanged: (String? v) {
+                            onChanged: (int? selected) {
                               setState(() {
-                                _character = v;
+                                founderId = selected;
                               });
                             }),
                       ],
                     ),
-                    _textField("رقم كارت الائتمان", context),
+                    /* _textField("رقم كارت الائتمان", context),
                     _textField("اسم كارت الائتمان", context),
                     Row(
                       children: [
@@ -156,23 +164,25 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                           child: _textField("الرقم المتغير", context),
                         ),
                       ],
+                    ),*/
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      width: double.infinity,
+                      child: FlatButton(
+                        onPressed: () {
+                          _recharge();
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        color: Theme.of(context).primaryColor,
+                        height: 50,
+                        child: Text(
+                          "تأكيد الدفع",
+                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                        ),
+                      ),
                     ),
                   ],
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              width: double.infinity,
-              child: FlatButton(
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                color: Theme.of(context).primaryColor,
-                height: 40,
-                child: Text(
-                  "تأكيد الدفع",
-                  style: TextStyle(color: Colors.white, fontSize: 14.0),
                 ),
               ),
             ),
@@ -219,7 +229,8 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
         value: value,
         groupValue: groupValue,
         icon: Container(
-          width: 50,
+          margin: EdgeInsets.all(5),
+          width: 30,
           child: Tab(
             icon: Image.asset(iconPath),
           ),

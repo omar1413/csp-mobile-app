@@ -1,3 +1,4 @@
+import 'package:csp_mobile_app/models/transaction_type.dart';
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
 import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
@@ -19,7 +20,18 @@ Widget CustomText(String str, FontWeight fw, Color color, double size) {
   );
 }
 
-class WalletScreen extends StatelessWidget {
+class WalletScreen extends StatefulWidget {
+  @override
+  State<WalletScreen> createState() => _WalletScreenState();
+}
+
+class _WalletScreenState extends State<WalletScreen> {
+  @override
+  void initState() {
+    TransactionList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -115,16 +127,9 @@ class WalletScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    TransactionIteam(transaction: DummyTransactionData[0]),
-                    TransactionIteam(transaction: DummyTransactionData[1]),
-                    TransactionIteam(transaction: DummyTransactionData[2]),
-                  ],
-                ),
-              ),
+              TransactionList(
+                legnth: 3,
+              )
             ],
           ),
         ),

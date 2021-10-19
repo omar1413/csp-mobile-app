@@ -20,6 +20,7 @@ class CustomRadioTile<T> extends StatelessWidget {
     return Row(
       children: [
         Radio<T>(
+          activeColor: Theme.of(context).primaryColor,
           value: value,
           groupValue: groupValue,
           onChanged: onChanged,

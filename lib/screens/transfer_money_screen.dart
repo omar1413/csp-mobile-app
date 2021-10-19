@@ -1,4 +1,7 @@
+import 'package:csp_mobile_app/api/transfer_api.dart';
 import 'package:csp_mobile_app/constant.dart';
+import 'package:csp_mobile_app/models/account.dart';
+import 'package:csp_mobile_app/models/founder.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:csp_mobile_app/widets/custom_icon.dart';
@@ -28,13 +31,26 @@ class TransferMoenyScreen extends StatefulWidget {
 }
 
 class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
-  double priceValue = 0;
-  String? _character;
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    TextEditingController accountIdControll = TextEditingController();
+    int amount = 0;
+
+    Account account = new Account(id: 0); ////////graby t4ely de
+
+    _transfer() async {
+      print("founderId:  " +
+          accountIdControll.value.text +
+          " amount: " +
+          amount.toString());
+      account.id = int.parse(accountIdControll.value.text);
+      print(account.id.toString());
+      final transaction = Transaction(amount: amount, toAccount: account);
+      final response = await TransferApi.saveTransferTransaction(transaction);
+    }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -53,17 +69,18 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                           height: 25,
                         ),
                         CustomTextLine(text: "طريقه التحويل"),
-                        CustomRadioTile(
-                          groupValue: _character,
-                          onChanged: (String? v) {
+                        /* CustomRadioTile(
+                          groupValue: accountId,
+                          onChanged: (selected) {
                             setState(() {
-                              _character = v;
+                              //accountId = selected;
                             });
                           },
                           value: "a",
                           text: Text("رقم الحساب"),
-                        ),
-                        _textField("ادخل رقم الحساب", context),
+                        ),*/
+                        _textField(
+                            "ادخل رقم الحساب", context, accountIdControll),
                         // CustomRadioTile(
                         //   groupValue: _character,
                         //   onChanged: (String? v) {
@@ -126,8 +143,8 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                                         color: kwhite,
                                         onPress: () {
                                           setState(() {
-                                            if (priceValue > 0) {
-                                              priceValue--;
+                                            if (amount > 0) {
+                                              amount--;
                                             }
                                           });
                                         },
@@ -137,8 +154,7 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                                             MainAxisAlignment.center,
                                         children: [
                                           CustomText(
-                                              priceValue.toStringAsFixed(2) +
-                                                  " ",
+                                              amount.toStringAsFixed(2) + " ",
                                               FontWeight.normal,
                                               Colors.white,
                                               26),
@@ -151,7 +167,7 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                                         color: kwhite,
                                         onPress: () {
                                           setState(() {
-                                            priceValue++;
+                                            amount++;
                                           });
                                         },
                                       ),
@@ -172,7 +188,9 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
               margin: EdgeInsets.all(10),
               width: double.infinity,
               child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  _transfer();
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 color: Theme.of(context).primaryColor,
@@ -189,18 +207,18 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
     );
   }
 
-  Widget _textField(String lbl, BuildContext context) {
+  Widget _textField(
+      String lbl, BuildContext context, TextEditingController controller) {
     return Container(
       height: 40,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: TextField(
+        controller: controller,
         // textDirection:TextDirection.rtl ,
-
         cursorColor: Colors.grey,
         decoration: InputDecoration(
           hintText: lbl,
           labelStyle: TextStyle(color: Colors.grey),
-          //focusColor: Theme.of(context).primaryColor,
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.all(Radius.circular(10.0))),

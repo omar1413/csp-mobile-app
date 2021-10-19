@@ -76,7 +76,6 @@ class DashboardApi {
         url,
         headers: kHostHeader,
       );
-
       if (response.statusCode == 200) {
         List<Subscription> subs = [];
 
