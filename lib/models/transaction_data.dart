@@ -18,13 +18,14 @@ class Transaction {
       this.founder,
       this.toAccount});
 
-  Transaction.fromJson(Map json)
-      : id = json["id"],
-        amount = json["amount"],
-        transactionType = TransactionType.fromJson(json["transactionType"]),
-        founder = Founder.fromJson(json["founderType"]),
-        toAccount = Account.fromJson(json["toAccount"]),
-        dateTime = DateTime.fromMillisecondsSinceEpoch(json["date"]);
+  Transaction.fromJson(Map? json)
+      : id = json?["id"],
+        amount = json?["amount"] ?? "",
+        transactionType = TransactionType.fromJson(json?["transactionType"]),
+        founder = Founder.fromJson(json?["founderType"]),
+        toAccount = Account.fromJson(json?["toAccount"]),
+        dateTime = DateTime.fromMillisecondsSinceEpoch(json?["date"]);
+
   Map toJson() {
     return {
       "id": id,

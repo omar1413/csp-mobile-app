@@ -29,17 +29,12 @@ class RechargeWalletScreen extends StatefulWidget {
 class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
   int amount = 0;
   int? founderId;
-  Founder founder = new Founder(id: 0);
+  Founder founder = Founder(id: 0);
 
   _recharge() async {
-    print("founderId:  " +
-        founderId.toString() +
-        " amount: " +
-        amount.toString());
     founder.id = founderId;
-    print(founder.id.toString());
     final transaction = Transaction(amount: amount, founder: founder);
-
+    print("ddddddddddddddddddddddd");
     final response = await RechargeAPI.saveRechargeTransaction(transaction);
   }
 

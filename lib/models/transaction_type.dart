@@ -5,10 +5,10 @@ class TransactionType {
 
   TransactionType({this.id, this.desc});
 
-  TransactionType.fromJson(Map json)
-      : id = json["id"],
-        code = json["code"],
-        desc = json["desc"];
+  TransactionType.fromJson(Map? json)
+      : id = json?["id"],
+        code = json?["code"] ?? "",
+        desc = json?["desc"] ?? "";
 
   Map toJson() {
     return {

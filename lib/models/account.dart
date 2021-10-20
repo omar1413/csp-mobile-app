@@ -6,9 +6,9 @@ class Account {
 
   Account({this.id});
 
-  Account.fromJson(Map json)
-      : id = json["id"],
-        accountNumber = json["accountNumber"];
+  Account.fromJson(Map? json)
+      : id = json?["id"],
+        accountNumber = json?["accountNumber"] ?? "";
 
   Map toJson() {
     return {

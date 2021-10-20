@@ -5,10 +5,10 @@ class Founder {
 
   Founder({this.id, this.desc, this.code});
 
-  Founder.fromJson(Map json)
-      : id = json["id"],
-        code = json["code"],
-        desc = json["desc"];
+  Founder.fromJson(Map? json)
+      : id = json?["id"],
+        code = json?["code"] ?? "",
+        desc = json?["desc"] ?? "";
 
   Map toJson() => {
         "id": id,
