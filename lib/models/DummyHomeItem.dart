@@ -36,14 +36,6 @@ final DummyHomeSquareItems = [
     color: Colors.black,
     img: "assets/images/download-speed.png",
   ),
-  HomeItem(
-    title: "شيراتون",
-    subtitle: "رصيدك الحالى",
-    type: "مشمس",
-    amount: 28,
-    color: Colors.orange,
-    img: "assets/images/weather-app.png",
-  ),
 ];
 
 final DummySpeedItems = [

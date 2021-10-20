@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:csp_mobile_app/models/weather_data.dart';
 import 'package:csp_mobile_app/widets/CustomText.dart';
 import 'square_item.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import '../models/DummyHomeItem.dart';
 import 'cirular_slider_item.dart';
 
 class CarouselSquare extends StatefulWidget {
-  CarouselSquare() : super();
+  CarouselSquare({required this.weatherData}) : super();
+  final WeatherData weatherData;
   @override
   CarouselSquareState createState() => CarouselSquareState();
 }
@@ -91,13 +93,27 @@ class CarouselSquareState extends State<CarouselSquare> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    String weatherDescriptin = " ";
+    if (widget.weatherData.weather.length > 0) {
+      weatherDescriptin = widget.weatherData.weather[0].description ?? "";
+    }
+    final item = HomeItem(
+      title: widget.weatherData.name ?? "",
+      subtitle: "رصيدك الحالى",
+      type: weatherDescriptin,
+      amount: widget.weatherData.main?.temp?.toInt() ?? 0,
+      color: Colors.orange,
+      img: "assets/images/weather-app.png",
+    );
     return Row(
       children: [
         // Expanded(
         //   child: CustomSquarWidget(DummyHomeSquareItems[0]),
         // ),
         Expanded(
-          child: CustomSquarWidget(DummyHomeSquareItems[1]),
+          child: CustomSquarWidget(
+            item,
+          ),
         )
       ],
     );

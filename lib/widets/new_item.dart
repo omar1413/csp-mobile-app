@@ -20,10 +20,17 @@ class _NewItemState extends State<NewItem> {
   Color color = Colors.yellow;
   int x = 0;
 
-  late Timer t;
+  Timer? t;
   @override
   void initState() {
-    print("init");
+    print("state : init");
+    initTimer();
+    super.initState();
+  }
+
+  initTimer() {
+    t?.cancel();
+
     t = Timer.periodic(Duration(seconds: 5), (_) {
       setState(() {
         x++;
@@ -32,13 +39,12 @@ class _NewItemState extends State<NewItem> {
         }
       });
     });
-    super.initState();
   }
 
   @override
   void dispose() {
-    print("dispose");
-    t.cancel();
+    print("state : dispose");
+    t?.cancel();
     super.dispose();
   }
 

@@ -32,8 +32,11 @@ Future<List<Transaction>> getAllTransaction() async {
       print(allTransaction[0].amount);
       return allTransaction;
     }
+  } on TypeError catch (e) {
+    print(e.stackTrace);
   } catch (e) {
-    print(e);
+    print("transactio_api" + e.toString());
+    print(e.runtimeType);
     rethrow;
   }
   throw Exception();

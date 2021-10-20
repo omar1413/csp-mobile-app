@@ -1,0 +1,11 @@
+{id: 40, amount: 50, transactionType: {id: 2, code: RECHARGE, desc: شحن رصيد
+    }, account: {id: 7, createdBy: {id: 1, userName: csp, token: null, isCustomer: false, userCustomer: null, userEmployee: {fullName: CSP, title: null, office: {id: 1, name: قيادة الشركة
+                }
+            }
+        }, createdOn: 1633384800000, updatedBy: {id: 3, userName: amany, token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbWFueSIsImV4cCI6MTYzNDYzNzUyNywiaWF0IjoxNjM0NjMzOTI3fQ.SnuyhdkHq3tfyn4QR2xuuc5XeN3UfmqjbuC8B_7MK5_nXRVcac_GUnLz0hVUkIkZrzqYOV5X6symFDkvD5frJQ, isCustomer: true, userCustomer: {id: 3, password: a, email: amany@gmail.com, isFirstTime: true
+            }, userEmployee: null
+        }, updatedOn: 1634634406000, accountNumber: 123, accountYear: 2021, accountTypeLkp: {id: 2, desc: افراد, code: PERSON_ACCOUNT
+        }, isDeleted: false, person: null, company: null, isForeigner: false, accountNumberFormate: 123 / 0 / 2021
+    }, founderType: {id: 2, code: VODAFONE, desc:   فودافون كاش
+    }, toAccount: null, date: 1634549564000
+}

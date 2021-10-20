@@ -3,10 +3,12 @@ import 'dart:async';
 
 import 'package:csp_mobile_app/api/dashboard_api.dart';
 import 'package:csp_mobile_app/api/subscription_api.dart';
+import 'package:csp_mobile_app/api/wether_api.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
+import 'package:csp_mobile_app/models/weather_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_tabs.dart';
@@ -34,13 +36,13 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   StreamController<List<Subscription>?> subStream = StreamController();
 
   @override
   void initState() {
     loadFirstThreeSubscription();
-
+    WetherApi.getWetherData();
     super.initState();
   }
 
@@ -115,7 +117,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CustomTextLine(text: "الأخبار"),
                 News(),
-                CarouselSquare(),
+                FutureBuilder(
+                    future: WetherApi.getWetherData(),
+                    builder: (ctx, AsyncSnapshot<WeatherData> sn) {
+                      if (!sn.hasData || sn.data == null) {
+                        return Container();
+                      }
+
+                      if (sn.hasError) {
+                        return Container();
+                      }
+
+                      return CarouselSquare(
+                        weatherData: sn.data!,
+                      );
+                    }),
+
                 // CustomTextLine(text: "المعلومات"),
                 // CarouselSquare(),
                 CustomTextLine(text: "الخدمات"),

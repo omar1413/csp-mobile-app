@@ -1,4 +1,5 @@
 import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/models/User.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
@@ -267,11 +268,11 @@ class _LoginScreenState extends State<LoginScreen> {
         AuthApi.saveToken(response.body);
         Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
       } else {
-        errorMessage(context, "حدث خطأ ما اثناء تسجيل الدخول");
+        errorMessage(context, "بيانات غير صحيحه");
       }
     } catch (error) {
       print(error);
-      errorMessage(context, "حدث خطأ ما اثناء تسجيل الدخول");
+      errorMessage(context, BaseApi.handleError(error));
     } finally {
       hideProgressIndicator();
     }

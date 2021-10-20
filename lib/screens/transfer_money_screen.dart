@@ -31,26 +31,19 @@ class TransferMoenyScreen extends StatefulWidget {
 }
 
 class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
+  int amount = 0;
+  TextEditingController accountIdControll = TextEditingController();
+
+  _transfer() async {
+    account.id = int.parse(accountIdControll.value.text);
+    print(account.id.toString());
+    final transaction = Transaction(amount: amount, toAccount: account);
+    final response = await TransferApi.saveTransferTransaction(transaction);
+  }
+
+  Account account = new Account(id: 0); ////////graby t4ely de
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    TextEditingController accountIdControll = TextEditingController();
-    int amount = 0;
-
-    Account account = new Account(id: 0); ////////graby t4ely de
-
-    _transfer() async {
-      print("founderId:  " +
-          accountIdControll.value.text +
-          " amount: " +
-          amount.toString());
-      account.id = int.parse(accountIdControll.value.text);
-      print(account.id.toString());
-      final transaction = Transaction(amount: amount, toAccount: account);
-      final response = await TransferApi.saveTransferTransaction(transaction);
-    }
-
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

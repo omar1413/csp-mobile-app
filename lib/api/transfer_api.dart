@@ -13,10 +13,6 @@ import 'package:http/http.dart' as http;
 class TransferApi {
   static Future<Transaction> saveTransferTransaction(
       Transaction transaction) async {
-    print("amount: " +
-        transaction.amount.toString() +
-        " ID : " +
-        transaction.founder!.id.toString());
     Uri url = BaseApi.getApiUrl("/eWalletTransactions/transfer");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
 
@@ -30,12 +26,16 @@ class TransferApi {
       print(response.statusCode);
 
       Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
+      print(decodedJson);
       if (response.statusCode == 200) {
         return Transaction.fromJson(decodedJson["data"]);
       } else {
         String msg = decodedJson["message"];
         throw Exception(" status code ${response.statusCode} >> ${msg}");
       }
+    } on TypeError catch (e) {
+      print(e.stackTrace);
+      rethrow;
     } catch (e) {
       print(e);
       rethrow;

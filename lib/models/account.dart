@@ -8,7 +8,7 @@ class Account {
 
   Account.fromJson(Map? json)
       : id = json?["id"],
-        accountNumber = json?["accountNumber"] ?? "";
+        accountNumber = json?["accountNumber"] ?? 0;
 
   Map toJson() {
     return {

@@ -1,9 +1,11 @@
+import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/api/bundle_api.dart';
 import 'package:csp_mobile_app/api/subscription_api.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/Bundle.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/vehicle.dart';
+import 'package:csp_mobile_app/widets/bundle_info.dart';
 import 'package:csp_mobile_app/widets/custom_alert_dialog.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
 import 'package:csp_mobile_app/widets/custom_button.dart';
@@ -140,20 +142,16 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
+                            // Container(
+                            //   alignment: Alignment.centerRight,
+                            //   child: Text(
+                            //     'اسم الباقه',
+                            //     style: TextStyle(
+                            //         fontWeight: FontWeight.w500, fontSize: 16),
+                            //   ),
+                            // ),
                             Row(
                               children: [
-                                Flexible(
-                                  flex: 20,
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'اسم الباقه',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16),
-                                    ),
-                                  ),
-                                ),
                                 Flexible(
                                   flex: 80,
                                   child: Container(
@@ -186,6 +184,17 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                                                   },
                                       ),
                                     ),
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 20,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: InkWell(
+                                        onTap: () {
+                                          showBundleinfo(selectedValue);
+                                        },
+                                        child: Icon(Icons.info)),
                                   ),
                                 ),
                               ],
@@ -377,7 +386,7 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
 
       Navigator.pop(context);
     } catch (e) {
-      errorMessage(context, "عذرا حدث خطأ اثناء الاشتراك");
+      errorMessage(context, BaseApi.handleError(e));
     }
 
     _hideProgress();
@@ -401,5 +410,20 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
     final String formattedDate = formatter.format(date);
     final DateTime formatted = formatter.parse(formattedDate);
     return formatted;
+  }
+
+  showBundleinfo(Bundle bundle) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            scrollable: true,
+            backgroundColor: Colors.transparent,
+            content: BundleInfo(
+              bundle: bundle,
+            ),
+          );
+        });
   }
 }
