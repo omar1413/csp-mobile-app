@@ -14,9 +14,9 @@ class TransactionIteam extends StatelessWidget {
 
   String _text(Transaction transaction) {
     if (transaction.transactionType!.code.toString() == "RECHARGE")
-      return "عن طريق " + transaction.founder!.desc.toString();
+      return " عن طريق " + transaction.founder!.desc.toString();
     if (transaction.transactionType!.code.toString() == "TRANSFER")
-      return "لحساب رقم " + transaction.toAccount!.id.toString();
+      return " لحساب رقم " + transaction.toAccount!.id.toString();
     else
       return "";
   }
@@ -52,9 +52,9 @@ class TransactionIteam extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      "تم " +
+                      " تم " +
                           transaction.transactionType!.desc.toString() +
-                          "بقيمة " +
+                          " بقيمة " +
                           transaction.amount.toString(),
                       style: TextStyle(
                         fontSize: 14,

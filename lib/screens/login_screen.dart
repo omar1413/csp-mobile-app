@@ -11,6 +11,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 //import 'package:hospital_application/Widget/Animation.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/loginScreen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

@@ -2,7 +2,7 @@ import 'package:csp_mobile_app/widets/custom_radio_tile.dart';
 import 'package:flutter/material.dart';
 
 class RegisterContinueScreen extends StatefulWidget {
-  static const routeName = '/registrationScreen';
+  static const routeName = '/registrationcountinueScreen';
   @override
   _RegisterContinueScreenState createState() => _RegisterContinueScreenState();
 }
@@ -77,7 +77,7 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
                   ),
                 ),
                 Positioned(
-                  left: width * 0.68,
+                  left: width * 0.60,
                   top: height * 0.35,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
