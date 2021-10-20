@@ -80,7 +80,7 @@ class _SubscriptionsmanagementState extends State<Subscriptionsmanagement> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: vehicle != null
+        appBar: vehicle != null || widget.args.showAppBar
             ? customAppBar(title: "اداراة الاشتراكات ", context: context)
             : null,
         body: PagedListView<int, Subscription>(

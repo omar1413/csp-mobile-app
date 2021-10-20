@@ -8,6 +8,7 @@ import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_data.dart';
+import 'package:csp_mobile_app/models/subscriptions_management_data_arg.dart';
 import 'package:csp_mobile_app/models/weather_data.dart';
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
@@ -189,7 +190,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               CustomTextLine(text: "الاشتراكات"),
                               CustomTextButton(
                                   str: "عرض الكل",
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context,
+                                        Subscriptionsmanagement.routeName,
+                                        arguments: SubscriptionsmanagementArg(
+                                            getAllSubscriptions: DashboardApi
+                                                .getfirstThreeSupscription,
+                                            showAppBar: true));
+                                  },
                                   size: 16,
                                   color: Colors.green,
                                   td: TextDecoration.none)
