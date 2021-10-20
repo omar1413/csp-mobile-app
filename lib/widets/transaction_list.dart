@@ -12,7 +12,7 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 190,
       child: FutureBuilder<List<Transaction>>(
-        future: getAllTransaction(),
+        future: getAllTransaction(pageNo: 0, pageSize: 10),
         builder:
             (BuildContext context, AsyncSnapshot<List<Transaction>> snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {

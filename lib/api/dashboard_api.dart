@@ -68,8 +68,10 @@ class DashboardApi {
     }
   }
 
-  static Future<List<Subscription>> getfirstThreeSupscription() async {
-    Uri url = BaseApi.getApiUrl("/dashboard/firsThreetSubscriptionsToEnd");
+  static Future<List<Subscription>> getfirstThreeSupscription(
+      {int pageNo = 0, int pageSize = 3}) async {
+    Uri url = BaseApi.getApiUrl(
+        "/dashboard/firsThreetSubscriptionsToEnd/${pageNo}/${pageSize}");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
     try {
       final response = await http.get(

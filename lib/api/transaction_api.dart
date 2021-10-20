@@ -8,8 +8,9 @@ import 'dart:convert';
 
 import '../constant.dart';
 
-Future<List<Transaction>> getAllTransaction() async {
-  Uri url = BaseApi.getApiUrl("/eWalletTransactions");
+Future<List<Transaction>> getAllTransaction(
+    {required int pageNo, required int pageSize}) async {
+  Uri url = BaseApi.getApiUrl("/eWalletTransactions/${pageNo}/${pageSize}");
 
   kHostHeader.addAll({"Authorization": AuthApi.getToken()});
   try {
@@ -22,7 +23,7 @@ Future<List<Transaction>> getAllTransaction() async {
       Map jsonData = jsonDecode(utf8.decode(TransactionData.bodyBytes));
       print(jsonData["data"]);
       List<Transaction> allTransaction = [];
-      for (var transaction in jsonData["data"]) {
+      for (var transaction in jsonData["data"]["result"]) {
         print(transaction);
 
         allTransaction.add(Transaction.fromJson(transaction));

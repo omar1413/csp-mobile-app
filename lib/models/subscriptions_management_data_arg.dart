@@ -9,13 +9,18 @@ class SubscriptionsmanagementArg {
     int pageSize,
   })? getVehicleSubscriptions;
 
+  final bool showAppBar;
+
   final Future<List<Subscription>> Function({
     int pageNo,
     int pageSize,
   })? getAllSubscriptions;
 
   SubscriptionsmanagementArg(
-      {this.vehicle, this.getVehicleSubscriptions, this.getAllSubscriptions});
+      {this.vehicle,
+      this.getVehicleSubscriptions,
+      this.getAllSubscriptions,
+      this.showAppBar = false});
 
   Future<List<Subscription>> getSubscription({
     int pageNo = 0,
