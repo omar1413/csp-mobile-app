@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
-
-class UserCustomer {
+class Person {
   String? email;
   String? password;
   bool isFirstTime = true;
-  UserCustomer(this.email, this.password, this.isFirstTime);
+  Person(this.email, this.password, this.isFirstTime);
 
-  UserCustomer.fromJson(Map json)
+  Person.fromJson(Map json)
       : password = json["password"],
         email = json["email"],
         isFirstTime = json["isFirstTime"];

@@ -1,5 +1,6 @@
 import 'package:csp_mobile_app/api/transfer_api.dart';
 import 'package:csp_mobile_app/constant.dart';
+import 'package:csp_mobile_app/exception/validation_exception.dart';
 import 'package:csp_mobile_app/models/account.dart';
 import 'package:csp_mobile_app/models/founder.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
@@ -8,6 +9,7 @@ import 'package:csp_mobile_app/widets/custom_icon.dart';
 import 'package:csp_mobile_app/widets/custom_radio_tile.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:csp_mobile_app/widets/fancy_card.dart';
+import 'package:csp_mobile_app/widets/messages.dart';
 import 'package:csp_mobile_app/widets/service.dart';
 import 'package:csp_mobile_app/widets/square_item.dart';
 import 'package:flutter/material.dart';
@@ -34,16 +36,23 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
   int amount = 0;
   TextEditingController accountIdControll = TextEditingController();
 
-  _transfer() async {
-    account.id = int.parse(accountIdControll.value.text);
-    print(account.id.toString());
-    final transaction = Transaction(amount: amount, toAccount: account);
-    final response = await TransferApi.saveTransferTransaction(transaction);
+  _transfer(BuildContext ctx) async {
+    try {
+      validate();
+      account.id = int.parse(accountIdControll.value.text);
+      final transaction = Transaction(amount: amount, toAccount: account);
+      final response = await TransferApi.saveTransferTransaction(transaction);
+      successMessage(ctx, "تم التحويل بنجاح ");
+    } on ValidationException catch (e) {
+      errorMessage(ctx, e.msg);
+    } catch (e) {
+      errorMessage(ctx, "فشل التحويل");
+    }
   }
 
   Account account = new Account(id: 0); ////////graby t4ely de
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -160,7 +169,7 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                                         color: kwhite,
                                         onPress: () {
                                           setState(() {
-                                            amount++;
+                                            amount += 10;
                                           });
                                         },
                                       ),
@@ -182,7 +191,7 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
               width: double.infinity,
               child: FlatButton(
                 onPressed: () {
-                  _transfer();
+                  _transfer(context);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
@@ -243,5 +252,14 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
           ),
         ),
         onChanged: onChanged);
+  }
+
+  void validate() {
+    if (accountIdControll.value.text.isEmpty) {
+      throw const ValidationException("ادخل رقم الحساب");
+    }
+    if (amount < 50) {
+      throw const ValidationException("يجب ان لا بقل المبلغ عن 50 جنيها ");
+    }
   }
 }

@@ -7,6 +7,8 @@ import 'package:csp_mobile_app/models/recharge.dart';
 
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/transaction_data.dart';
+import 'package:csp_mobile_app/widets/messages.dart';
+import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
@@ -37,7 +39,7 @@ class TransferApi {
       print(e.stackTrace);
       rethrow;
     } catch (e) {
-      print(e);
+      print(e.runtimeType);
       rethrow;
     }
   }
