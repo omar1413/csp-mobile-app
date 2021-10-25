@@ -1,5 +1,7 @@
+import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/api/transaction_api.dart';
 import 'package:csp_mobile_app/constant.dart';
+import 'package:csp_mobile_app/exception/validation_exception.dart';
 import 'package:csp_mobile_app/models/founder.dart';
 
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
@@ -7,6 +9,7 @@ import 'package:csp_mobile_app/widets/custom_icon.dart';
 import 'package:csp_mobile_app/widets/custom_radio_tile.dart';
 import 'package:csp_mobile_app/widets/custom_text_line.dart';
 import 'package:csp_mobile_app/widets/fancy_card.dart';
+import 'package:csp_mobile_app/widets/messages.dart';
 import '../api/rechargr_api.dart';
 import 'package:flutter/material.dart';
 
@@ -31,11 +34,19 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
   int? founderId;
   Founder founder = Founder(id: 0);
 
-  _recharge() async {
-    founder.id = founderId;
-    final transaction = Transaction(amount: amount, founder: founder);
-    print("ddddddddddddddddddddddd");
-    final response = await RechargeAPI.saveRechargeTransaction(transaction);
+  _recharge(BuildContext ctx) async {
+    try {
+      validate();
+      founder.id = founderId;
+      final transaction = Transaction(amount: amount, founder: founder);
+      final response = await RechargeAPI.saveRechargeTransaction(transaction);
+      successMessage(ctx, "تم شحن الرصيد  ");
+      Navigator.pop(ctx);
+    } on ValidationException catch (e) {
+      errorMessage(ctx, e.msg);
+    } catch (e) {
+      errorMessage(ctx, "فشل شحن الرصيد");
+    }
   }
 
   @override
@@ -68,11 +79,11 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                CustomText("اسم المستخدم", FontWeight.normal,
+                                CustomText(AuthApi.userName, FontWeight.normal,
                                     Colors.white70, 16),
                                 SizedBox(height: 5),
-                                CustomText("RFIO 10002248900",
-                                    FontWeight.normal, Colors.white70, 14),
+                                //CustomText("RFIO 10002248900",
+                                //  FontWeight.normal, Colors.white70, 14),
                               ],
                             ),
                             Row(
@@ -165,7 +176,7 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                       width: double.infinity,
                       child: FlatButton(
                         onPressed: () {
-                          _recharge();
+                          _recharge(context);
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
@@ -207,6 +218,15 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
         ),
       ),
     );
+  }
+
+  void validate() {
+    if (founderId == null) {
+      throw const ValidationException("من فضلك اختر طريقة الدفع ");
+    }
+    if (amount < 50) {
+      throw const ValidationException("يجب ان لا بقل المبلغ عن 50 جنيها ");
+    }
   }
 
   Widget _radioTile<T>({

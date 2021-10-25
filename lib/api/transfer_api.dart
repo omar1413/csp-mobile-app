@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/constant.dart';
+import 'package:csp_mobile_app/models/account.dart';
 import 'package:csp_mobile_app/models/recharge.dart';
 
 import 'package:csp_mobile_app/models/subscription.dart';
@@ -13,8 +14,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class TransferApi {
-  static Future<Transaction> saveTransferTransaction(
-      Transaction transaction) async {
+  static Future<bool> saveTransferTransaction(Transaction transaction) async {
     Uri url = BaseApi.getApiUrl("/eWalletTransactions/transfer");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
 
@@ -26,11 +26,10 @@ class TransferApi {
         headers: kHostHeader,
       );
       print(response.statusCode);
-
       Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       print(decodedJson);
       if (response.statusCode == 200) {
-        return Transaction.fromJson(decodedJson["data"]);
+        return decodedJson["success"];
       } else {
         String msg = decodedJson["message"];
         throw Exception(" status code ${response.statusCode} >> ${msg}");
@@ -42,5 +41,36 @@ class TransferApi {
       print(e.runtimeType);
       rethrow;
     }
+  }
+
+  static Future<Account> gitAccountByAccNumber(
+      int number, int year, int type) async {
+    Uri url = BaseApi.getApiUrl(
+        "/account/findByAccountNumber/${number}/${year}/${type}");
+    kHostHeader.addAll({"Authorization": AuthApi.getToken()});
+
+    try {
+      final account = await http.get(
+        url,
+        headers: kHostHeader,
+      );
+
+      print(account.statusCode);
+      Account acc;
+      if (account.statusCode == 200) {
+        Map jsonData = jsonDecode(utf8.decode(account.bodyBytes));
+        print(jsonData["data"]);
+        acc = Account.fromJson(jsonData["data"]);
+
+        return acc;
+      }
+    } on TypeError catch (e) {
+      print(e.stackTrace);
+    } catch (e) {
+      print("transactio_api" + e.toString());
+      print(e.runtimeType);
+      rethrow;
+    }
+    throw Exception();
   }
 }

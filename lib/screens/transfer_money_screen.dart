@@ -34,15 +34,23 @@ class TransferMoenyScreen extends StatefulWidget {
 
 class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
   int amount = 0;
-  TextEditingController accountIdControll = TextEditingController();
+  TextEditingController numberControll = TextEditingController();
+  TextEditingController yearControll = TextEditingController();
+  TextEditingController typeControll = TextEditingController();
 
   _transfer(BuildContext ctx) async {
     try {
       validate();
-      account.id = int.parse(accountIdControll.value.text);
+
+      final account = await TransferApi.gitAccountByAccNumber(
+          int.parse(numberControll.value.text),
+          int.parse(yearControll.value.text),
+          int.parse(typeControll.value.text));
+
       final transaction = Transaction(amount: amount, toAccount: account);
       final response = await TransferApi.saveTransferTransaction(transaction);
       successMessage(ctx, "تم التحويل بنجاح ");
+      Navigator.pop(ctx);
     } on ValidationException catch (e) {
       errorMessage(ctx, e.msg);
     } catch (e) {
@@ -70,7 +78,7 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                         const SizedBox(
                           height: 25,
                         ),
-                        CustomTextLine(text: "طريقه التحويل"),
+
                         /* CustomRadioTile(
                           groupValue: accountId,
                           onChanged: (selected) {
@@ -81,8 +89,19 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
                           value: "a",
                           text: Text("رقم الحساب"),
                         ),*/
-                        _textField(
-                            "ادخل رقم الحساب", context, accountIdControll),
+                        CustomTextLine(text: "ادخل رقم الحساب"),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              _textField("الرقم", context, numberControll),
+                              _textField("السنة", context, yearControll),
+                              _textField("النوع", context, typeControll)
+                            ],
+                          ),
+                        ),
+
                         // CustomRadioTile(
                         //   groupValue: _character,
                         //   onChanged: (String? v) {
@@ -213,10 +232,10 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
       String lbl, BuildContext context, TextEditingController controller) {
     return Container(
       height: 40,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      width: 100,
+      //margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: TextField(
         controller: controller,
-        // textDirection:TextDirection.rtl ,
         cursorColor: Colors.grey,
         decoration: InputDecoration(
           hintText: lbl,
@@ -255,11 +274,21 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
   }
 
   void validate() {
-    if (accountIdControll.value.text.isEmpty) {
-      throw const ValidationException("ادخل رقم الحساب");
+    if (numberControll.value.text.isEmpty ||
+        yearControll.value.text.isEmpty ||
+        typeControll.value.text.isEmpty) {
+      throw const ValidationException("  رقم الحساب غير صحيح");
     }
     if (amount < 50) {
       throw const ValidationException("يجب ان لا بقل المبلغ عن 50 جنيها ");
+    }
+  }
+
+  getAccount(BuildContext ctx) async {
+    try {} on ValidationException catch (e) {
+      errorMessage(ctx, e.msg);
+    } catch (e) {
+      errorMessage(ctx, "رقم  حساب غير صحيح");
     }
   }
 }

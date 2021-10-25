@@ -29,6 +29,7 @@ class CarouselCircleState extends State<CarouselCircle> {
       subtitle: "رصيدك الحالى",
       type: "ج.م",
       amount: 0,
+      max: 100000,
       color: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
       img: "",
       future: DashboardApi.getWalletAmount,
@@ -39,6 +40,7 @@ class CarouselCircleState extends State<CarouselCircle> {
       subtitle: " عدد الاشتراكات ",
       type: "اشتراك ",
       amount: 2,
+      max: 30,
       color: Colors.orange,
       img: "",
       future: DashboardApi.getSubscriptionCount,
@@ -49,6 +51,7 @@ class CarouselCircleState extends State<CarouselCircle> {
       subtitle: " عدد المركبات",
       type: "مركبات",
       amount: 2,
+      max: 10,
       color: Colors.red,
       img: "",
       future: DashboardApi.getVehicleCount,
@@ -131,7 +134,7 @@ class CarouselCircleState extends State<CarouselCircle> {
             // height: MediaQuery.of(context).size.height*0.6,
             initialPage: 0,
             enlargeCenterPage: true,
-            autoPlay: false,
+            autoPlay: true,
             reverse: false,
             enableInfiniteScroll: true,
             autoPlayInterval: Duration(seconds: 3),
@@ -150,12 +153,15 @@ class CarouselCircleState extends State<CarouselCircle> {
                       }
                       if (sn.hasData && sn.data != null) {
                         item.amount = sn.data!;
-                        double max = item.amount.toDouble();
+                        double max = item.max!.toDouble();
                         if (item.max != null) {
                           max = item.max!;
                         }
                         if (item.amount <= 0) {
                           max = 100;
+                        }
+                        if (item.amount > max) {
+                          max = item.amount.toDouble();
                         }
                         return Cirular_slider(
                           item: item,

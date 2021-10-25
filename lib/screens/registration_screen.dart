@@ -1,5 +1,6 @@
 import 'package:csp_mobile_app/api/Registration_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
+import 'package:csp_mobile_app/exception/validation_exception.dart';
 import 'package:csp_mobile_app/models/registration.dart';
 import 'package:csp_mobile_app/models/user_customer.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
@@ -126,9 +127,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             width: width * 0.6,
             child: FlatButton(
               onPressed: () {
-                _registeration();
-                Navigator.of(context)
-                    .pushReplacementNamed(RegisterContinueScreen.routeName);
+                _registeration(context);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0)),
@@ -145,30 +144,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 
-  _registeration() async {
+  _registeration(BuildContext ctx) async {
     try {
+      validate(ctx);
       showProgressIndicator();
-      if (passcontroll.value.text != passConficontroll.value.text)
-        errorMessage(context, "اعد كتابة كلمة المرور ");
-      else {
-        final userCustomer = UserCustomer(
-          emailControll.value.text,
-          passcontroll.value.text,
-          true,
-        );
-        final registration = Registration(
-          userCustomer,
-          usernameControll.value.text,
-        );
-        final response = await RegistrationApi.saveUser(registration);
-        print("status code : ${response.statusCode}");
-        if (response.statusCode == 200)
-          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-        else
-          errorMessage(context, "بيانات غير صحيحه");
-      }
+
+      final userCustomer = UserCustomer(
+        emailControll.value.text,
+        passcontroll.value.text,
+        true,
+      );
+      final registration = Registration(
+        userCustomer,
+        usernameControll.value.text,
+      );
+      final response = await RegistrationApi.saveUser(registration);
+      print("status code : ${response.statusCode}");
+      if (response.statusCode == 200) {
+        successMessage(ctx, "تم انشاء الحساب");
+        Navigator.pop(ctx);
+      } else
+        errorMessage(ctx, "بيانات غير صحيحه");
     } catch (error) {
-      print(error);
       errorMessage(context, BaseApi.handleError(error));
     } finally {
       hideProgressIndicator();
@@ -200,5 +197,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     } else {
       return Container();
     }
+  }
+
+  void validate(BuildContext ctx) {
+    if (passcontroll.value.text != passConficontroll.value.text ||
+        passcontroll.value.text.isEmpty)
+      throw ValidationException("اعد كتابة كلمة المرور ");
+    if (emailControll.value.text.isEmpty ||
+        passcontroll.value.text.isEmpty ||
+        usernameControll.value.text.isEmpty)
+      throw ValidationException("من فضلك اكمل البيانات");
   }
 }

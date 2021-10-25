@@ -1,4 +1,5 @@
 import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -6,11 +7,8 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //height: 100,
-      //width:200,
-      //color: Colors.red,
-      child: Column(children: [
+    return Column(
+      children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -33,28 +31,37 @@ class ProfileWidget extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white70),
                 ),
-                Text(
-                  "RFID 10007763",
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal, color: Colors.white70),
-                ),
+                // Text(
+                //   "RFID 10007763",
+                //   style: TextStyle(
+                //       fontWeight: FontWeight.normal, color: Colors.white70),
+                // ),
               ],
             ),
             SizedBox(
               width: 150,
             ),
-            Icon(
-              Icons.notifications_active,
-              size: 20,
-              color: Colors.white54,
-            ),
+            RotatedBox(
+              quarterTurns: 2,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                      context, LoginScreen.routeName);
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  size: 20,
+                  color: Colors.white54,
+                ),
+              ),
+            )
           ],
         ),
         Divider(
           color: Colors.white,
           thickness: 0.5,
         )
-      ]),
+      ],
     );
   }
 }

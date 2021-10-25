@@ -3,6 +3,7 @@ import 'package:csp_mobile_app/api/transaction_api.dart';
 import 'package:flutter/material.dart';
 import '../models/transaction_data.dart';
 import './transaction_item.dart';
+import 'empty.dart';
 
 class TransactionList extends StatelessWidget {
   int? legnth;
@@ -17,9 +18,7 @@ class TransactionList extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<List<Transaction>> snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
             return Center(
-              child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
-              ),
+              child: EmptyWidget(text: "لا يوجد تعاملات "),
             );
           }
           transactions = snapshot.data!.reversed.toList();

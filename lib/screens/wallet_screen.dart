@@ -1,3 +1,5 @@
+import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/api/dashboard_api.dart';
 import 'package:csp_mobile_app/models/transaction_type.dart';
 import 'package:csp_mobile_app/screens/recharge_wallet_screen.dart';
 import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
@@ -29,6 +31,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   void initState() {
     TransactionList();
+
     super.initState();
   }
 
@@ -60,25 +63,35 @@ class _WalletScreenState extends State<WalletScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          CustomText("اسم المستخدم", FontWeight.normal,
+                          CustomText(AuthApi.userName, FontWeight.normal,
                               Colors.white70, 16),
                           SizedBox(height: 5),
-                          CustomText("RFIO 10002248900", FontWeight.normal,
-                              Colors.white70, 14),
+                          // CustomText("RFIO 10002248900", FontWeight.normal,
+                          //   Colors.white70, 14),
                         ],
                       ),
                       Align(
                         alignment: Alignment.center,
                         child: Container(
                           width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomText(
-                                  "140 ", FontWeight.normal, Colors.white, 26),
-                              CustomText(
-                                  "ج/م", FontWeight.normal, Colors.white, 18),
-                            ],
+                          child: FutureBuilder(
+                            future: DashboardApi.getWalletAmount(),
+                            builder: (ctx, AsyncSnapshot<int> sn) {
+                              if (sn.hasError ||
+                                  !sn.hasData ||
+                                  sn.data == null) {
+                                return Container();
+                              }
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomText(sn.data.toString(),
+                                      FontWeight.normal, Colors.white, 26),
+                                  CustomText("ج/م", FontWeight.normal,
+                                      Colors.white, 18),
+                                ],
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -93,18 +106,22 @@ class _WalletScreenState extends State<WalletScreen> {
                     id: "4",
                     title: "اعادة الشحن",
                     image: "assets/images/wallet-relaod.png",
-                    onPress: () {
-                      Navigator.pushNamed(
+                    onPress: () async {
+                      await Navigator.pushNamed(
                           context, RechargeWalletScreen.routeName);
+
+                      setState(() {});
                     },
                   ),
                   Service(
                     id: "5",
                     title: " تحويل رصيد",
                     image: "assets/images/payment-transfer.png",
-                    onPress: () {
-                      Navigator.pushNamed(
+                    onPress: () async {
+                      await Navigator.pushNamed(
                           context, TransferMoenyScreen.routeName);
+
+                      setState(() {});
                     },
                   )
                 ],

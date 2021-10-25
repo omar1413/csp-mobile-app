@@ -86,27 +86,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   child: Column(
                     children: [
-                      // Container(
-                      //   child: Image.asset('assets/images/login.png',
-                      //       fit: BoxFit.fill),
-                      //   height: height * 0.42,
-                      //   width: width,
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.green[700],
-                      //     borderRadius: BorderRadius.only(
-                      //       bottomLeft: Radius.circular(32.0),
-                      //       bottomRight: Radius.circular(32.0),
-                      //     ),
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //         color: Colors.grey.withOpacity(0.9),
-                      //         spreadRadius: 5,
-                      //         blurRadius: 7,
-                      //         offset: Offset(0, 3), // changes position of shadow
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       SizedBox(height: 20),
                       Container(child: ProfileWidget()),
                       Container(
@@ -147,10 +126,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           id: "2",
                           title: "ادارة الأشتراكات",
                           image: "assets/images/barcode.png",
-                          onPress: () {
-                            Navigator.of(context).pushNamed(
+                          onPress: () async {
+                            await Navigator.of(context).pushNamed(
                               SubscriptionTabs.routeName,
                             );
+                            setState(() {});
                           },
                         ),
                       ),
@@ -159,10 +139,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           id: "3",
                           title: "بيانات الطرق",
                           image: "assets/images/direction.png",
-                          onPress: () {
-                            Navigator.of(context).pushNamed(
+                          onPress: () async {
+                            await Navigator.of(context).pushNamed(
                               RoadData.routeName,
                             );
+                            setState(() {});
                           },
                         ),
                       ),
@@ -190,13 +171,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               CustomTextLine(text: "الاشتراكات"),
                               CustomTextButton(
                                   str: "عرض الكل",
-                                  onPressed: () {
-                                    Navigator.pushNamed(context,
+                                  onPressed: () async {
+                                    await Navigator.pushNamed(context,
                                         Subscriptionsmanagement.routeName,
                                         arguments: SubscriptionsmanagementArg(
                                             getAllSubscriptions: DashboardApi
                                                 .getfirstThreeSupscription,
                                             showAppBar: true));
+                                    setState(() {});
                                   },
                                   size: 16,
                                   color: Colors.green,

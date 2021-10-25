@@ -3,6 +3,7 @@ import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/models/User.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
+import 'package:csp_mobile_app/screens/registration_continue_screen.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
 import 'package:csp_mobile_app/widets/custom_alert_dialog.dart';
 import 'package:csp_mobile_app/widets/messages.dart';
@@ -266,8 +267,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
       print("status code : ${response.statusCode}");
       if (response.statusCode == 200) {
-        AuthApi.saveToken(response.body);
-        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+        if (AuthApi.saveToken(response.body)) {
+          Navigator.of(context).pushNamed(RegisterContinueScreen.routeName);
+        } else {
+          Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+        }
       } else {
         errorMessage(context, "بيانات غير صحيحه");
       }

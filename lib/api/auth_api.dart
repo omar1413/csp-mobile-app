@@ -11,6 +11,7 @@ import '../constant.dart';
 class AuthApi {
   static String _token = "";
   static String userName = "";
+  static bool isFirstTime = true;
 
   static Future<Response> login(User user) async {
     Uri url = BaseApi.getApiUrl("/auth/login");
@@ -28,10 +29,12 @@ class AuthApi {
     );
   }
 
-  static saveToken(String bodyJson) {
+  static bool saveToken(String bodyJson) {
     Map data = jsonDecode(bodyJson);
     _token = data["data"]["token"];
     userName = data["data"]["username"];
+    isFirstTime = data["data"]["isFirstTime"];
+    return isFirstTime;
   }
 
   static String getToken() {

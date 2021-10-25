@@ -23,7 +23,6 @@ class VehicleApi {
 
       if (response.statusCode == 200) {
         List<Vehicle> vehicles = [];
-
         Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]["result"]) {

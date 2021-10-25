@@ -18,7 +18,7 @@ Future<List<Transaction>> getAllTransaction(
       url,
       headers: kHostHeader,
     );
-    print("jjjjjjjjjjjjjjjjjjjjj");
+
     print(TransactionData.statusCode);
     if (TransactionData.statusCode == 200) {
       Map jsonData = jsonDecode(utf8.decode(TransactionData.bodyBytes));
@@ -28,8 +28,6 @@ Future<List<Transaction>> getAllTransaction(
         print(transaction);
 
         allTransaction.add(Transaction.fromJson(transaction));
-
-        print("Fffffffffffffffffffddddddff");
       }
       print(allTransaction[0].amount);
       return allTransaction;
