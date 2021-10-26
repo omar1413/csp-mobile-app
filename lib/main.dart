@@ -22,7 +22,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/registration_continue_screen.dart';
 import 'screens/subscription_data_screen.dart';
-import 'widets/carousel_circle_slider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 int? isviewed;
 
@@ -32,11 +33,20 @@ void main() async {
   ));
   WidgetsFlutterBinding.ensureInitialized();
 
+  await EasyLocalization.ensureInitialized();
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isviewed = prefs.getInt('onBoard');
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
-  runApp(MyApp());
+  runApp(
+    EasyLocalization(
+        supportedLocales: [Locale('ar'), Locale('en')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: Locale('en', 'US'),
+        child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,9 +55,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ColorScheme schema = Theme.of(context).colorScheme;
+    context.setLocale(Locale("ar"));
 
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: ThemeData(
         primaryColor: Color.fromRGBO(0x40, 0x91, 0x6C, 1.0),
         primaryColorDark: Color.fromRGBO(0x20, 0x49, 0x36, 1.0),
