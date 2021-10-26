@@ -209,12 +209,14 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                               readOnly: true,
                               onTap: readOnly ? null : showPicker,
                               textAlign: TextAlign.center,
+                              isPassword: false,
                             ),
                             CustomTextField(
                               readOnly: readOnly,
                               onChanged: (_) {
                                 _calculatePaidAmount();
                               },
+                              isPassword: false,
                               controller: periodInput,
                               error: periodInputError,
                               keyboardType: TextInputType.number,
@@ -226,6 +228,7 @@ class _SubscriptionDataScreenState extends State<SubscriptionDataScreen> {
                               str: "المدفوع",
                               readOnly: true,
                               textAlign: TextAlign.center,
+                              isPassword: false,
                             ),
                           ],
                         ),

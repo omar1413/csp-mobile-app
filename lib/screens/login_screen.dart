@@ -6,6 +6,8 @@ import 'package:csp_mobile_app/screens/home_screen.dart';
 import 'package:csp_mobile_app/screens/registration_continue_screen.dart';
 import 'package:csp_mobile_app/screens/registration_screen.dart';
 import 'package:csp_mobile_app/widets/custom_alert_dialog.dart';
+import 'package:csp_mobile_app/widets/custom_text_line.dart';
+import 'package:csp_mobile_app/widets/custom_textfiled.dart';
 import 'package:csp_mobile_app/widets/messages.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -31,12 +33,20 @@ Widget _text(String str) {
 }
 
 Widget _textField(
-    String str, BuildContext context, TextEditingController controller) {
+    String str,
+    BuildContext context,
+    TextEditingController controller,
+    TextInputType textInputType,
+    bool visibal) {
   return Container(
     height: 40,
     width: 300,
     margin: EdgeInsets.only(bottom: 10),
     child: TextField(
+      obscureText: visibal,
+      enableSuggestions: false,
+      autocorrect: false,
+      keyboardType: textInputType,
       controller: controller,
       textAlign: TextAlign.end,
       cursorColor: Colors.grey,
@@ -144,11 +154,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
-                    width: width * 0.9,
+                    width: width * 0.8,
                     child: Column(
                       children: [
-                        _textField("اسم المستخدم", context, usernameControll),
-                        _textField("كلمة المرور ", context, passcontroll),
+                        CustomTextField(
+                          str: "اسم المستخدم",
+                          isPassword: false,
+                          controller: usernameControll,
+                        ),
+                        CustomTextField(
+                          str: "كلمة المرور",
+                          isPassword: true,
+                          controller: passcontroll,
+                        ),
                         // _textBtn("هل نسيت كلمة المرور؟ ", () {}),
                         Container(
                           margin: EdgeInsets.all(10),
@@ -173,14 +191,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                              // IconButton(
-                              //   icon: const Icon(
-                              //     Icons.fingerprint,
-                              //     color: Colors.green,
-                              //   ),
-                              //   //color:Colors.,
-                              //   onPressed: () {},
-                              // ),
                             ],
                           ),
                         ),
@@ -190,11 +200,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _textBtn("هل انت مستخدم جديد؟", () {
+                              _textBtn("هل نسيت كلمةالمرور؟", () {}),
+                              _textBtn("انشاء حساب جديد ", () {
                                 Navigator.pushNamed(
                                     context, RegistrationScreen.routeName);
                               }),
-                              _textBtn("انشاء حساب جديد  ", () {}),
                               SizedBox(
                                 width: 10,
                               ),

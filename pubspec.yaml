@@ -54,6 +54,9 @@ dependencies:
   # geolocator: ^7.7.0
   location: ^4.3.0
   currency_icons: ^0.3.0
+  parse_server_sdk_flutter: ^3.1.0
+  flutter_email_sender: ^5.0.2
+
  
 dev_dependencies:
   flutter_test:

@@ -56,7 +56,6 @@ class MyApp extends StatelessWidget {
       home: OnBoard(),
       onGenerateRoute: (RouteSettings settings) {
         Map<String, WidgetBuilder> routes = {
-          LoginScreen.routeName: (ctx) => LoginScreen(),
           RegistrationScreen.routeName: (ctx) => RegistrationScreen(),
           RegisterContinueScreen.routeName: (ctx) => RegisterContinueScreen(),
           Vehiclemanagement.routeName: (ctx) => Vehiclemanagement(),

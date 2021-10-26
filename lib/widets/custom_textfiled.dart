@@ -13,52 +13,52 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool digitsOnly;
   final Function(String)? onChanged;
+  final bool isPassword;
 
-  CustomTextField({
-    required this.str,
-    this.controller,
-    this.readOnly = false,
-    this.onTap,
-    this.textAlign = TextAlign.end,
-    this.error = false,
-    this.keyboardType,
-    this.digitsOnly = false,
-    this.onChanged,
-  });
+  CustomTextField(
+      {required this.str,
+      this.controller,
+      this.readOnly = false,
+      this.onTap,
+      this.textAlign = TextAlign.end,
+      this.error = false,
+      this.keyboardType,
+      this.digitsOnly = false,
+      this.onChanged,
+      required this.isPassword});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kMidHeight,
+      height: 45,
       margin: EdgeInsets.only(bottom: 10),
       child: TextField(
         onChanged: onChanged,
         keyboardType: keyboardType,
         onTap: onTap,
+        obscureText: isPassword,
+        enableSuggestions: false,
+        autocorrect: false,
         readOnly: readOnly,
         controller: controller,
         inputFormatters: digitsOnly
             ? [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))]
             : null,
-        // textDirection:TextDirection.rtl ,
         textAlign: textAlign,
         cursorColor: Colors.grey,
         decoration: InputDecoration(
-          //icon: Icon(Icons.calendar_today),
           labelStyle: TextStyle(color: Colors.grey),
-
-          //focusColor: Theme.of(context).primaryColor,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: error ? Colors.red : Theme.of(context).primaryColor),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: error ? Colors.red : kgrey),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderRadius: BorderRadius.all(Radius.circular(30.0)),
           ),
           labelText: str,
         ),
