@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:csp_mobile_app/exception/validation_exception.dart';
 
 import '../constant.dart';
@@ -13,11 +14,9 @@ class BaseApi {
 
   static String handleError(Object e) {
     if (e is SocketException) {
-      return "تأكد من اتصالك بالانترنت ";
-    } else if (e is ValidationException) {
-      return e.msg;
+      return "SOCKET_ERROR".tr();
     } else {
-      return e.toString();
+      return e.toString().tr();
     }
 
     return "حدث خطأ  غير متوقع";

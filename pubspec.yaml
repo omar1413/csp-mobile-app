@@ -54,6 +54,8 @@ dependencies:
   # geolocator: ^7.7.0
   location: ^4.3.0
   currency_icons: ^0.3.0
+  easy_localization: ^3.0.0
+ 
  
 dev_dependencies:
   flutter_test:

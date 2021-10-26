@@ -1,0 +1,139 @@
+{
+    "rfid": {
+        "TAG_ID_NOT_FOUND": "لم يتم العثور على ملصق ",
+        "MORE_THAN_TAG_ID_FOUND": "تم العثور على اكثر من ملصق"
+    },
+    "account": {
+        "errors": {
+            "NATIONAL_ID": "الرقم القومي \n غير صحيح",
+            "PASSPORT_NUMBER": "رقم جواز السفر غير صحيح",
+            "FILL_ACCOUNT_DATA_FIRST": "يجب الانتهاء من تسجيل الحساب اولا"
+        }
+    },
+    "sidebar": {
+        "accounts": "ادارة الحساب",
+        "vehicle": "ادارة المركبات",
+        "registeration": "ادارة الاشتراكات",
+        "reports": "التقارير",
+        "administration": {
+            "main": "ادارة النظام",
+            "bundleSector": "إدارة أسعار الاشتراكات على القطاعات"
+        }
+    },
+    "alert": {
+        "titles": {
+            "error": "خطأ",
+            "success": "نجاح",
+            "warning": "تحذير"
+        },
+        "DEFUALT_ERROR_MESSAGE": "حدث خطأ فى النظام",
+        "DEFUALT_SUCCESS_MESSAGE": "تمت العملية بنجاح",
+        "DEFUALT_WARNING_MESSAGE": " البيانات المدخلة قد تكون غير صحيحة او غير مكتملة"
+    },
+    "errors": {
+        "SOCKET_ERROR":"تأكد من اتصالك بالانترنت ",
+        "INVALID_CREDENTIALS": "خطأ فى اسم المستخدم او كلمة المرور",
+        "TOKEN_IS_REQUIRED": "من فضلك قم بتسجيل الدخول",
+        "INVALID_TOKEN": "من فضلك قم بتسجيل الدخول",
+        "INVALID_TOKEN_signature": "من فضلك قم بتسجيل الدخول",
+        "EXPIRED_TOKEN": "تم انتهاء الجلسة من فضلك سجل الدخول مرة اخرى",
+        "UNSUPPORTED_TOKEN": "من فضلك قم بتسجيل الدخول",
+        "EMPTY_CLAIMS_TOKEN": "من فضلك قم بتسجيل الدخول",
+        "FORBIDDEN_TOKEN": "من فضلك قم بتسجيل الدخول",
+        "NOT_AUTHENTICATED": "من فضلك قم بتسجيل الدخول",
+        "ENTITY_IS_NOT_FOUND": "الكائن غير موجود",
+        "Only_images_are_supported": "لا يمكن رفع الملف المختار .. يمكن رفع الصور فقط",
+        "Cant_Preview_file": "لا يمكن استعراض الملف",
+        "REQUIRED_FIELD": "يجب ادخال هذا الحقل",
+        "MOBILE_NUMBER_INVALID": "رقم الموبيل غير صحيح يجب مراعاة ان يبدأ الرقم بـ(01) و مكون من 11 رقم",
+        "ROADS_IS_REQUIRED": "يجب ادخال طرق",
+        "DEDUCTED_BY_IS_REQUIRED": "يجب ادخال الامر بالخصم",
+        "SECTORS_IS_REQUIRED": "يجب ادخال قطاعات",
+        "PERSON_NAME_IS_REQUIRED": "يجب ادخال اسم المشترك",
+        "PERSON_NAME_IS_NOT_QUADRANT": "اسم المشترك ليس رباعى",
+        "DB": {
+            "companies_un": "السجل التجارى مسجل بالفعل",
+            "persons_mobile_un": "رقم الموبيل مسجل بالفعل",
+            "persons_name_un": "الاسم المستخدم مسجل بالفعل",
+            "persons_un": "الرقم القومى مسجل بالفعل",
+            "vehicles_un": "رقم اللوحات مسجل بالفعل",
+            "vehicles_tag_un": "رقم الملصق مسجل بالفعل ",
+            "vehicle_transactions_un": "رقم الايصال مسجل بالفعل",
+            "subscription_transactions_un": "رقم الايصال مسجل بالفعل",
+            "account_attachments_un": "الملف المراد رفعه موجود بالفعل",
+            "bundle_sectors_un": "القطاع المختار مسجل بالفعل على نفس الباقة",
+            "bundles_un": "كود الباقة مسجل بالفعل",
+            "bundle_name_un": "اسم الباقة مسجل بالفعل",
+            "offices_un": "اسم المكتب مسجل بالفعل",
+            "users_un": "اسم المستخدم مسجل بالفعل",
+            "persons__passport_un": "رقم جواز السفر مسجل بالفعل",
+            "vehicle_type_id\" of relation \"vehicles": "لم يتم أختيار نوع السيارة ",
+            "bundle_id\" of relation \"subscriptions": "لم يتم أختيار أسم الباقة "
+        },
+        "SUBSCRIPTION": {
+            "SUBSCRIPTION_PERIOD_NOT_VALID": "فترة الاشتراك يجب ان تكون ارقام فقط من 1 الى 12",
+            "SUBSCRIPTION_ALREADY_EXIST": "يوجد اشتراك بالفعل لنفس الباقة فى نفس الفترة الزمنية"
+        }
+    },
+    "primeng": {
+        "dayNames": [
+            "الاحد",
+            "الاثنين",
+            "الثلاثاء",
+            "الاربعاء",
+            "الخميس",
+            "الجمعة",
+            "السبت"
+        ],
+        "dayNamesShort": [
+            "الاحد",
+            "الاثنين",
+            "الثلاثاء",
+            "الاربعاء",
+            "الخميس",
+            "الجمعة",
+            "السبت"
+        ],
+        "dayNamesMin": [
+            "الاحد",
+            "الاثنين",
+            "الثلاثاء",
+            "الاربعاء",
+            "الخميس",
+            "الجمعة",
+            "السبت"
+        ],
+        "monthNames": [
+            "يناير",
+            "فبراير ",
+            "مارس",
+            "أبريل",
+            "مايو",
+            "يونيو",
+            "يوليو",
+            "أغسطس",
+            "سبتمبر",
+            "أكتوبر",
+            "نوفمبر",
+            "ديسمبر"
+        ],
+        "monthNamesShort": [
+            "يناير",
+            "فبراير ",
+            "مارس",
+            "أبريل",
+            "مايو",
+            "يونيو",
+            "يوليو",
+            "أغسطس",
+            "سبتمبر",
+            "أكتوبر",
+            "نوفمبر",
+            "ديسمبر"
+        ],
+        "today": "اليوم",
+        "weekHeader": "الاسبوع"
+    },
+    "SUBSCRIPTION_PERIOD_NOT_VALID": "فترة الاشتراك يجب ان تكون ارقام فقط من 1 الى 12",
+    "SUBSCRIPTION_ALREADY_EXIST": "يوجد اشتراك بالفعل لنفس الباقة فى نفس الفترة الزمنية"
+}

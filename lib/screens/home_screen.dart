@@ -2,28 +2,28 @@
 import 'dart:async';
 
 import 'package:csp_mobile_app/api/dashboard_api.dart';
-import 'package:csp_mobile_app/api/subscription_api.dart';
+
 import 'package:csp_mobile_app/api/wether_api.dart';
-import 'package:csp_mobile_app/constant.dart';
-import 'package:csp_mobile_app/models/news_data.dart';
+
 import 'package:csp_mobile_app/models/subscription.dart';
-import 'package:csp_mobile_app/models/subscriptions_data.dart';
+
 import 'package:csp_mobile_app/models/subscriptions_management_data_arg.dart';
 import 'package:csp_mobile_app/models/weather_data.dart';
+
 import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_tabs.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
-import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
-import 'package:csp_mobile_app/screens/vehicle_management_screen.dart';
+
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
 import 'package:csp_mobile_app/widets/custom_textButton.dart';
-import 'package:csp_mobile_app/widets/new_item.dart';
+
 import 'package:csp_mobile_app/widets/news_list.dart';
 import 'package:csp_mobile_app/widets/profile.dart';
 import 'package:csp_mobile_app/widets/service.dart';
 import 'package:csp_mobile_app/widets/subscripe_item.dart';
+import 'package:easy_localization/easy_localization.dart' as bundle;
 import 'package:flutter/material.dart';
 
 import '../widets/profile.dart';
@@ -95,7 +95,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ],
                   ),
                 ),
-                CustomTextLine(text: "الأخبار"),
+                CustomTextLine(text: bundle.tr("news")),
+
                 News(),
                 FutureBuilder(
                     future: WetherApi.getWetherData(),

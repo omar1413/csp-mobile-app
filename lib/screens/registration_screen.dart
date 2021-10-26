@@ -1,4 +1,4 @@
-import 'package:csp_mobile_app/api/Registration_api.dart';
+import 'package:csp_mobile_app/api/registration_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/exception/validation_exception.dart';
 import 'package:csp_mobile_app/models/registration.dart';
