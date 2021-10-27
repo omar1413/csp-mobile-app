@@ -85,6 +85,7 @@ class MyApp extends StatelessWidget {
               ),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
           SubscriptionTabs.routeName: (ctx) => SubscriptionTabs(),
+          LoginScreen.routeName: (ctx) => LoginScreen(),
         };
         WidgetBuilder builder = routes[settings.name]!;
         return MaterialPageRoute(builder: (ctx) => builder(ctx));

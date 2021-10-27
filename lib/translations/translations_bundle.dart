@@ -5,7 +5,15 @@ String translate(String? msg) {
 
   transalatedMsg = msg?.tr();
 
-  if (msg == transalatedMsg || transalatedMsg == null) {
+  if (msg != null && transalatedMsg == msg) {
+    String newMsg = "errors." + msg;
+    transalatedMsg = newMsg.tr();
+    if (transalatedMsg == newMsg) {
+      transalatedMsg = msg;
+    }
+  }
+
+  if (transalatedMsg == null) {
     transalatedMsg = "GENERAL_ERROR".tr();
   }
 

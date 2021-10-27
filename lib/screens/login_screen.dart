@@ -279,7 +279,8 @@ class _LoginScreenState extends State<LoginScreen> {
       if (userResponse.isFirstTime ?? false) {
         Navigator.of(context).pushNamed(RegisterContinueScreen.routeName);
       } else {
-        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(MainScreen.routeName, (_) => false);
       }
     } catch (error) {
       errorMessage(context, BaseApi.handleError(error));

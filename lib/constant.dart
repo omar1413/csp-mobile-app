@@ -1,3 +1,4 @@
+import 'package:csp_mobile_app/translations/translations_bundle.dart';
 import 'package:flutter/material.dart';
 
 const Color kblue = Color(0xFF4756DF);
@@ -13,8 +14,10 @@ const double kNavBarHeight = 50;
 
 //const String kHost = "192.168.1.108:8098";
 // const String kHost = "10.1.2.159:8098";
-const String kHost = "10.3.1.229:8098";
+// const String kHost = "10.3.1.229:8098";
+// const String kHost = "192.168.1.5";
 //const String kHost = "10.1.2.159:8099";
+String kHost = translate("connection.ip");
 const String kPrefixHost = "/csp/portal";
 
 Map<String, String> kHostHeader = {

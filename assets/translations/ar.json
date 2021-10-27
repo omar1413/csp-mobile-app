@@ -1,4 +1,7 @@
 {
+    "connection": {
+        "ip": "10.3.1.229:8098"
+    },
     "news": "الاخبار",
     "rfid": {
         "TAG_ID_NOT_FOUND": "لم يتم العثور على ملصق ",
@@ -42,7 +45,7 @@
         "EMPTY_CLAIMS_TOKEN": "من فضلك قم بتسجيل الدخول",
         "FORBIDDEN_TOKEN": "من فضلك قم بتسجيل الدخول",
         "NOT_AUTHENTICATED": "من فضلك قم بتسجيل الدخول",
-        "ENTITY_IS_NOT_FOUND": "الكائن غير موجود",
+        "ENTITY_IS_NOT_FOUND": "البيانات غير موجوده",
         "Only_images_are_supported": "لا يمكن رفع الملف المختار .. يمكن رفع الصور فقط",
         "Cant_Preview_file": "لا يمكن استعراض الملف",
         "REQUIRED_FIELD": "يجب ادخال هذا الحقل",
@@ -52,6 +55,9 @@
         "SECTORS_IS_REQUIRED": "يجب ادخال قطاعات",
         "PERSON_NAME_IS_REQUIRED": "يجب ادخال اسم المشترك",
         "PERSON_NAME_IS_NOT_QUADRANT": "اسم المشترك ليس رباعى",
+        "SUBSCRIPTION_PERIOD_NOT_VALID": "فترة الاشتراك يجب ان تكون ارقام فقط من 1 الى 12",
+        "SUBSCRIPTION_ALREADY_EXIST": "يوجد اشتراك بالفعل لنفس الباقة فى نفس الفترة الزمنية",
+        "GENERAL_ERROR": "خطأ بالنظام",
         "DB": {
             "companies_un": "السجل التجارى مسجل بالفعل",
             "persons_mobile_un": "رقم الموبيل مسجل بالفعل",

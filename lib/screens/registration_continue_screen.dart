@@ -302,7 +302,8 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
       final response = await RegistrationApi.saveContinueRegistration(account);
       print("status code : ${response.statusCode}");
       if (response.statusCode == 200) {
-        Navigator.of(ctx).pushReplacementNamed(MainScreen.routeName);
+        Navigator.of(ctx)
+            .pushNamedAndRemoveUntil(MainScreen.routeName, (_) => false);
         successMessage(ctx, "تم استكمال بيانات الحساب");
       } else
         errorMessage(ctx, "بيانات غير صحيحه");
