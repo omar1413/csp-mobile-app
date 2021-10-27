@@ -1,17 +1,16 @@
 import 'package:bubble/bubble.dart';
-import 'package:chat_bubbles/chat_bubbles.dart';
+
+import 'package:csp_mobile_app/api/chatBot_api.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/models/clickable_bubble.dart';
 import 'package:csp_mobile_app/widets/custom_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
-  final ChatModel chatModel;
-
   ChatScreen({
     Key? key,
-    required this.chatModel,
   }) : super(key: key);
 
   @override
@@ -20,8 +19,8 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   // AudioPlayer audioPlayer = new AudioPlayer();
-  late Map<String, String> data;
-  late List<Widget> dataList;
+  Map<String, String> data = {};
+  List<Widget> dataList = [];
   Duration duration = new Duration();
   Duration position = new Duration();
   bool isPlaying = false;
@@ -29,21 +28,45 @@ class _ChatScreenState extends State<ChatScreen> {
   bool isPause = false;
   ScrollController _scrollController = ScrollController();
   bool _needsScroll = false;
-
+  String lastElement = "";
   _scrollToEnd() async {
     _scrollController.animateTo(_scrollController.position.maxScrollExtent,
         duration: Duration(milliseconds: 1000), curve: Curves.easeIn);
   }
 
+  void setQuistions() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
+      try {
+        final list = await getchatbot();
+        lastElement = list[list.length - 1].question;
+
+        print(list.length);
+        for (var i = 0; i < list.length; i++) {
+          var e = list[i];
+          data[e.question] = e.answer;
+        }
+
+        dataList = data.entries.map(
+          (entry) {
+            if (lastElement == entry.key) {
+              return _senderWidget(entry, nip: true, clickable: true);
+            }
+            return _senderWidget(entry, clickable: true);
+          },
+        ).toList();
+        print(data);
+        setState(() {});
+      } catch (e) {
+        print(e);
+      }
+    });
+  }
+
   @override
   void initState() {
-    data = widget.chatModel.questions;
-    dataList = data.entries.map((entry) {
-      if (widget.chatModel.lastElement == entry.key) {
-        return _senderWidget(entry, nip: true, clickable: true);
-      }
-      return _senderWidget(entry, clickable: true);
-    }).toList();
+    //data = widget.chatModel.questions;
+    setQuistions();
+
     super.initState();
   }
 
@@ -92,7 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ...tempData,
                 _replyWidget(e.value),
                 ...data.entries.map((entry) {
-                  if (widget.chatModel.lastElement == entry.key) {
+                  if (lastElement == entry.key) {
                     return _senderWidget(entry, nip: true, clickable: true);
                   }
                   return _senderWidget(entry, clickable: true);

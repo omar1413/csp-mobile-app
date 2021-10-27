@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, Object>> screensList = [
-      {'page': ChatScreen(chatModel: ChatModel()), 'title': 'مساعدة'},
+      {'page': ChatScreen(), 'title': 'مساعدة'},
       {
         'page': HomeScreen(
           selectedPage: (int val) => setState(

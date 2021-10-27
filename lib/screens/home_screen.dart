@@ -14,6 +14,7 @@ import 'package:csp_mobile_app/screens/road_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_data_screen.dart';
 import 'package:csp_mobile_app/screens/subscription_tabs.dart';
 import 'package:csp_mobile_app/screens/subscriptions_management_screen.dart';
+import 'package:csp_mobile_app/translations/translations_bundle.dart';
 
 import 'package:csp_mobile_app/widets/carousel_circle_slider.dart';
 import 'package:csp_mobile_app/widets/carousel_square_slider.dart';
@@ -95,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ],
                   ),
                 ),
-                CustomTextLine(text: bundle.tr("news")),
+                CustomTextLine(text: translate("news")),
 
                 News(),
                 FutureBuilder(
