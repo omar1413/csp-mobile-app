@@ -1,4 +1,5 @@
 import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/api/transaction_api.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/exception/validation_exception.dart';
@@ -42,10 +43,8 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
       final response = await RechargeAPI.saveRechargeTransaction(transaction);
       successMessage(ctx, "تم شحن الرصيد  ");
       Navigator.pop(ctx);
-    } on ValidationException catch (e) {
-      errorMessage(ctx, e.msg);
     } catch (e) {
-      errorMessage(ctx, "فشل شحن الرصيد");
+      errorMessage(ctx, BaseApi.handleError(e));
     }
   }
 
@@ -79,8 +78,8 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                CustomText(AuthApi.userName, FontWeight.normal,
-                                    Colors.white70, 16),
+                                CustomText(AuthApi.authedUser?.username ?? "",
+                                    FontWeight.normal, Colors.white70, 16),
                                 SizedBox(height: 5),
                                 //CustomText("RFIO 10002248900",
                                 //  FontWeight.normal, Colors.white70, 14),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/vehicle.dart';
 import 'package:csp_mobile_app/models/weather_data.dart';
@@ -35,7 +36,8 @@ class WetherApi {
       if (response.statusCode == 200) {
         return WeatherData.fromJson(body);
       }
-      throw Exception("status code ${response.statusCode}");
+      throw GeneralException(body["message"]);
+      // throw Exception("status code ${response.statusCode}");
     } catch (e) {
       print(e);
       rethrow;

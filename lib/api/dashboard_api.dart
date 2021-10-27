@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/User.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 
@@ -24,7 +25,8 @@ class DashboardApi {
         return body["data"];
       }
       String msg = body["message"];
-      throw Exception("status code ${response.statusCode} with msg ${msg}");
+      throw GeneralException(body["message"]);
+      // throw Exception("status code ${response.statusCode} with msg ${msg}");
     } catch (e) {
       rethrow;
     }
@@ -43,7 +45,8 @@ class DashboardApi {
         return body["data"];
       }
       String msg = body["message"];
-      throw Exception("status code ${response.statusCode} with msg ${msg}");
+      throw GeneralException(body["message"]);
+      //throw Exception("status code ${response.statusCode} with msg ${msg}");
     } catch (e) {
       rethrow;
     }
@@ -62,7 +65,8 @@ class DashboardApi {
         return body["data"];
       }
       String msg = body["message"];
-      throw Exception("status code ${response.statusCode} with msg ${msg}");
+      throw GeneralException(body["message"]);
+      //throw Exception("status code ${response.statusCode} with msg ${msg}");
     } catch (e) {
       rethrow;
     }
@@ -78,10 +82,9 @@ class DashboardApi {
         url,
         headers: kHostHeader,
       );
+      Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       if (response.statusCode == 200) {
         List<Subscription> subs = [];
-
-        Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]) {
           subs.add(Subscription.fromJson(m));
@@ -89,8 +92,9 @@ class DashboardApi {
 
         return subs;
       } else {
-        throw Exception(
-            "getfirstThreeSupscription status code ${response.statusCode}");
+        throw GeneralException(decodedJson["message"]);
+        // throw Exception(
+        //     "getfirstThreeSupscription status code ${response.statusCode}");
       }
     } catch (e) {
       rethrow;

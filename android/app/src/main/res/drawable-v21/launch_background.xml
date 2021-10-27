@@ -11,9 +11,19 @@
     </item>
 
 
-     <item>
+     <!-- <item>
         <bitmap
             android:gravity="center"
             android:src="@drawable/logo" />
-   </item>
+   </item> -->
+
+    
+        <item
+            android:width="200dp"
+            android:height="200dp"
+            android:drawable="@drawable/logo"
+            android:gravity="center"/>
+            
+       
+  
 </layer-list>

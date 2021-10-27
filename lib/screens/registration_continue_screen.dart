@@ -307,7 +307,6 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
       } else
         errorMessage(ctx, "بيانات غير صحيحه");
     } catch (error) {
-      print(error);
       errorMessage(ctx, BaseApi.handleError(error));
     } finally {
       hideProgressIndicator();

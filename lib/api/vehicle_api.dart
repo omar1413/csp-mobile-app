@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/vehicle.dart';
 
@@ -20,10 +21,9 @@ class VehicleApi {
         url,
         headers: kHostHeader,
       );
-
+      Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       if (response.statusCode == 200) {
         List<Vehicle> vehicles = [];
-        Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]["result"]) {
           vehicles.add(Vehicle.fromJson(m));
@@ -31,8 +31,9 @@ class VehicleApi {
 
         return vehicles;
       } else {
-        throw Exception(
-            "getfirstThreeSupscription status code ${response.statusCode}");
+        throw GeneralException(decodedJson["message"]);
+        // throw Exception(
+        //     "getfirstThreeSupscription status code ${response.statusCode}");
       }
     } catch (e) {
       rethrow;

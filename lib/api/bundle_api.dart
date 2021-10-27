@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/Bundle.dart';
 import 'package:csp_mobile_app/models/sector.dart';
 
@@ -20,11 +21,9 @@ class BundleApi {
         url,
         headers: kHostHeader,
       );
-
+      Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       if (response.statusCode == 200) {
         List<Bundle> bundels = [];
-
-        Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]) {
           bundels.add(Bundle.fromJson(m));
@@ -32,7 +31,8 @@ class BundleApi {
 
         return bundels;
       } else {
-        throw Exception("bundleLkp status code ${response.statusCode}");
+        throw GeneralException(decodedJson["message"]);
+        // throw Exception("bundleLkp status code ${response.statusCode}");
       }
     } catch (e) {
       print(e);
@@ -48,11 +48,9 @@ class BundleApi {
         url,
         headers: kHostHeader,
       );
-
+      Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       if (response.statusCode == 200) {
         List<Sector> sectors = [];
-
-        Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]) {
           sectors.add(Sector.fromJson(m));
@@ -60,7 +58,8 @@ class BundleApi {
 
         return sectors;
       } else {
-        throw Exception("bundSectors status code ${response.statusCode}");
+        throw GeneralException(decodedJson["message"]);
+        //throw Exception("bundSectors status code ${response.statusCode}");
       }
     } catch (e) {
       print(e);

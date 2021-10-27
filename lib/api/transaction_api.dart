@@ -1,5 +1,6 @@
 import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
+import 'package:csp_mobile_app/exception/general_exception.dart';
 
 import 'package:csp_mobile_app/models/transaction_data.dart';
 
@@ -19,9 +20,8 @@ Future<List<Transaction>> getAllTransaction(
       headers: kHostHeader,
     );
 
-    print(TransactionData.statusCode);
+    Map jsonData = jsonDecode(utf8.decode(TransactionData.bodyBytes));
     if (TransactionData.statusCode == 200) {
-      Map jsonData = jsonDecode(utf8.decode(TransactionData.bodyBytes));
       print(jsonData["data"]);
       List<Transaction> allTransaction = [];
       for (var transaction in jsonData["data"]["result"]) {
@@ -32,6 +32,8 @@ Future<List<Transaction>> getAllTransaction(
       print(allTransaction[0].amount);
       return allTransaction;
     }
+
+    throw GeneralException(jsonData["message"]);
   } on TypeError catch (e) {
     print(e.stackTrace);
   } catch (e) {

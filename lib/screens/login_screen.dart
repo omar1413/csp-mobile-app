@@ -1,5 +1,6 @@
 import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/User.dart';
 import 'package:csp_mobile_app/screens/main_screen.dart';
 import 'package:csp_mobile_app/screens/home_screen.dart';
@@ -270,23 +271,17 @@ class _LoginScreenState extends State<LoginScreen> {
     showProgressIndicator();
     try {
       final user = User(
-        usernameControll.value.text,
-        passcontroll.value.text,
+        username: usernameControll.value.text,
+        password: passcontroll.value.text,
       );
-      final response = await AuthApi.login(user);
+      final userResponse = await AuthApi.login(user);
 
-      print("status code : ${response.statusCode}");
-      if (response.statusCode == 200) {
-        if (AuthApi.saveToken(response.body)) {
-          Navigator.of(context).pushNamed(RegisterContinueScreen.routeName);
-        } else {
-          Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
-        }
+      if (userResponse.isFirstTime ?? false) {
+        Navigator.of(context).pushNamed(RegisterContinueScreen.routeName);
       } else {
-        errorMessage(context, "بيانات غير صحيحه");
+        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
       }
     } catch (error) {
-      print(error);
       errorMessage(context, BaseApi.handleError(error));
     } finally {
       hideProgressIndicator();

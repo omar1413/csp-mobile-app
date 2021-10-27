@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:csp_mobile_app/api/auth_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/constant.dart';
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/Bundle.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'dart:async';
@@ -28,7 +29,8 @@ class SubscriptionApi {
         return Subscription.fromJson(decodedJson["data"]);
       } else {
         String msg = decodedJson["message"];
-        throw Exception(" status code ${response.statusCode} >> ${msg}");
+        throw GeneralException(decodedJson["message"]);
+        //throw Exception(" status code ${response.statusCode} >> ${msg}");
       }
     } catch (e) {
       print(e);
@@ -54,7 +56,8 @@ class SubscriptionApi {
         return Subscription.fromJson(decodedJson["data"]);
       } else {
         String msg = decodedJson["message"];
-        throw Exception(" status code ${response.statusCode} >> ${msg}");
+        throw GeneralException(decodedJson["message"]);
+        //throw Exception(" status code ${response.statusCode} >> ${msg}");
       }
     } catch (e) {
       print(e);
@@ -75,11 +78,9 @@ class SubscriptionApi {
         url,
         headers: kHostHeader,
       );
-
+      Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       if (response.statusCode == 200) {
         List<Subscription> subscription = [];
-
-        Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]["result"]) {
           subscription.add(Subscription.fromJson(m));
@@ -87,7 +88,8 @@ class SubscriptionApi {
 
         return subscription;
       } else {
-        throw Exception(" status code ${response.statusCode}");
+        throw GeneralException(decodedJson["message"]);
+        // throw Exception(" status code ${response.statusCode}");
       }
     } catch (e) {
       print(e);
@@ -106,11 +108,9 @@ class SubscriptionApi {
         url,
         headers: kHostHeader,
       );
-
+      Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       if (response.statusCode == 200) {
         List<Subscription> subscription = [];
-
-        Map decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
 
         for (Map m in decodedJson["data"]["result"]) {
           subscription.add(Subscription.fromJson(m));
@@ -119,7 +119,8 @@ class SubscriptionApi {
 
         return subscription;
       } else {
-        throw Exception(" status code ${response.statusCode}");
+        throw GeneralException(decodedJson["message"]);
+        // throw Exception(" status code ${response.statusCode}");
       }
     } catch (e) {
       print(e);

@@ -1,3 +1,4 @@
+import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/api/transfer_api.dart';
 import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/exception/validation_exception.dart';
@@ -54,7 +55,8 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
     } on ValidationException catch (e) {
       errorMessage(ctx, e.msg);
     } catch (e) {
-      errorMessage(ctx, "فشل التحويل");
+      //errorMessage(ctx, "فشل التحويل");
+      errorMessage(ctx, BaseApi.handleError(e));
     }
   }
 
@@ -286,9 +288,11 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
 
   getAccount(BuildContext ctx) async {
     try {} on ValidationException catch (e) {
-      errorMessage(ctx, e.msg);
+      errorMessage(ctx, BaseApi.handleError(e));
+      //errorMessage(ctx, e.msg);
     } catch (e) {
-      errorMessage(ctx, "رقم  حساب غير صحيح");
+      errorMessage(ctx, BaseApi.handleError(e));
+      //errorMessage(ctx, "رقم  حساب غير صحيح");
     }
   }
 }

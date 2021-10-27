@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/news_data.dart';
 import 'package:csp_mobile_app/models/road_data.dart';
 import 'package:http/http.dart' as http;
@@ -18,8 +19,8 @@ Future<List<Road>> getAllRoads() async {
       headers: kHostHeader,
     );
     print(roadData.statusCode);
+    var jsonData = json.decode(utf8.decode(roadData.bodyBytes));
     if (roadData.statusCode == 200) {
-      var jsonData = json.decode(utf8.decode(roadData.bodyBytes));
       List<Road> allroads = [];
       int cont = 0;
       for (var road in jsonData["data"]) {
@@ -32,7 +33,8 @@ Future<List<Road>> getAllRoads() async {
       print(allroads);
       return allroads;
     }
-    throw Exception(roadData.statusCode);
+    //throw Exception(roadData.statusCode);
+    throw GeneralException(jsonData["message"]);
   } catch (e) {
     print(e);
     rethrow;

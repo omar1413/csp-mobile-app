@@ -27,7 +27,7 @@ class ProfileWidget extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "${AuthApi.userName}",
+                  "${AuthApi.authedUser?.username ?? ""}",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white70),
                 ),

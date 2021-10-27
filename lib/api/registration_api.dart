@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:csp_mobile_app/exception/general_exception.dart';
 import 'package:csp_mobile_app/models/account.dart';
 import 'package:csp_mobile_app/models/registration.dart';
 import 'package:http/http.dart' as http;
@@ -32,7 +33,8 @@ class RegistrationApi {
         return response;
       } else {
         String msg = decodedJson["message"];
-        throw Exception(" status code ${response.statusCode} >> ${msg}");
+        throw GeneralException(decodedJson["message"]);
+        //throw Exception(" status code ${response.statusCode} >> ${msg}");
       }
     } on TypeError catch (e) {
       print(e.stackTrace);
@@ -63,7 +65,8 @@ class RegistrationApi {
         return response;
       } else {
         String msg = decodedJson["message"];
-        throw Exception(" status code ${response.statusCode} >> ${msg}");
+        throw GeneralException(decodedJson["message"]);
+        //throw Exception(" status code ${response.statusCode} >> ${msg}");
       }
     } on TypeError catch (e) {
       print(e.stackTrace);

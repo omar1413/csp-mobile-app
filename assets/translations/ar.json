@@ -31,7 +31,7 @@
         "DEFUALT_WARNING_MESSAGE": " البيانات المدخلة قد تكون غير صحيحة او غير مكتملة"
     },
     "errors": {
-        "SOCKET_ERROR":"تأكد من اتصالك بالانترنت ",
+        "SOCKET_ERROR": "تأكد من اتصالك بالانترنت ",
         "INVALID_CREDENTIALS": "خطأ فى اسم المستخدم او كلمة المرور",
         "TOKEN_IS_REQUIRED": "من فضلك قم بتسجيل الدخول",
         "INVALID_TOKEN": "من فضلك قم بتسجيل الدخول",
@@ -135,5 +135,6 @@
         "weekHeader": "الاسبوع"
     },
     "SUBSCRIPTION_PERIOD_NOT_VALID": "فترة الاشتراك يجب ان تكون ارقام فقط من 1 الى 12",
-    "SUBSCRIPTION_ALREADY_EXIST": "يوجد اشتراك بالفعل لنفس الباقة فى نفس الفترة الزمنية"
+    "SUBSCRIPTION_ALREADY_EXIST": "يوجد اشتراك بالفعل لنفس الباقة فى نفس الفترة الزمنية",
+    "GENERAL_ERROR": "خطأ بالنظام"
 }

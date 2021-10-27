@@ -63,8 +63,8 @@ class _WalletScreenState extends State<WalletScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          CustomText(AuthApi.userName, FontWeight.normal,
-                              Colors.white70, 16),
+                          CustomText(AuthApi.authedUser?.username ?? "",
+                              FontWeight.normal, Colors.white70, 16),
                           SizedBox(height: 5),
                           // CustomText("RFIO 10002248900", FontWeight.normal,
                           //   Colors.white70, 14),
