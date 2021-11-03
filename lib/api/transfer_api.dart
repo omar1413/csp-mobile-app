@@ -59,6 +59,8 @@ class TransferApi {
 
       print(account.statusCode);
       Account acc;
+      print("json : " + account.body);
+      print("====");
       Map jsonData = jsonDecode(utf8.decode(account.bodyBytes));
       if (account.statusCode == 200) {
         print(jsonData["data"]);

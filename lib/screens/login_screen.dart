@@ -165,6 +165,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         CustomTextField(
                           str: "كلمة المرور",
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.left,
                           isPassword: true,
                           controller: passcontroll,
                         ),
@@ -201,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _textBtn("هل نسيت كلمةالمرور؟", () {}),
+                              // _textBtn("هل نسيت كلمةالمرور؟", () {}),
                               _textBtn("انشاء حساب جديد ", () {
                                 Navigator.pushNamed(
                                     context, RegistrationScreen.routeName);

@@ -1,3 +1,4 @@
+import 'package:csp_mobile_app/api/account_api.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/api/registration_api.dart';
 import 'package:csp_mobile_app/exception/validation_exception.dart';
@@ -65,6 +66,18 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
 //  String dropdownValue = "";
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+      try {
+        showProgressIndicator();
+        accountTypes = await AccountApi.accountTypesLkp();
+        setState(() {});
+      } catch (e) {
+        BaseApi.handleError(e);
+      } finally {
+        hideProgressIndicator();
+      }
+    });
     //dropdownValue = accountType[1]!;
   }
 
@@ -93,135 +106,159 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
   }
 
   List<AccountType> accountTypes = [
-    AccountType(id: 1, desc: "فرد", code: "PERSON_ACCOUNT"),
-    AccountType(id: 2, desc: "شركة", code: "COMPANY_ACCOUNT"),
+    AccountType(id: 2, desc: "فرد", code: "PERSON_ACCOUNT"),
+    AccountType(id: 1, desc: "شركة", code: "COMPANY_ACCOUNT"),
   ];
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                Stack(
-                  children: [
-                    Container(
-                      child: Image.asset('assets/images/login.png',
-                          fit: BoxFit.fill),
-                      height: height * 0.4,
-                      width: width,
-                      decoration: BoxDecoration(
-                        color: Colors.green[700],
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(32.0),
-                          bottomRight: Radius.circular(32.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.9),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                child: Image.asset('assets/images/login.png',
+                                    fit: BoxFit.fill),
+                                height: height * 0.4,
+                                width: width,
+                                decoration: BoxDecoration(
+                                  color: Colors.green[700],
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(32.0),
+                                    bottomRight: Radius.circular(32.0),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.9),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                left: width * 0.60,
+                                top: height * 0.35,
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "استكمال بيانات الحساب",
+                                        textAlign: TextAlign.end,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 4,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                      ),
+                                    ]),
+                              ),
+                              Positioned(
+                                  left: width * 0.34,
+                                  top: height * 0.14,
+                                  child: Container(
+                                    height: 120,
+                                    width: 120,
+                                    child: Image.asset('assets/images/logo.png',
+                                        fit: BoxFit.fill),
+                                  ))
+                            ],
+                          ),
+                          CustomTextLine(text: "نوع الحساب"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              // _accountTypeRadioTile(
+                              //     text: accountTypes[0].desc.toString(),
+                              //     value: accountTypes[0].code.toString()),
+                              // _accountTypeRadioTile(
+                              //     text: accountTypes[1].desc.toString(),
+                              //     value: accountTypes[1].code.toString()),
+
+                              _accountTypeRadioTile(accountTypes[0]),
+                              _accountTypeRadioTile(accountTypes[1]),
+                            ],
+                          ),
+                          accountTypeGroup.code == Account.PERSON
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    _textField("الاسم الرباعى ", context,
+                                        namecontroll),
+                                    _textField("رقم الهاتف المحمول", context,
+                                        phoneControll),
+                                    CustomTextLine(text: "جنسية الحساب "),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        _isForeignerRadioTile(
+                                            value: "0", text: "مصرى"),
+                                        _isForeignerRadioTile(
+                                            value: "1", text: "اجنبى"),
+                                      ],
+                                    ),
+                                    isForeignerType == "0"
+                                        ? _textField("الرقم القومى", context,
+                                            nationalNumberControll)
+                                        : Container(),
+                                    isForeignerType == "1"
+                                        ? _textField("رقم جواز السفر", context,
+                                            passportNumberControll)
+                                        : Container(),
+                                  ],
+                                )
+                              : Container(),
+                          accountTypeGroup.code == Account.COMPANY
+                              ? Column(
+                                  children: [
+                                    _textField(
+                                        "اسم الشركه", context, namecontroll),
+                                    _textField("رقم هاتف الشركه", context,
+                                        phoneControll),
+                                    _textField("السجل التجارى", context,
+                                        commercialRegisterControll),
+                                  ],
+                                )
+                              : Container(),
+                          SizedBox(
+                            height: 20,
                           ),
                         ],
                       ),
                     ),
-                    Positioned(
-                      left: width * 0.60,
-                      top: height * 0.35,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "استكمال بيانات الحساب",
-                              textAlign: TextAlign.end,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Container(
-                              height: 4,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
-                          ]),
-                    ),
-                    Positioned(
-                        left: width * 0.34,
-                        top: height * 0.14,
-                        child: Container(
-                          height: 120,
-                          width: 120,
-                          child: Image.asset('assets/images/logo.png',
-                              fit: BoxFit.fill),
-                        ))
-                  ],
-                ),
-                CustomTextLine(text: "نوع الحساب"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // _accountTypeRadioTile(
-                    //     text: accountTypes[0].desc.toString(),
-                    //     value: accountTypes[0].code.toString()),
-                    // _accountTypeRadioTile(
-                    //     text: accountTypes[1].desc.toString(),
-                    //     value: accountTypes[1].code.toString()),
-
-                    _accountTypeRadioTile(accountTypes[0]),
-                    _accountTypeRadioTile(accountTypes[1]),
-                  ],
-                ),
-                accountTypeGroup == accountTypes[0]
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _textField("الاسم الرباعى ", context, namecontroll),
-                          _textField(
-                              "رقم الهاتف المحمول", context, phoneControll),
-                          CustomTextLine(text: "جنسية الحساب "),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              _isForeignerRadioTile(value: "0", text: "مصرى"),
-                              _isForeignerRadioTile(value: "1", text: "اجنبى"),
-                            ],
-                          ),
-                          isForeignerType == "0"
-                              ? _textField("الرقم القومى", context,
-                                  nationalNumberControll)
-                              : Container(),
-                          isForeignerType == "1"
-                              ? _textField("رقم جواز السفر", context,
-                                  passportNumberControll)
-                              : Container(),
-                        ],
-                      )
-                    : Container(),
-                accountTypeGroup == accountTypes[1]
-                    ? Column(
-                        children: [
-                          _textField("اسم الشركه", context, namecontroll),
-                          _textField("رقم هاتف الشركه", context, phoneControll),
-                          _textField("السجل التجارى", context,
-                              commercialRegisterControll),
-                        ],
-                      )
-                    : Container(),
-                SizedBox(
-                  height: 20,
+                  ),
                 ),
                 Container(
+                  margin: EdgeInsets.all(8.0),
                   color: Colors.white,
                   width: width * 0.6,
                   child: FlatButton(
@@ -238,8 +275,13 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
                     ),
                   ),
                 ),
-              ])),
-        ));
+              ],
+            ),
+            _circularProgressIndicator(),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _accountTypeRadioTile(AccountType accountType) {
@@ -348,12 +390,12 @@ class _RegisterContinueScreenState extends State<RegisterContinueScreen> {
     if (namecontroll.value.text.isEmpty || phoneControll.value.text.isEmpty) {
       throw ValidationException("من فضلك اكمل البيانات");
     }
-    if (selectedAccountType!.id == 1) {
+    if (selectedAccountType!.code == Account.PERSON) {
       if (passportNumberControll.value.text.isEmpty &&
           nationalNumberControll.value.text.isEmpty) {
         throw ValidationException("من فضلك اكمل البيانات");
       }
-      if (selectedAccountType!.id == 2) {
+      if (selectedAccountType!.code == Account.COMPANY) {
         if (commercialRegisterControll.value.text.isEmpty) {
           throw ValidationException("من فضلك اكمل البيانات");
         }

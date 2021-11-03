@@ -58,7 +58,12 @@ dependencies:
   flutter_email_sender: ^5.0.2
 
   easy_localization: ^3.0.0
+  path: ^1.6.4
  
+  flutter_file_manager: ^0.2.0
+  ext_storage: ^1.0.3
+  mockito: ^5.0.15
+  confirm_dialog: ^1.0.0
  
 dev_dependencies:
   flutter_test:
@@ -70,6 +75,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  build_runner: ^2.1.2
+ 
  
 
 # For information on the generic Dart part of this file, see the

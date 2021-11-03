@@ -18,12 +18,17 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class SubscriptionTabs extends StatefulWidget {
+  int tabIndex = 0;
+
+  SubscriptionTabs({this.tabIndex = 0});
   @override
   State<SubscriptionTabs> createState() => _SubscriptionTabsState();
   static const routeName = '/SubscriptionTabs';
 }
 
-class _SubscriptionTabsState extends State<SubscriptionTabs> {
+class _SubscriptionTabsState extends State<SubscriptionTabs>
+    with SingleTickerProviderStateMixin {
+  TabController? tabController;
   int _indexOfSelectedScreen = 0;
   void _selectedTap(int index) {
     setState(() {
@@ -31,19 +36,29 @@ class _SubscriptionTabsState extends State<SubscriptionTabs> {
     });
   }
 
+  List<Map<String, Object>> screensList = [
+    {
+      'page': Subscriptionsmanagement(
+        args: SubscriptionsmanagementArg(
+          getAllSubscriptions: SubscriptionApi.getAllSubscriptions,
+        ),
+      ),
+      'title': 'ادارة الاشتراكات'
+    },
+    {'page': VechileListScreen(), 'title': '3الكود الشخصى'},
+  ];
+
+  @override
+  void initState() {
+    tabController = TabController(length: screensList.length, vsync: this);
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      tabController?.animateTo(widget.tabIndex);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Map<String, Object>> screensList = [
-      {
-        'page': Subscriptionsmanagement(
-          args: SubscriptionsmanagementArg(
-            getAllSubscriptions: SubscriptionApi.getAllSubscriptions,
-          ),
-        ),
-        'title': 'ادارة الاشتراكات'
-      },
-      {'page': VechileListScreen(), 'title': '3الكود الشخصى'},
-    ];
     return Directionality(
       textDirection: TextDirection.rtl,
       child: DefaultTabController(
@@ -53,6 +68,7 @@ class _SubscriptionTabsState extends State<SubscriptionTabs> {
             appBar: AppBar(
               backgroundColor: Theme.of(context).primaryColor,
               bottom: TabBar(
+                controller: tabController,
                 unselectedLabelColor: Theme.of(context).primaryColor,
                 indicatorColor: Colors.white,
                 onTap: (index) {
@@ -77,5 +93,11 @@ class _SubscriptionTabsState extends State<SubscriptionTabs> {
             body: screensList[_indexOfSelectedScreen]['page'] as Widget),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    tabController?.dispose();
+    super.dispose();
   }
 }

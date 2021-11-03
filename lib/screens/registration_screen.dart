@@ -5,6 +5,7 @@ import 'package:csp_mobile_app/models/registration.dart';
 import 'package:csp_mobile_app/models/user_customer.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:csp_mobile_app/screens/registration_continue_screen.dart';
+import 'package:csp_mobile_app/widets/custom_textfiled.dart';
 import 'package:csp_mobile_app/widets/messages.dart';
 import 'package:flutter/material.dart';
 
@@ -53,93 +54,138 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-            child: Column(children: [
-          Stack(
-            children: [
-              Container(
-                child: Image.asset('assets/images/login.png', fit: BoxFit.fill),
-                height: height * 0.4,
-                width: width,
-                decoration: BoxDecoration(
-                  color: Colors.green[700],
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(32.0),
-                    bottomRight: Radius.circular(32.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.9),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                left: width * 0.68,
-                top: height * 0.35,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
                     children: [
-                      Text(
-                        "انشاء حساب جديد",
-                        textAlign: TextAlign.end,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: Colors.white,
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset('assets/images/login.png',
+                                fit: BoxFit.fill),
+                            height: height * 0.4,
+                            width: width,
+                            decoration: BoxDecoration(
+                              color: Colors.green[700],
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(32.0),
+                                bottomRight: Radius.circular(32.0),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.9),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            left: width * 0.68,
+                            top: height * 0.35,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "انشاء حساب جديد",
+                                    textAlign: TextAlign.end,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 4,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                  ),
+                                ]),
+                          ),
+                          Positioned(
+                              left: width * 0.34,
+                              top: height * 0.14,
+                              child: Container(
+                                height: 120,
+                                width: 120,
+                                child: Image.asset('assets/images/logo.png',
+                                    fit: BoxFit.fill),
+                              ))
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 0.06,
+                      ),
+                      _textField("اسم المستخدم", context, usernameControll),
+                      _textField("البريد الالكترونى ", context, emailControll),
+                      // _textField("كلمة المرور", context, passcontroll),
+                      Container(
+                        height: 50,
+                        width: 300,
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: CustomTextField(
+                          str: "كلمة المرور",
+                          isPassword: true,
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.left,
+                          controller: passcontroll,
                         ),
                       ),
+
                       Container(
-                        height: 4,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
+                        height: 50,
+                        width: 300,
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: CustomTextField(
+                          str: "تأكيد كلمة المرور",
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.left,
+                          isPassword: true,
+                          controller: passConficontroll,
+                        ),
                       ),
-                    ]),
-              ),
-              Positioned(
-                  left: width * 0.34,
-                  top: height * 0.14,
-                  child: Container(
-                    height: 120,
-                    width: 120,
-                    child:
-                        Image.asset('assets/images/logo.png', fit: BoxFit.fill),
-                  ))
-            ],
-          ),
-          SizedBox(
-            height: height * 0.06,
-          ),
-          _textField("اسم المستخدم", context, usernameControll),
-          _textField("البريد الالكترونى ", context, emailControll),
-          _textField("كلمة المرور", context, passcontroll),
-          _textField("تأكيد كلمة المرور", context, passConficontroll),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            color: Colors.white,
-            width: width * 0.6,
-            child: FlatButton(
-              onPressed: () {
-                _registeration(context);
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0)),
-              color: Colors.green[600],
-              height: 40,
-              child: Text(
-                "انشاء حساب",
-                style: TextStyle(color: Colors.white, fontSize: 14.0),
-              ),
+                      //_textField("تأكيد كلمة المرور", context, passConficontroll),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        color: Colors.white,
+                        width: width * 0.6,
+                        child: FlatButton(
+                          onPressed: () {
+                            _registeration(context);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0)),
+                          color: Colors.green[600],
+                          height: 40,
+                          child: Text(
+                            "انشاء حساب",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                _circularProgressIndicator(),
+              ],
             ),
           ),
-        ])),
+        ),
       ),
     );
   }
@@ -200,12 +246,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void validate(BuildContext ctx) {
-    if (passcontroll.value.text != passConficontroll.value.text ||
-        passcontroll.value.text.isEmpty)
+    if (passcontroll.value.text != passConficontroll.value.text) {
       throw ValidationException("اعد كتابة كلمة المرور ");
+    }
     if (emailControll.value.text.isEmpty ||
         passcontroll.value.text.isEmpty ||
-        usernameControll.value.text.isEmpty)
+        usernameControll.value.text.isEmpty) {
       throw ValidationException("من فضلك اكمل البيانات");
+    }
   }
 }

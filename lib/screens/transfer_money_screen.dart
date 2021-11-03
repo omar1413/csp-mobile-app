@@ -1,3 +1,4 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:csp_mobile_app/api/base_api.dart';
 import 'package:csp_mobile_app/api/transfer_api.dart';
 import 'package:csp_mobile_app/constant.dart';
@@ -38,9 +39,23 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
   TextEditingController numberControll = TextEditingController();
   TextEditingController yearControll = TextEditingController();
   TextEditingController typeControll = TextEditingController();
+  bool _showProgressIndicator = false;
+
+  showProgressIndicator() {
+    setState(() {
+      _showProgressIndicator = true;
+    });
+  }
+
+  hideProgressIndicator() {
+    setState(() {
+      _showProgressIndicator = false;
+    });
+  }
 
   _transfer(BuildContext ctx) async {
     try {
+      showProgressIndicator();
       validate();
 
       final account = await TransferApi.gitAccountByAccNumber(
@@ -48,15 +63,42 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
           int.parse(yearControll.value.text),
           int.parse(typeControll.value.text));
 
-      final transaction = Transaction(amount: amount, toAccount: account);
-      final response = await TransferApi.saveTransferTransaction(transaction);
-      successMessage(ctx, "تم التحويل بنجاح ");
-      Navigator.pop(ctx);
+      if (await confirm(
+        context,
+        title: Text('تأكيد'),
+        content: () {
+          String name = "";
+          if (account.accountType?.code == Account.PERSON) {
+            name = account.person?.name ?? " ";
+          } else {
+            name = account.company?.name ?? " ";
+          }
+
+          print("person : " +
+              (account.person == null
+                  ? "null"
+                  : account.person!.toJson().toString()));
+          print("company : " +
+              (account.company == null
+                  ? "null"
+                  : account.company!.toJson().toString()));
+          return Text('صاحب اسم الحساب هو ' + (name) + " هل تريد الاستكمال ؟");
+        }(),
+        textOK: Text('نعم'),
+        textCancel: Text('الغاء'),
+      )) {
+        final transaction = Transaction(amount: amount, toAccount: account);
+        final response = await TransferApi.saveTransferTransaction(transaction);
+        successMessage(ctx, "تم التحويل بنجاح ");
+        Navigator.pop(ctx);
+      }
     } on ValidationException catch (e) {
       errorMessage(ctx, e.msg);
     } catch (e) {
       //errorMessage(ctx, "فشل التحويل");
       errorMessage(ctx, BaseApi.handleError(e));
+    } finally {
+      hideProgressIndicator();
     }
   }
 
@@ -67,163 +109,175 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: customAppBar(title: "تحويل رصيد", context: context),
-        body: Column(
+        body: Stack(
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
+            Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 25,
-                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 25,
+                            ),
 
-                        /* CustomRadioTile(
-                          groupValue: accountId,
-                          onChanged: (selected) {
-                            setState(() {
-                              //accountId = selected;
-                            });
-                          },
-                          value: "a",
-                          text: Text("رقم الحساب"),
-                        ),*/
-                        CustomTextLine(text: "ادخل رقم الحساب"),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _textField("الرقم", context, numberControll),
-                              _textField("السنة", context, yearControll),
-                              _textField("النوع", context, typeControll)
-                            ],
-                          ),
-                        ),
+                            /* CustomRadioTile(
+                              groupValue: accountId,
+                              onChanged: (selected) {
+                                setState(() {
+                                  //accountId = selected;
+                                });
+                              },
+                              value: "a",
+                              text: Text("رقم الحساب"),
+                            ),*/
+                            CustomTextLine(text: "ادخل رقم الحساب"),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  _textField("الرقم", context, numberControll),
+                                  _textField("النوع", context, typeControll),
+                                  _textField("السنة", context, yearControll),
+                                ],
+                              ),
+                            ),
 
-                        // CustomRadioTile(
-                        //   groupValue: _character,
-                        //   onChanged: (String? v) {
-                        //     setState(() {
-                        //       _character = v;
-                        //     });
-                        //   },
-                        //   value: "b",
-                        //   text: Text("Qr Code"),
-                        // ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     border: Border.all(
-                        //       width: 1,
-                        //       color: kgrey,
-                        //     ),
-                        //     borderRadius: BorderRadius.circular(10),
-                        //   ),
-                        //   padding: EdgeInsets.all(20),
-                        //   margin: EdgeInsets.symmetric(horizontal: 15),
-                        //   child: Image.asset("assets/images/shadow-large-par-code.png"),
-                        // ),
-                        CustomTextLine(text: "ادخل المبلغ"),
-                        Container(
-                          height: 110,
-                          margin: EdgeInsets.all(15),
-                          child: FancyCard(
-                            imagePath: "assets/images/blue-card.png",
-                            // color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 30,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Expanded(
-                                        child: FittedBox(
-                                          child: CustomText(
-                                              "",
-                                              FontWeight.normal,
-                                              Colors.white70,
-                                              16),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 75,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      CustomIcon(
-                                        icon: Icons.remove,
-                                        color: kwhite,
-                                        onPress: () {
-                                          setState(() {
-                                            if (amount > 0) {
-                                              amount--;
-                                            }
-                                          });
-                                        },
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                            // CustomRadioTile(
+                            //   groupValue: _character,
+                            //   onChanged: (String? v) {
+                            //     setState(() {
+                            //       _character = v;
+                            //     });
+                            //   },
+                            //   value: "b",
+                            //   text: Text("Qr Code"),
+                            // ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     border: Border.all(
+                            //       width: 1,
+                            //       color: kgrey,
+                            //     ),
+                            //     borderRadius: BorderRadius.circular(10),
+                            //   ),
+                            //   padding: EdgeInsets.all(20),
+                            //   margin: EdgeInsets.symmetric(horizontal: 15),
+                            //   child: Image.asset("assets/images/shadow-large-par-code.png"),
+                            // ),
+                            CustomTextLine(text: "ادخل المبلغ"),
+                            Container(
+                              height: 110,
+                              margin: EdgeInsets.all(15),
+                              child: FancyCard(
+                                imagePath: "assets/images/blue-card.png",
+                                // color: Colors.white,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 30,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
                                         children: [
-                                          CustomText(
-                                              amount.toStringAsFixed(2) + " ",
-                                              FontWeight.normal,
-                                              Colors.white,
-                                              26),
-                                          CustomText("ج/م", FontWeight.normal,
-                                              Colors.white, 18),
+                                          Expanded(
+                                            child: FittedBox(
+                                              child: CustomText(
+                                                  "",
+                                                  FontWeight.normal,
+                                                  Colors.white70,
+                                                  16),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      CustomIcon(
-                                        icon: Icons.add,
-                                        color: kwhite,
-                                        onPress: () {
-                                          setState(() {
-                                            amount += 10;
-                                          });
-                                        },
+                                    ),
+                                    Expanded(
+                                      flex: 75,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          CustomIcon(
+                                            icon: Icons.remove,
+                                            color: kwhite,
+                                            onPress: () {
+                                              setState(() {
+                                                if (amount > 0) {
+                                                  amount--;
+                                                }
+                                              });
+                                            },
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CustomText(
+                                                  amount.toStringAsFixed(2) +
+                                                      " ",
+                                                  FontWeight.normal,
+                                                  Colors.white,
+                                                  26),
+                                              CustomText(
+                                                  "ج/م",
+                                                  FontWeight.normal,
+                                                  Colors.white,
+                                                  18),
+                                            ],
+                                          ),
+                                          CustomIcon(
+                                            icon: Icons.add,
+                                            color: kwhite,
+                                            onPress: () {
+                                              setState(() {
+                                                amount += 10;
+                                              });
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              width: double.infinity,
-              child: FlatButton(
-                onPressed: () {
-                  _transfer(context);
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                color: Theme.of(context).primaryColor,
-                height: 40,
-                child: Text(
-                  "تأكيد التحويل",
-                  style: TextStyle(color: Colors.white, fontSize: 14.0),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  width: double.infinity,
+                  child: FlatButton(
+                    onPressed: () {
+                      _transfer(context);
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    color: Theme.of(context).primaryColor,
+                    height: 40,
+                    child: Text(
+                      "تأكيد التحويل",
+                      style: TextStyle(color: Colors.white, fontSize: 14.0),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
+            _circularProgressIndicator(),
           ],
         ),
       ),
@@ -293,6 +347,21 @@ class _TransferMoneyScreenState extends State<TransferMoenyScreen> {
     } catch (e) {
       errorMessage(ctx, BaseApi.handleError(e));
       //errorMessage(ctx, "رقم  حساب غير صحيح");
+    }
+  }
+
+  _circularProgressIndicator() {
+    if (_showProgressIndicator) {
+      return Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Color.fromARGB(120, 150, 150, 150),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Container();
     }
   }
 }

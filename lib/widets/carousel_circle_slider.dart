@@ -106,7 +106,7 @@ class CarouselCircleState extends State<CarouselCircle> {
     } else if (ob.id == 2) {
       Navigator.pushNamed(context, SubscriptionTabs.routeName);
     } else if (ob.id == 3) {
-      Navigator.pushNamed(context, SubscriptionTabs.routeName);
+      Navigator.pushNamed(context, SubscriptionTabs.routeName, arguments: 1);
     } else if (ob.id == 4) {
       Navigator.pushNamed(context, SubscriptionTabs.routeName);
     }

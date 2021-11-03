@@ -1,6 +1,9 @@
+import 'package:csp_mobile_app/api/account_api.dart';
 import 'package:csp_mobile_app/api/auth_api.dart';
+import 'package:csp_mobile_app/models/account.dart';
 import 'package:csp_mobile_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:confirm_dialog/confirm_dialog.dart';
 
 class ProfileWidget extends StatelessWidget {
   const ProfileWidget({Key? key}) : super(key: key);
@@ -31,11 +34,19 @@ class ProfileWidget extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white70),
                 ),
-                // Text(
-                //   "RFID 10007763",
-                //   style: TextStyle(
-                //       fontWeight: FontWeight.normal, color: Colors.white70),
-                // ),
+                FutureBuilder(
+                  future: AccountApi.accountData(),
+                  builder: (ctx, AsyncSnapshot<Account> sn) {
+                    if (!sn.hasData || sn.data == null) {
+                      return Container();
+                    }
+                    return Text(
+                      sn.data!.accountNumber.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.white70),
+                    );
+                  },
+                )
               ],
             ),
             SizedBox(
@@ -44,9 +55,17 @@ class ProfileWidget extends StatelessWidget {
             RotatedBox(
               quarterTurns: 2,
               child: IconButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(
-                      context, LoginScreen.routeName);
+                onPressed: () async {
+                  if (await confirm(
+                    context,
+                    title: Text('تأكيد'),
+                    content: Text('هل تريد تسجيل الخروج ؟'),
+                    textOK: Text('نعم'),
+                    textCancel: Text('ليس الان'),
+                  )) {
+                    Navigator.pushReplacementNamed(
+                        context, LoginScreen.routeName);
+                  }
                 },
                 icon: const Icon(
                   Icons.logout,

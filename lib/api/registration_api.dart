@@ -48,6 +48,7 @@ class RegistrationApi {
   static Future<Response> saveContinueRegistration(Account account) async {
     Uri url = BaseApi.getApiUrl("/account/save");
     kHostHeader.addAll({"Authorization": AuthApi.getToken()});
+    print("account :: " + jsonEncode(account.toJson()));
 
     try {
       print(jsonEncode(account.toJson()));

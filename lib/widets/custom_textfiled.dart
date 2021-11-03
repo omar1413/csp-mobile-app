@@ -1,5 +1,5 @@
 import 'package:csp_mobile_app/constant.dart';
-import 'package:csp_mobile_app/widets/CustomText.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final bool digitsOnly;
   final Function(String)? onChanged;
   final bool isPassword;
+  final TextDirection? textDirection;
 
   CustomTextField(
       {required this.str,
@@ -25,6 +26,7 @@ class CustomTextField extends StatelessWidget {
       this.keyboardType,
       this.digitsOnly = false,
       this.onChanged,
+      this.textDirection,
       required this.isPassword});
 
   @override
@@ -34,6 +36,7 @@ class CustomTextField extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10),
       child: TextField(
         onChanged: onChanged,
+        textDirection: textDirection,
         keyboardType: keyboardType,
         onTap: onTap,
         obscureText: isPassword,

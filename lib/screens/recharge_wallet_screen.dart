@@ -35,8 +35,23 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
   int? founderId;
   Founder founder = Founder(id: 0);
 
+  bool _showProgressIndicator = false;
+
+  showProgressIndicator() {
+    setState(() {
+      _showProgressIndicator = true;
+    });
+  }
+
+  hideProgressIndicator() {
+    setState(() {
+      _showProgressIndicator = false;
+    });
+  }
+
   _recharge(BuildContext ctx) async {
     try {
+      showProgressIndicator();
       validate();
       founder.id = founderId;
       final transaction = Transaction(amount: amount, founder: founder);
@@ -45,6 +60,8 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
       Navigator.pop(ctx);
     } catch (e) {
       errorMessage(ctx, BaseApi.handleError(e));
+    } finally {
+      hideProgressIndicator();
     }
   }
 
@@ -56,141 +73,156 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: customAppBar(title: "إعادة الشحن", context: context),
-        body: Column(
+        body: Stack(
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    CustomTextLine(text: "أدخل المبلغ"),
-                    Container(
-                      margin: EdgeInsets.all(15),
-                      child: FancyCard(
-                        imagePath: "assets/images/card.png",
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
+            Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        CustomTextLine(text: "أدخل المبلغ"),
+                        Container(
+                          margin: EdgeInsets.all(15),
+                          child: FancyCard(
+                            imagePath: "assets/images/card.png",
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CustomText(AuthApi.authedUser?.username ?? "",
-                                    FontWeight.normal, Colors.white70, 16),
-                                SizedBox(height: 5),
-                                //CustomText("RFIO 10002248900",
-                                //  FontWeight.normal, Colors.white70, 14),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomIcon(
-                                  icon: Icons.remove,
-                                  color: kwhite,
-                                  onPress: () {
-                                    setState(() {
-                                      if (amount > 10) {
-                                        amount -= 10;
-                                      }
-                                    });
-                                  },
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
-                                    CustomText(amount.toStringAsFixed(2) + " ",
-                                        FontWeight.normal, Colors.white, 26),
-                                    CustomText("ج/م", FontWeight.normal,
-                                        Colors.white, 18),
+                                    CustomText(
+                                        AuthApi.authedUser?.username ?? "",
+                                        FontWeight.normal,
+                                        Colors.white70,
+                                        16),
+                                    SizedBox(height: 5),
+                                    //CustomText("RFIO 10002248900",
+                                    //  FontWeight.normal, Colors.white70, 14),
                                   ],
                                 ),
-                                CustomIcon(
-                                  icon: Icons.add,
-                                  color: kwhite,
-                                  onPress: () {
-                                    setState(() {
-                                      amount += 10;
-                                    });
-                                  },
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    CustomIcon(
+                                      icon: Icons.remove,
+                                      color: kwhite,
+                                      onPress: () {
+                                        setState(() {
+                                          if (amount > 10) {
+                                            amount -= 10;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CustomText(
+                                            amount.toStringAsFixed(2) + " ",
+                                            FontWeight.normal,
+                                            Colors.white,
+                                            26),
+                                        CustomText("ج/م", FontWeight.normal,
+                                            Colors.white, 18),
+                                      ],
+                                    ),
+                                    CustomIcon(
+                                      icon: Icons.add,
+                                      color: kwhite,
+                                      onPress: () {
+                                        setState(() {
+                                          amount += 10;
+                                        });
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                        ),
+                        CustomTextLine(text: "طريقه الدفع"),
+                        Column(
+                          children: [
+                            _radioTile<int>(
+                                text: " فودافون كاش",
+                                value: 2,
+                                groupValue: founderId,
+                                iconPath: "assets/images/vodafone.png",
+                                onChanged: (int? selected) {
+                                  setState(() {
+                                    founderId = selected;
+                                  });
+                                }),
+                            _radioTile<int>(
+                                text: " فيزا",
+                                value: 3,
+                                groupValue: founderId,
+                                iconPath: "assets/images/miza.png",
+                                onChanged: (int? selected) {
+                                  setState(() {
+                                    founderId = selected;
+                                  });
+                                }),
+                            _radioTile<int>(
+                                text: " فورى",
+                                value: 1,
+                                groupValue: founderId,
+                                iconPath: "assets/images/fawry.png",
+                                onChanged: (int? selected) {
+                                  setState(() {
+                                    founderId = selected;
+                                  });
+                                }),
                           ],
                         ),
-                      ),
-                    ),
-                    CustomTextLine(text: "طريقه الدفع"),
-                    Column(
-                      children: [
-                        _radioTile<int>(
-                            text: " فودافون كاش",
-                            value: 2,
-                            groupValue: founderId,
-                            iconPath: "assets/images/vodafone.png",
-                            onChanged: (int? selected) {
-                              setState(() {
-                                founderId = selected;
-                              });
-                            }),
-                        _radioTile<int>(
-                            text: " فيزا",
-                            value: 3,
-                            groupValue: founderId,
-                            iconPath: "assets/images/miza.png",
-                            onChanged: (int? selected) {
-                              setState(() {
-                                founderId = selected;
-                              });
-                            }),
-                        _radioTile<int>(
-                            text: " فورى",
-                            value: 1,
-                            groupValue: founderId,
-                            iconPath: "assets/images/fawry.png",
-                            onChanged: (int? selected) {
-                              setState(() {
-                                founderId = selected;
-                              });
-                            }),
-                      ],
-                    ),
-                    /* _textField("رقم كارت الائتمان", context),
-                    _textField("اسم كارت الائتمان", context),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _textField("تاريخ الانتهاء", context),
-                        ),
-                        Expanded(
-                          child: _textField("الرقم المتغير", context),
+                        /* _textField("رقم كارت الائتمان", context),
+                        _textField("اسم كارت الائتمان", context),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _textField("تاريخ الانتهاء", context),
+                            ),
+                            Expanded(
+                              child: _textField("الرقم المتغير", context),
+                            ),
+                          ],
+                        ),*/
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          width: double.infinity,
+                          child: FlatButton(
+                            onPressed: () {
+                              _recharge(context);
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            color: Theme.of(context).primaryColor,
+                            height: 50,
+                            child: Text(
+                              "تأكيد الدفع",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.0),
+                            ),
+                          ),
                         ),
                       ],
-                    ),*/
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      width: double.infinity,
-                      child: FlatButton(
-                        onPressed: () {
-                          _recharge(context);
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                        color: Theme.of(context).primaryColor,
-                        height: 50,
-                        child: Text(
-                          "تأكيد الدفع",
-                          style: TextStyle(color: Colors.white, fontSize: 14.0),
-                        ),
-                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
+            _circularProgressIndicator(),
           ],
         ),
       ),
@@ -250,5 +282,20 @@ class _RechargeWalletScreenState extends State<RechargeWalletScreen> {
           ),
         ),
         onChanged: onChanged);
+  }
+
+  _circularProgressIndicator() {
+    if (_showProgressIndicator) {
+      return Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Color.fromARGB(120, 150, 150, 150),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }

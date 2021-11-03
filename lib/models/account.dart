@@ -3,6 +3,9 @@ import 'package:csp_mobile_app/models/company.dart';
 import 'package:csp_mobile_app/models/person.dart';
 
 class Account {
+  static const PERSON = "PERSON_ACCOUNT";
+  static const COMPANY = "COMPANY_ACCOUNT";
+
   int? id;
   int? accountNumber;
   AccountType? accountType;

@@ -1,3 +1,5 @@
+import 'package:csp_mobile_app/models/account.dart';
+
 class User {
   String? username;
   String? password;

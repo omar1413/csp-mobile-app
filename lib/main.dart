@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:csp_mobile_app/constant.dart';
 import 'package:csp_mobile_app/models/chat_model.dart';
 import 'package:csp_mobile_app/models/subscription.dart';
 import 'package:csp_mobile_app/models/subscriptions_management_data_arg.dart';
@@ -16,14 +19,17 @@ import 'package:csp_mobile_app/screens/transaction_list_screen.dart';
 import 'package:csp_mobile_app/screens/transfer_money_screen.dart';
 import 'package:csp_mobile_app/screens/vechile_list_screen.dart';
 import 'package:csp_mobile_app/screens/vehicle_management_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/registration_continue_screen.dart';
 import 'screens/subscription_data_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:easy_localization/easy_localization.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 int? isviewed;
 
@@ -39,6 +45,9 @@ void main() async {
   isviewed = prefs.getInt('onBoard');
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
+
+  getFilePath();
+  saveFile();
   runApp(
     EasyLocalization(
         supportedLocales: [Locale('ar'), Locale('en')],
@@ -48,6 +57,46 @@ void main() async {
         child: MyApp()),
   );
 }
+
+var files;
+
+Future<String> getFilePath() async {
+  Directory? appDocumentsDirectory = await getExternalStorageDirectory();
+
+  String? appDocumentsPath = appDocumentsDirectory?.path; // 2
+  String filePath = '$appDocumentsPath/ip.txt'; // 3
+
+  print(filePath);
+
+  return filePath;
+}
+
+void saveFile() async {
+  File file = File(await getFilePath()); // 1
+  if (!await file.exists()) {
+    file.writeAsString(kHost); // 2
+
+  } else {
+    kHost = await file.readAsString();
+  }
+}
+
+// void a() async {
+//   var externalDirectoryPath = await ExtStorage.getExternalStorageDirectory();
+//   print(externalDirectoryPath);
+//   File file = File(externalDirectoryPath + "/csp-mob/csp.txt");
+//   ExtStorage.getExternalStoragePublicDirectory()
+//   if (await file.exists()) {
+//     String str = await file.readAsString();
+//     print("strrrrrrrr" + str);
+//   } else {
+//     final dir = await Directory(externalDirectoryPath + "/csp-mob").create();
+
+//     final file = await File(dir.path + "csp.txt").create();
+
+//     file.writeAsString("strrrrrrrrrrrrrrrrrrrrrrrrrr555");
+//   }
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -84,7 +133,9 @@ class MyApp extends StatelessWidget {
                 subscription: settings.arguments as Subscription,
               ),
           TransactionListScreen.routeName: (ctx) => TransactionListScreen(),
-          SubscriptionTabs.routeName: (ctx) => SubscriptionTabs(),
+          SubscriptionTabs.routeName: (ctx) => SubscriptionTabs(
+                tabIndex: settings.arguments as int? ?? 0,
+              ),
           LoginScreen.routeName: (ctx) => LoginScreen(),
         };
         WidgetBuilder builder = routes[settings.name]!;
